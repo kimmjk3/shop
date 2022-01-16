@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="shop/layout/basic">
+
+<th:block layout:fragment="title">
+	<title>게시물 보기</title>
+</th:block>
+
+<th:block layout:fragment="content">
+	<div style="width: 70%; margin-left: auto; margin-right: auto;">
+		<form th:object="${board}">
+			<table class="table table-bordered" style="text-align: center; border: 3px solid #dddddd;">
+				<thead>
+					<tr>
+						<td colspan="4">게시글</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="width: 20%; background-color: #eeeeee;">게시판</td>
+						<td th:if="*{boardNumber} == 1">리뷰게시판</td>
+						<td th:if="*{boardNumber} == 2">Q&A게시판</td>
+						<td style="width: 20%; background-color: #eeeeee;">카테고리</td>
+						<td th:if="*{postCategory} == 1">키보드</td>
+						<td th:if="*{postCategory} == 2">마우스</td>
+					</tr>
+					<tr>
+						<td style="width: 20%; background-color: #eeeeee;">작성자</td>
+						<td style="width: 30%;" th:text="*{userID}"></td>
+						<td style="width: 20%; background-color: #eeeeee;">등록일</td>
+						<td style="width: 30%;" th:text="*{postInputDate}"></td>
+					</tr>
+					<tr>
+						<td style="width: 20%; background-color: #eeeeee;">별점</td>
+						<td th:if="*{postScore} == 1">1점</td>
+						<td th:if="*{postScore} == 2">2점</td>
+						<td th:if="*{postScore} == 3">3점</td>
+						<td th:if="*{postScore} == 4">4점</td>
+						<td th:if="*{postScore} == 5">5점</td>
+						<td style="width: 20%; background-color: #eeeeee;">추천수</td>
+						<td style="width: 30%;" th:text="*{postRecommend}"></td>
+					</tr>
+					<tr>
+						<td colspan="1" style="background-color: #eeeeee;">제목</td>
+						<td colspan="3" th:text="*{postTitle}"></td>
+					</tr>
+					<tr>
+						<td colspan="4" style="background-color: #eeeeee;">내용</td>
+					</tr>
+					<tr>
+						<td style="height: 400px; text-align: left;" colspan="4" th:text="*{postContents}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+
+		<div style="text-align: right;">
+			<a class="btn btn-primary" th:if="${session.userID != null}" th:href="@{/shop/write.do( postNumber=${board.postNumber} )}">수정하기</a>
+			<button type="button" class="btn btn-danger" th:if="${session.userID != null}" th:onclick="deleteBoard([[ ${board.postNumber} ]])">삭제하기</button>
+			<a th:href="@{/shop/list.do}" class="btn btn-info">뒤로가기</a>
+		</div>
+	</div>
+	</div>
+</th:block>
+
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+
+		console.log("${session.userLo}");
+
+		function deleteBoard(postNumber) {
+
+			if (confirm(postNumber + "번 게시글을 삭제할까요?")) {
+				var uri = /*[[ @{/shop/delete.do} ]]*/null;
+				var html = "";
+
+				html += '<form name="dataForm" action="'+uri+'" method="post">';
+				html += '<input type="hidden" name="postNumber" value="'+postNumber+'" />';
+				html += '</form>';
+
+				$("body").append(html);
+				document.dataForm.submit();
+			}
+		}
+		/*[- end of function -]*/
+		/*]]>*/
+	</script>
+</th:block>
+
+</html>

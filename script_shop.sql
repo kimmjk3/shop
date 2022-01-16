@@ -234,6 +234,21 @@ INSERT INTO `Board`(
 values
 	(default, '리뷰', default, null, null)
 	;
+#게시글 데이터 삽입
+INSERT INTO Post 
+	VALUES (
+              DEFAULT
+            , 1
+            , 'ㅎㅇ'
+            , 'ㅎㅇㅎㅇ'
+            , 1
+            , 5
+            , NOW()
+            , NULL
+            , NULL
+            , default
+            , 'idid1234'
+        );
 
 #상품 데이터삽입
 INSERT INTO `Product`(
@@ -252,21 +267,7 @@ values
 	(default, 1, 1, '마우수수', '20000', 3, '신제품 마우수수', default, default, null, null)
 	;
 
-#게시글 데이터 삽입
-INSERT INTO Post 
-	VALUES (
-              DEFAULT
-            , 1
-            , 'ㅎㅇ'
-            , 'ㅎㅇㅎㅇ'
-            , 1
-            , 5
-            , NOW()
-            , NULL
-            , NULL
-            , default
-            , 'idid1234'
-        );
+
 
 select * from user;
 SELECT * FROM post;

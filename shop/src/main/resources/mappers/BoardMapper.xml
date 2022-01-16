@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shop.mapper.BoardMapper">
+
+    <sql id="Post">
+          post_Number       <!--게시글 번호-->
+        , board_Number      <!--게시판 번호-->
+        , post_Title        <!--게시글 제목-->
+        , post_Contents     <!--게시글 내용-->
+        , post_Category     <!--게시글 카테고리-->
+        , post_Score        <!--게시글 별점-->
+        , post_InputDate    <!--게시글 작성일-->
+        , post_Correct      <!--게시글 수정일-->
+        , post_DeleteDate   <!--게시글 삭제일-->
+        , post_Recommend    <!--게시글 추천수-->
+        , user_ID           <!--게시글 작성자-->
+    </sql>
+    
+    <!--게시글 작성-->
+    <insert id="insertBoard" parameterType="BoardDTO">
+        INSERT INTO Post (
+            <include refid="Post" />
+        ) VALUES (
+              DEFAULT
+            , #{boardNumber}
+            , #{postTitle}
+            , #{postContents}
+            , #{postCategory}
+            , #{postScore}
+            , NOW()
+            , NULL
+            , NULL
+            , DEFAULT
+            , #{userID}
+        )
+    </insert>
+    
+    <!--게시글 보기-->
+    <select id="selectBoardDetail" parameterType="Integer" resultType="BoardDTO">
+        SELECT
+            <include refid="Post" />
+        FROM
+            Post
+        WHERE
+            post_DeleteDate IS NULL
+        AND
+            post_Number = #{postNumber}
+    </select>
+
+    <!--게시글 수정-->
+    <update id="updateBoard" parameterType="BoardDTO">
+        UPDATE Post
+        SET
+              post_Title = #{postTitle}
+            , post_Contents = #{postContents}
+            , post_Category = #{postCategory}
+            , post_Score = #{postScore}
+            , post_Correct = NOW()
+            
+        WHERE
+            post_Number = #{postNumber}
+    </update>
+
+    <!--게시글 삭제-->
+    <update id="deleteBoard" parameterType="Integer">
+        UPDATE Post
+        SET
+            post_DeleteDate = NOW()
+        WHERE
+            post_Number = #{postNumber}
+    </update>
+
+    <!--게시글 전체조회-->
+    <select id="selectBoardList" parameterType="BoardDTO" resultType="BoardDTO">
+        SELECT
+            <include refid="Post" />
+        FROM
+            Post
+        WHERE
+            post_DeleteDate IS NULL
+        ORDER BY
+            post_Number DESC,
+            post_InputDate DESC
+    </select>
+
+    <select id="selectBoardTotalCount" parameterType="BoardDTO" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            Post
+        WHERE
+            post_DeleteDate IS NULL
+    </select>
+
+</mapper>

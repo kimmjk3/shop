@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="shop/layout/basic">
+
+<th:block layout:fragment="title">
+	<title>글쓰기</title>
+</th:block>
+
+<th:block layout:fragment="content">
+	<div class="card-content">
+		<form class="form-horizontal" th:action="@{/shop/register.do}" th:object="${board}" method="post" onsubmit="return registerBoard(this)" style="width:50%; margin: 0 auto;">
+			<!--/* update의 경우 서버로 전달할 게시글 번호 (PK) */-->
+			<input type="hidden" th:if="*{postNumber != null and postNumber > 0}" th:field="*{postNumber}" />
+
+			<div class="form-group">
+				<label for="boardNumber" class="col-sm-2 control-label">게시판</label>
+				<div class="col-sm-10">
+					<select type="number" th:field="*{boardNumber}" style="width: 100%;">
+						<option value="">게시판을 선택해 주세요</option>
+						<option value="1">리뷰게시판</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="postCategory" class="col-sm-2 control-label">카테고리</label>
+				<div class="col-sm-10">
+					<select type="number" th:field="*{postCategory}" style="width: 100%;">
+						<option value="">카테고리를 선택해 주세요</option>
+						<option value="1">마우스</option>
+						<option value="2">키보드</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="postScore" class="col-sm-2 control-label">별점</label>
+				<div class="col-sm-10">
+					<select type="number" th:field="*{postScore}" style="width: 100%;">
+						<option value="">별점을 입력해 주세요</option>
+						<option value="1">1점</option>
+						<option value="2">2점</option>
+						<option value="3">3점</option>
+						<option value="4">4점</option>
+						<option value="5">5점</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="postTitle" class="col-sm-2 control-label">제목</label>
+				<div class="col-sm-10">
+					<input type="text" th:field="*{postTitle}" class="form-control" placeholder="제목을 입력해 주세요." />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="postContents" class="col-sm-2 control-label">내용</label>
+				<div class="col-sm-10">
+					<textarea th:field="*{postContents}" class="form-control" placeholder="내용을 입력해 주세요."></textarea>
+				</div>
+			</div>
+
+			<div class="btn_wrap text-center">
+				<a th:href="@{/shop/list.do}" class="btn btn-info">뒤로가기</a>
+				<button type="submit" class="btn btn-primary">저장하기</button>
+			</div>
+		</form>
+	</div>
+	<!-- /.card-content -->
+</th:block>
+
+
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+
+		function registerBoard(form) {
+
+			var result = (isValid(form.userID, "작성자", null, null)
+					&& isValid(form.boardNumber, "게시판", null, null)
+					&& isValid(form.postCategory, "카테고리", null, null)
+					&& isValid(form.postScore, "별점", null, null)
+					&& isValid(form.postTitle, "제목", null, null) && isValid(
+					form.postContents, "내용", null, null));
+
+			if (result == false) {
+				return false;
+			}
+		}
+		/*[- end of function -]*/
+
+		/*]]>*/
+	</script>
+</th:block>
+
+</html>

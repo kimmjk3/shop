@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="shop/layout/basic">
+
+<th:block layout:fragment="title">
+	<title>리뷰게시판</title>
+</th:block>
+
+<th:block layout:fragment="content">
+	<h3 style="text-align: center; font-family: 'Jua', sans-serif;">리뷰게시판</h3>
+
+	<div style="width: 70%; text-align: center; margin-left: auto; margin-right: auto;">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>등록일</th>
+					<th>추천수</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${not #lists.isEmpty( boardList )}" th:each="row : ${boardList}">
+					<td th:text="${row.postNumber}"></td>
+					<td>
+						<a th:href="@{/shop/view.do( postNumber=${row.postNumber} )}" th:text="${row.postTitle}"></a>
+					</td>
+					<td th:text="${row.userID}"></td>
+					<td th:text="${row.postInputDate}"></td>
+					<!-- <td th:text="${#temporals.format( row.postInputDate, 'yyyy-MM-dd' )}"></td> -->
+					<td th:text="${row.postRecommend}"></td>
+				</tr>
+				<tr th:unless="${not #lists.isEmpty( boardList )}">
+					<td colspan="5">조회된 결과가 없습니다.</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div class="btn_wrap text-right">
+			<!-- <a th:href="@{/shop/write.do}" class="btn btn-primary waves-effect waves-light">글쓰기</a> -->
+			<a th:if="${session.userID != null}" th:href="@{/shop/write.do}" class="btn btn-primary waves-effect waves-light">글쓰기</a>
+			<button type="button" th:if="${session.userID == null}" th:onclick="writeAlert()" class="btn btn-primary waves-effect waves-light">글쓰기</button>
+
+		</div>
+	</div>
+</th:block>
+
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+
+		console.log("${session.userLo}");
+
+		function writeAlert() {
+			alert("로그인이 필요합니다. 로그인페이지로 이동합니다.");
+			location.href = "/shop/login.do";
+		}
+		/*[- end of function -]*/
+		/*]]>*/
+	</script>
+</th:block>
+
+</html>
