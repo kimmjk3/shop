@@ -1,4 +1,4 @@
-﻿drop database shop;
+drop database shop;
 create database shop;
 show databases;
 use shop;
