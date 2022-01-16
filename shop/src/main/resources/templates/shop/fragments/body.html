@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<body th:fragment="main-body">
+	<!-- title -->
+	<div class="container text-center">
+		<h2 style="font-family: 'Jua', sans-serif;">
+			<a href="/shop/index" style="color: #2C3E50;">GG마켓</a>
+		</h2>
+	</div>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="margin-bottom: 30px;">
+		<div class="container-fluid" style="font-family: 'Jua', sans-serif;">
+			<a class="navbar-brand" href="#">GG마켓</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01"
+				aria-expanded="false" aria-label="Toggle navigation"
+			>
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarColor01">
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item"><a class="nav-link" href="#">메인</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">키보드</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">마우스</a></li>
+				</ul>
+				<form class="d-flex">
+					<ul class="navbar-nav me-auto">
+						<li class="nav-item"><a class="nav-link" href="#">공지사항</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">Q&A</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">리뷰게시판</a></li>
+						<li class="nav-item"><a class="nav-link" th:if="${session.userID == null}" href="/shop/login.do">로그인</a></li>
+						<li class="nav-item"><a class="nav-link" th:if="${session.userID != null}" href="/shop/logout">로그아웃</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">마이페이지</a></li>
+					</ul>
+				</form>
+			</div>
+		</div>
+	</nav>
+
+	<th:block layout:fragment="content"></th:block>
+</body>
