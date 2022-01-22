@@ -77,7 +77,9 @@ public class UserController {
             session.setAttribute("userID", null);
             return "redirect:/shop/login.do";
         } else {
-            session.setAttribute("userID", user.getUserID()); // 일치하는 아이디, 비밀번호 입력 할 경우 (로그인성공)
+            // 일치하는 아이디, 비밀번호 입력 할 경우 로그인 성공 세션값 부여
+            session.setAttribute("userID", user.getUserID());
+            session.setAttribute("userPW", user.getUserPW());
         }
 
         return "redirect:/shop/index.do";
