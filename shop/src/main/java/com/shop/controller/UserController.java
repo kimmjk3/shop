@@ -20,7 +20,7 @@ public class UserController {
     private UserService userService;
 
     // 메인페이지 진입
-    @GetMapping(value = "/shop/index")
+    @GetMapping(value = "/shop/index.do")
     public String openMain(Model model) {
         System.out.println("index페이지 진입");
         return "shop/index";
@@ -80,6 +80,7 @@ public class UserController {
             // 일치하는 아이디, 비밀번호 입력 할 경우 로그인 성공 세션값 부여
             session.setAttribute("userID", user.getUserID());
             session.setAttribute("userPW", user.getUserPW());
+            session.setAttribute("userAuthority", user.getUserAuthority());
         }
 
         return "redirect:/shop/index.do";
@@ -91,12 +92,5 @@ public class UserController {
         // 세션제거
         session.invalidate();
         return "redirect:/shop/index.do";
-    }
-
-    // 메인 페이지 진입
-    @GetMapping(value = "/shop/index.do") // 회원가입 주소
-    public String openUserMain(Model model) {
-        System.out.println("로그인 페이지 진입");
-        return "shop/index";
     }
 }

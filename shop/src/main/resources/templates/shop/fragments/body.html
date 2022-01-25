@@ -31,6 +31,7 @@
 						<li class="nav-item"><a class="nav-link" th:if="${session.userID == null}" href="/shop/login.do">로그인</a></li>
 						<li class="nav-item"><a class="nav-link" th:if="${session.userID != null}" href="/shop/logout">로그아웃</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">마이페이지</a></li>
+						<li class="nav-item"><a class="nav-link" th:if="${session.userAuthority == 0}" href="/shop/productmanagement">상품관리</a></li>
 					</ul>
 				</form>
 			</div>
