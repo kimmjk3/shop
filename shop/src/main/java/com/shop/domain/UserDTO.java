@@ -23,7 +23,7 @@ public class UserDTO {
     private String userJoinDate; // 가입일
     private String userSecessionDate; // 탈퇴일
 
-    private int userAuthority; // 권한 0.관리자 1. 유저
+    private int userAuthority; // 권한 0.관리자 1.유저
     private int userState; // 활동상태 0.탈퇴 1.활동중 2.정지
 
 }

@@ -58,6 +58,10 @@ DEFAULT
            user_Address3,
            user_Phone,
            user_Email
+           user_JoinDate,
+           user_SecessionDate,
+           user_Authority,
+           user_State
     FROM
             User
     WHERE
