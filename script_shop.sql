@@ -4,38 +4,38 @@ show databases;
 use shop;
 
 CREATE TABLE `User` (
-	`user_ID`	VARCHAR(20)	NOT null primary key,
-	`user_PW`	VARCHAR(20)	NOT NULL,
-	`user_Name`	VARCHAR(20)	NOT NULL,
-	`user_Gender`	INT	NOT NULL	COMMENT '1:남성 2:여성',
-	`user_DOB`	VARCHAR(8)	NOT NULL	COMMENT 'ex)20211213',
-	`user_Address1`	VARCHAR(20)	NOT NULL	COMMENT '우편번호',
-	`user_Address2`	VARCHAR(100)	NOT NULL	COMMENT '기본주소',
-	`user_Address3`	VARCHAR(100)	NOT NULL	COMMENT '상세주소',
-	`user_Phone`	VARCHAR(20)	NOT NULL,
-	`user_Email`	VARCHAR(20)	NOT NULL,
-	`user_JoinDate`	DATETIME	NOT NULL	DEFAULT NOW(),
-	`user_SecessionDate`	DATETIME	NULL,
-	`user_Authority`	INT	NOT NULL	DEFAULT 1	COMMENT '0:관리자 1:유저',
-	`user_State`	INT	NOT NULL	DEFAULT 1	COMMENT '0:탈퇴 1:활동중 2:정지'
+	`user_ID`	VARCHAR(20)	NOT null primary key,	#야이디
+	`user_PW`	VARCHAR(20)	NOT NULL,	#비밀번호
+	`user_Name`	VARCHAR(20)	NOT NULL,	#이름
+	`user_Gender`	INT	NOT NULL	COMMENT '1:남성 2:여성',	#성별
+	`user_DOB`	VARCHAR(8)	NOT NULL	COMMENT 'ex)20211213',	#생년월일
+	`user_Address1`	VARCHAR(20)	NOT NULL	COMMENT '우편번호',	#주소1
+	`user_Address2`	VARCHAR(100)	NOT NULL	COMMENT '기본주소',	#주소2
+	`user_Address3`	VARCHAR(100)	NOT NULL	COMMENT '상세주소',	#주소3
+	`user_Phone`	VARCHAR(20)	NOT NULL,	#전화번호
+	`user_Email`	VARCHAR(20)	NOT NULL,	#이메일
+	`user_JoinDate`	DATETIME	NOT NULL	DEFAULT NOW(),	#가입일
+	`user_SecessionDate`	DATETIME	NULL,	#탈퇴일
+	`user_Authority`	INT	NOT NULL	DEFAULT 1	COMMENT '0:관리자 1:유저',	#권한
+	`user_State`	INT	NOT NULL	DEFAULT 1	COMMENT '0:탈퇴 1:활동중 2:정지'	#활동상태
 );
 
 CREATE TABLE `Product` (
-	`product_Number`	INT	NOT null auto_increment primary key	COMMENT 'AUTO_INCREMENT 추가',
-	`product_Category`	VARCHAR(20)	NOT NULL,
-	`product_State`	INT	NOT NULL	COMMENT '0:준비중 1:판매중',
-	`product_Name`	VARCHAR(20)	NOT NULL,
-	`product_Price`	INT	NOT NULL,
-	`product_Stock`	INT	NULL,
-	`product_Desc`	VARCHAR(2000)	NOT NULL,
-	`product_Hits`	INT	NOT NULL	DEFAULT 0,
-	`product_Date`	DATETIME	NOT NULL	DEFAULT NOW(),
-	`product_Current`	DATETIME	NULL,
-	`product_DeleteDate`	DATETIME	NULL
+	`product_Number`	INT	NOT null auto_increment primary key	COMMENT 'AUTO_INCREMENT 추가',	#상품번호
+	`product_Category`	VARCHAR(20)	NOT NULL,	#상품카테고리
+	`product_State`	INT	NOT NULL	COMMENT '0:준비중 1:판매중',	#상품상태
+	`product_Name`	VARCHAR(20)	NOT NULL,	#상품명
+	`product_Price`	INT	NOT NULL,	#상품가격
+	`product_Stock`	INT	NULL,	#상품재고
+	`product_Desc`	VARCHAR(2000)	NOT NULL,	#상품상세내용
+	`product_Hits`	INT	NOT NULL	DEFAULT 0,	#상품조회수
+	`product_Date`	DATETIME	NOT NULL	DEFAULT NOW(),	#상품등록일
+	`product_Current`	DATETIME	NULL,	#상품수정일
+	`product_DeleteDate`	DATETIME	NULL	#상품삭제일
 );
 
 CREATE TABLE `Product_ImageFile` (
-	`file_Number`	INT	NOT null primary key,
+	`file_Number`	INT	NOT null primary KEY,
 	`orgin_FileName`	VARCHAR(200)	NOT NULL,
 	`stored_FileName`	VARCHAR(200)	NOT NULL,
 	`stored_thumbNail`	VARCHAR(200)	NOT NULL,
@@ -54,62 +54,62 @@ CREATE TABLE `userOrder_Detail` (
 );
 
 CREATE TABLE `Board` (
-	`board_Number`	INT	NOT null auto_increment primary key	COMMENT 'AUTO_INCREMENT 추가',
-	`board_Name`	VARCHAR(20)	NOT NULL,
-	`board_inputDate`	DATETIME	NOT NULL	DEFAULT NOW(),
-	`board_Correct`	DATETIME	NULL,
-	`board_DeleteDate`	DATETIME	NULL
+	`board_Number`	INT	NOT null auto_increment primary key	COMMENT 'AUTO_INCREMENT 추가',	#게시판번호
+	`board_Name`	VARCHAR(20)	NOT NULL,	#게시판이름
+	`board_inputDate`	DATETIME	NOT NULL	DEFAULT NOW(),	#게시판생성일
+	`board_Correct`	DATETIME	NULL,	#게시판수정일
+	`board_DeleteDate`	DATETIME	NULL	#게시판삭제일
 );
 
 CREATE TABLE `user_Order` (
-	`order_Number`	INT	NOT null auto_increment primary key	COMMENT 'AUTO_INCREMENT 추가',
-	`order_Date`	DATETIME	NOT NULL	DEFAULT NOW(),
-	`delivery_Address1`	VARCHAR(20)	NOT NULL,
-	`delivery_Address2`	VARCHAR(20)	NOT NULL,
-	`delivery_Address3`	VARCHAR(20)	NOT NULL,
-	`delivery_Message`	VARCHAR(100)	NULL,
-	`receiver_Name`	VARCHAR(20)	NOT NULL,
-	`receiver_Phone`	VARCHAR(20)	NOT NULL,
-	`user_ID`	VARCHAR(20)	NOT NULL
+	`order_Number`	INT	NOT null auto_increment primary key	COMMENT 'AUTO_INCREMENT 추가',	#주문번호
+	`order_Date`	DATETIME	NOT NULL	DEFAULT NOW(),	#주문날자
+	`delivery_Address1`	VARCHAR(20)	NOT NULL,	#배송주소1
+	`delivery_Address2`	VARCHAR(20)	NOT NULL,	#배송주소2
+	`delivery_Address3`	VARCHAR(20)	NOT NULL,	#배송주소3
+	`delivery_Message`	VARCHAR(100)	NULL,	#배송메세지
+	`receiver_Name`	VARCHAR(20)	NOT NULL,		#수령인이름
+	`receiver_Phone`	VARCHAR(20)	NOT NULL,	#수령인전화번호
+	`user_ID`	VARCHAR(20)	NOT NULL			#아이디
 );
 
 CREATE TABLE `Post` (
-	`post_Number`	INT	NOT null auto_increment primary key	COMMENT 'AUTO_INCREMENT 추가',
-	`board_Number`	INT	NOT NULL,
-	`post_Title`	VARCHAR(100)	NOT NULL,
-	`post_Contents`	VARCHAR(1000)	NOT NULL,
-	`post_Category`	INT	NOT NULL	COMMENT '1: 마우스 2:키보드',
-	`post_Score`	INT	NOT NULL,
-	`post_InputDate`	DATETIME	NOT NULL	DEFAULT NOW(),
-	`post_Correct`	DATETIME	NULL,
-	`post_DeleteDate`	DATETIME	NULL,
-	`post_Recommend`	INT	NOT NULL	DEFAULT 0,
+	`post_Number`	INT	NOT null auto_increment primary key	COMMENT 'AUTO_INCREMENT 추가',	#게시글번호
+	`board_Number`	INT	NOT NULL,	#게시판번호
+	`post_Title`	VARCHAR(100)	NOT NULL,	#게시글제목
+	`post_Contents`	VARCHAR(1000)	NOT NULL,	#게시글내용
+	`post_Category`	INT	NOT NULL	COMMENT '1: 마우스 2:키보드',	#게시글 카테고리
+	`post_Score`	INT	NOT NULL,	#게시글별점
+	`post_InputDate`	DATETIME	NOT NULL	DEFAULT NOW(),	#게시글 작성일
+	`post_Correct`	DATETIME	NULL,	#게시글수정일
+	`post_DeleteDate`	DATETIME	NULL,	#게시글삭제일
+	`post_Recommend`	INT	NOT NULL	DEFAULT 0,	#게시글추천수
 	`user_ID`	VARCHAR(20)	NOT NULL
 );
 
 CREATE TABLE `Comment` (
-	`comment_Number`	INT	NOT null auto_increment primary key	COMMENT 'AUTO_INCREMENT 추가',
-	`post_Number`	INT	NOT NULL,
-	`board_Number`	INT	NOT NULL,
-	`comment_Contents`	VARCHAR(1000)	NOT NULL,
-	`comment_InputDate`	DATETIME	NOT NULL	DEFAULT NOW(),
-	`comment_Correct`	DATETIME	NULL,
-	`comment_DeleteDate`	DATETIME	NULL,
-	`comment_Recommend`	INT	NOT NULL	DEFAULT 0,
+	`comment_Number`	INT	NOT null auto_increment primary key	COMMENT 'AUTO_INCREMENT 추가',	#댓글번호
+	`post_Number`	INT	NOT NULL,	#게시글번호
+	`board_Number`	INT	NOT NULL,	#게시판번호
+	`comment_Contents`	VARCHAR(1000)	NOT NULL,	#댓글내용
+	`comment_InputDate`	DATETIME	NOT NULL	DEFAULT NOW(),	#댓글작성일
+	`comment_Correct`	DATETIME	NULL,	#댓글수정일
+	`comment_DeleteDate`	DATETIME	NULL,	#댓글삭제일
+	`comment_Recommend`	INT	NOT NULL	DEFAULT 0,	#댓글추천수
 	`user_ID`	VARCHAR(20)	NOT NULL
 );
 
 CREATE TABLE `cart_Item` (
-	`cart_ItemNumber`	INT	NOT null auto_increment primary key	COMMENT 'AUTO_INCREMENT 추가',
-	`user_ID`	VARCHAR(20)	NOT NULL,
-	`cart_ItemCount`	INT	NULL,
-	`product_Number`	INT	NOT NULL
+	`cart_ItemNumber`	INT	NOT null auto_increment primary key	COMMENT 'AUTO_INCREMENT 추가',	#장바구니 물품번호
+	`user_ID`	VARCHAR(20)	NOT NULL,	#아이디
+	`cart_ItemCount`	INT	NULL,	#물품수량
+	`product_Number`	INT	NOT NULL	#상품번호
 );
 
 CREATE TABLE `Interest_Item` (
-	`Interest_ItemNumber`	INT	NOT null auto_increment primary key	COMMENT 'AUTO_INCREMENT 추가',
-	`user_ID`	VARCHAR(20)	NOT NULL,
-	`product_Number`	INT	NOT NULL
+	`Interest_ItemNumber`	INT	NOT null auto_increment primary key	COMMENT 'AUTO_INCREMENT 추가',	#관심 풀품번호
+	`user_ID`	VARCHAR(20)	NOT NULL,	#아이디
+	`product_Number`	INT	NOT NULL	#상품번호
 );
 
 ALTER TABLE `Product_ImageFile` ADD CONSTRAINT `FK_Product_TO_Product_ImageFile_1` FOREIGN KEY (
@@ -221,7 +221,7 @@ INSERT INTO `USER`(
 	`user_Authority`,
 	`user_State`)
 values
-	('idid1234','pwpw1234', '김명진', 1, '19961202', '123-456', '상세주소', '도로명주소', '010-3505-3471', 'kimmjk35@naver.com', default, null, default, default)
+	('idid1234','pwpw1234', '김명진', 1, '19961202', '123-456', '상세주소', '도로명주소', '010-3505-3471', 'kimmjk35@naver.com', default, null, 0, default)
 	;
 
 #게시판 데이터삽입

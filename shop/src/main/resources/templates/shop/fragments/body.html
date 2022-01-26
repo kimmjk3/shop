@@ -5,12 +5,12 @@
 	<!-- title -->
 	<div class="container text-center">
 		<h2 style="font-family: 'Jua', sans-serif;">
-			<a href="/shop/index" style="color: #2C3E50;">GG마켓</a>
+			<a href="/shop/index.do" style="color: #2C3E50;">GG마켓</a>
 		</h2>
 	</div>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="margin-bottom: 30px;">
 		<div class="container-fluid" style="font-family: 'Jua', sans-serif;">
-			<a class="navbar-brand" href="#">GG마켓</a>
+			<a class="navbar-brand" href="/shop/index.do">GG마켓</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01"
 				aria-expanded="false" aria-label="Toggle navigation"
 			>
@@ -31,7 +31,7 @@
 						<li class="nav-item"><a class="nav-link" th:if="${session.userID == null}" href="/shop/login.do">로그인</a></li>
 						<li class="nav-item"><a class="nav-link" th:if="${session.userID != null}" href="/shop/logout">로그아웃</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">마이페이지</a></li>
-						<li class="nav-item"><a class="nav-link" th:if="${session.userAuthority == 0}" href="/shop/productmanagement">상품관리</a></li>
+						<li class="nav-item"><a class="nav-link" th:if="${session.userAuthority == 0}" href="/shop/productmanagement.do">상품관리</a></li>
 					</ul>
 				</form>
 			</div>
