@@ -26,6 +26,20 @@ public class UserController {
         return "shop/index";
     }
 
+    // 마이페이지 진입
+    @GetMapping(value = "/shop/mypage.do")
+    public String openMypage(Model model) {
+        System.out.println("마이페이지 진입");
+        return "shop/mypage";
+    }
+
+    // 판매리스트 페이지 진입
+    @GetMapping(value = "/shop/selllist.do")
+    public String openSellList(Model model) {
+        System.out.println("판매리스트 페이지 진입");
+        return "shop/selllist";
+    }
+
 //회원가입 페이지 진입
     @GetMapping(value = "/shop/join.do") // 회원가입 주소
     public String openUserJoin(Model model) {

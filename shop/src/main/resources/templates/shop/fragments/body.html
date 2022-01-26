@@ -2,47 +2,86 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <body th:fragment="main-body">
-	<!-- title -->
-	<div class="container text-center">
-		<h2 style="font-family: 'Jua', sans-serif;">
-			<a href="/shop/index.do" style="color: #2C3E50;">GG마켓</a>
-		</h2>
-	</div>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="margin-bottom: 30px;">
-		<div class="container-fluid" style="font-family: 'Jua', sans-serif;">
-			<a class="navbar-brand" href="/shop/index.do">GG마켓</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01"
-				aria-expanded="false" aria-label="Toggle navigation"
-			>
-				<span class="navbar-toggler-icon"></span>
-			</button>
 
-			<div class="collapse navbar-collapse" id="navbarColor01">
-				<ul class="navbar-nav me-auto">
-					<li class="nav-item"><a class="nav-link" href="#">메인</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">키보드</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">마우스</a></li>
+	<!-- ======= Header ======= -->
+	<header id="header" class="fixed-top">
+		<div style="float:right;" class="navbar">
+			<a style="margin-left:5px;margin-right:5px;" th:if="${session.userID == null}" th:href="@{/shop/login.do}">로그인</a>
+			<a style="margin-left:5px;margin-right:5px;" th:if="${session.userID != null}" th:href="@{/shop/logout}">로그아웃</a>
+			<a style="margin-left:5px;margin-right:5px;" th:href="@{/shop/mypage.do}">마이페이지</a>
+			<a style="margin-left:5px;margin-right:5px;" th:if="${session.userAuthority == 0}" th:href="@{/shop/productmanagement.do}">상품관리</a>
+		</div>
+
+		<div class="container-fluid d-flex justify-content-between align-items-center">
+			<h1 class="logo me-auto me-lg-0">
+				<a href="/shop/index.do"> <img th:src="@{/assets/img/shop_logo-1-01.png}" alt="" />
+				</a>
+			</h1>
+			<!-- Uncomment below if you prefer to use an image logo -->
+			<!-- <a href="index.html" class="logo"><img th:src="@{/assets/img/logo.png}" alt="" class="img-fluid"></a>-->
+
+			<nav id="navbar" class="navbar order-last order-lg-0">
+				<ul>
+					<!-- <li><a class="active" href="/shop/index.do">Home</a></li> -->
+					<li><a th:href="@{/shop/index.do}">메인</a></li>
+                    <li><a th:href="@{#}">공지사항</a></li>
+					<li><a th:href="@{/shop/selllist.do}">상품</a></li>
+					<li><a th:href="@{/shop/list.do}">리뷰게시판</a></li>
+					<li><a th:href="@{#}">Q&A</a></li>
 				</ul>
-				<form class="d-flex">
-					<ul class="navbar-nav me-auto">
-						<li class="nav-item"><a class="nav-link" href="#">공지사항</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">Q&A</a></li>
-						<li class="nav-item"><a class="nav-link" href="/shop/list.do">리뷰게시판</a></li>
-						<li class="nav-item"><a class="nav-link" th:if="${session.userID == null}" href="/shop/login.do">로그인</a></li>
-						<li class="nav-item"><a class="nav-link" th:if="${session.userID != null}" href="/shop/logout">로그아웃</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">마이페이지</a></li>
-						<li class="nav-item"><a class="nav-link" th:if="${session.userAuthority == 0}" href="/shop/productmanagement.do">상품관리</a></li>
-					</ul>
-				</form>
+				<i class="bi bi-list mobile-nav-toggle"></i>
+			</nav>
+			<!-- .navbar -->
+
+			<div class="header-social-links">
+				<a href="#" class="twitter"><i class="bi bi-twitter"></i></a> <a href="#" class="facebook"><i class="bi bi-facebook"></i></a> <a href="#"
+					class="instagram"
+				><i class="bi bi-instagram"></i></a> <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
 			</div>
 		</div>
-	</nav>
+	</header>
+	<!-- End Header -->
+
 
 	<th:block layout:fragment="content"></th:block>
-	<th:block layout:fragment="footer"></th:block>
+
+
+	<!-- footer -->
+	<th:block layout:fragment="footer">
+		<!-- ======= Footer ======= -->
+		<footer id="footer">
+			<div class="container">
+				<div class="copyright">
+					&copy; Copyright <strong><span>Kelly</span></strong>. All Rights Reserved
+				</div>
+				<div class="credits">
+					<!-- All the links in the footer should remain intact. -->
+					<!-- You can delete the links only if you purchased the pro version. -->
+					<!-- Licensing information: https://bootstrapmade.com/license/ -->
+					<!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/kelly-free-bootstrap-cv-resume-html-template/ -->
+					Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+				</div>
+			</div>
+		</footer>
+		<!-- End  Footer -->
+
+		<div id="preloader"></div>
+		<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+	</th:block>
+
 	<th:block layout:fragment="script"></th:block>
 
-	<script th:src="@{/scripts/jquery.min.js}"></script>
-	<script th:src="@{/scripts/main.js}"></script>
-	<script th:src="@{/scripts/common.js}"></script>
+
+	<!-- Vendor JS Files -->
+	<script th:src="@{/assets/vendor/purecounter/purecounter.js}"></script>
+	<script th:src="@{/assets/vendor/aos/aos.js}"></script>
+	<script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<script th:src="@{/assets/vendor/glightbox/js/glightbox.min.js}"></script>
+	<script th:src="@{/assets/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
+	<script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+	<script th:src="@{/assets/vendor/waypoints/noframework.waypoints.js}"></script>
+	<script th:src="@{/assets/vendor/php-email-form/validate.js}"></script>
+
+	<!-- Template Main JS File -->
+	<script th:src="@{/assets/js/main.js}"></script>
 </body>
