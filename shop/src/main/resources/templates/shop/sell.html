@@ -1,116 +1,77 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="shop/layout/basic">
 
-<head>
-
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-
-<title>sell</title>
-
-<!-- Bootstrap core CSS -->
-<link href="/bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<!-- Custom styles for this template -->
-<link href="/bootstrap/css/shop-homepage.css" rel="stylesheet">
-<!-- 구글폰트 -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
-<style>
-a {
-	font-family: 'Noto Sans KR', sans-serif;
-}
-</style>
-</head>
-
-<body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark <!-- fixed-top -->">
-        <div class="container">
-            <a class="navbar-brand" href="/gshop/index">GamingGearShop</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
-                aria-expanded="false" aria-label="Toggle navigation"
-            >
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="/gshop/list.do">리뷰게시판</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">관심상품</a></li>
-                    <!-- <li class="nav-item active"><a class="nav-link" href="#">관심상품 <span class="sr-only">(current)</span></a></li> -->
-                    <li class="nav-item"><a class="nav-link" href="#">장바구니</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">마이페이지</a></li>
-                    <li class="nav-item"><a class="nav-link" th:if="${session.userID == null}" href="/gshop/login.do">로그인</a></li>
-                    <li class="nav-item"><a class="nav-link" th:if="${session.userID != null}" href="/gshop/logout">로그아웃</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div style = "visibility:hidden;">공백삽입</div>
-	<!-- Page Content -->
-	<div style="width: 90%;margin: 0 auto;">
-		<div class="row">
-			<div style="display: flex; width:100%;">
-				<div style="width: 70%;">
-					<div><img class="card-img-top" src="/image/keyboard1.png" alt=""></div>
-					<div style="text-align:center;"><img style="width:100%" src="/image/im1.jpg" alt=""></div>
+<th:block layout:fragment="title">
+	<title>상품구매</title>
+</th:block>
+<th:block layout:fragment="content">
+	<main id="main">
+		<section id="about" class="about">
+			<div class="container" data-aos="fade-up">
+				<div class="section-title">
+					<h2>상품구매</h2>
 				</div>
 
-				<div style="width: 30%; position:fixed; right:10px; margin-top: 60px;">
-					<div style=" margin-bottom: 10px;">타이폰 마르스프로 베스타 기계식 키보드</div>
-                    <div style="margin-top: 10px; padding-bottom: 30px; text-align:right; border-bottom:1px dashed #bbb;">174,000원</div>
-					<div style="display: flex; margin-left: 10px; text-align: center; margin-top: 30px; margin-bottom: 30px;">
-						<div style="width: 50%; text-align: center;">키보드색상</div>
-						<select style="width: 50%; text-align: center;" name="keyboardColor">
-							<option value="">색상선택</option>
-							<option value="블랙">블랙</option>
-							<option value="화이트">화이트</option>
-						</select>
-					</div>
-					<div style="display: flex; margin-left: 10px; text-align: center; margin-top: 30px; margin-bottom: 30px;">
-						<div style="width: 50%; text-align: center;">폰트</div>
-						<select style="width: 50%; text-align: center;" name="keyboardColor">
-							<option value="">폰트선택</option>
-							<option value="한글">한글</option>
-							<option value="영어">영어</option>
-						</select>
-					</div>
-                    <div style="display: flex; margin-left: 10px; text-align: center; margin-top: 30px; margin-bottom: 30px;">
-                        <div style="width: 50%; text-align: center;">스위치</div>
-                        <select style="width: 50%; text-align: center;" name="keyboardColor">
-                            <option value="">스위치종류</option>
-                            <option value="청축">청축</option>
-                            <option value="갈축">갈축</option>
-                            <option value="적축">적축</option>
-                            <option value="저소음적축">저소음적축</option>
-                        </select>
-                    </div>
-                    <div style="padding-top:30px;border-top:1px dashed #bbb;">
-                        <div><a th:href="@{#}" class="btn btn-dark" style="width:100%;">BUY NOW</a></div>
-                        <div><a th:href="@{#}" class="btn btn-primary" style="width:100%;">ADD CART</a></div>
-                    </div>
+				<div class="row">
+					<div style="width: 90%; margin: 0 auto;">
+						<div class="row">
+							<div style="display: flex; width: 100%;">
+								<div style="width: 70%;">
+									<div>
+										<img class="card-img-top" src="/image/keyboard1.jpg" alt="">
+									</div>
+									<div style="text-align: center;">
+										<img style="width: 100%" src="/image/im1.jpg" alt="">
+									</div>
+								</div>
 
+								<div style="width: 30%; position: fixed; right: 10px; margin-top: 60px;">
+									<div style="margin-bottom: 10px;">타이폰 마르스프로 베스타 기계식 키보드</div>
+									<div style="margin-top: 10px; padding-bottom: 30px; text-align: right; border-bottom: 1px dashed #bbb;">174,000원</div>
+									<div style="display: flex; margin-left: 10px; text-align: center; margin-top: 30px; margin-bottom: 30px;">
+										<div style="width: 50%; text-align: center;">키보드색상</div>
+										<select style="width: 50%; text-align: center;" name="keyboardColor">
+											<option value="">색상선택</option>
+											<option value="블랙">블랙</option>
+											<option value="화이트">화이트</option>
+										</select>
+									</div>
+									<div style="display: flex; margin-left: 10px; text-align: center; margin-top: 30px; margin-bottom: 30px;">
+										<div style="width: 50%; text-align: center;">폰트</div>
+										<select style="width: 50%; text-align: center;" name="keyboardColor">
+											<option value="">폰트선택</option>
+											<option value="한글">한글</option>
+											<option value="영어">영어</option>
+										</select>
+									</div>
+									<div style="display: flex; margin-left: 10px; text-align: center; margin-top: 30px; margin-bottom: 30px;">
+										<div style="width: 50%; text-align: center;">스위치</div>
+										<select style="width: 50%; text-align: center;" name="keyboardColor">
+											<option value="">스위치종류</option>
+											<option value="청축">청축</option>
+											<option value="갈축">갈축</option>
+											<option value="적축">적축</option>
+											<option value="저소음적축">저소음적축</option>
+										</select>
+									</div>
+									<div style="padding-top: 30px; border-top: 1px dashed #bbb;">
+										<div>
+											<a th:href="@{#}" class="btn btn-dark" style="width: 100%;">BUY NOW</a>
+										</div>
+										<div>
+											<a th:href="@{#}" class="btn btn-primary" style="width: 100%;">ADD CART</a>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
+
 			</div>
-		</div>
-		<!-- /.row -->
-
-	</div>
-	<!-- /.container -->
-
-       <!-- Footer -->
-    <footer class="py-5 bg-dark" style = "margin-top:50px;">
-        <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
-        </div>
-        <!-- /.container -->
-    </footer>
-
-	<!-- Bootstrap core JavaScript -->
-	<script src="/bootstrap/vendor/jquery/jquery.min.js"></script>
-	<script src="/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-</body>
+		</section>
+	</main>
+</th:block>
 
 </html>

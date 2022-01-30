@@ -40,6 +40,13 @@ public class UserController {
         return "shop/selllist";
     }
 
+    // 판매 페이지 진입
+    @GetMapping(value = "/shop/sell.do")
+    public String openSell(Model model) {
+        System.out.println("판매페이지 진입");
+        return "shop/sell";
+    }
+
 //회원가입 페이지 진입
     @GetMapping(value = "/shop/join.do") // 회원가입 주소
     public String openUserJoin(Model model) {
