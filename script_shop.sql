@@ -29,7 +29,7 @@ CREATE TABLE `Product` (
 	`product_Stock`	INT	NULL,	#상품재고
 	`product_Desc`	VARCHAR(2000)	NOT NULL,	#상품상세내용
 	`product_Hits`	INT	NOT NULL	DEFAULT 0,	#상품조회수
-	`product_Date`	DATETIME	NOT NULL	DEFAULT NOW(),	#상품등록일
+	`product_InputDate`	DATETIME	NOT NULL	DEFAULT NOW(),	#상품등록일
 	`product_Current`	DATETIME	NULL,	#상품수정일
 	`product_DeleteDate`	DATETIME	NULL	#상품삭제일
 );
