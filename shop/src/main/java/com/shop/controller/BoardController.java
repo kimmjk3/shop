@@ -126,26 +126,26 @@ public class BoardController extends UiUtils {
      * return "redirect:/shop/list.do"; }
      */
 
-    @PostMapping(value = "/shop/delete.do")
+    @PostMapping(value = "/shop/boarddelete.do")
     public String deleteBoard(@RequestParam(value = "postNumber", required = false) Integer postNumber, Model model) {
-        System.out.println("/shop/delete.do 실행됨");
+        System.out.println("/shop/boarddelete.do 실행됨");
 
         if (postNumber == null) {
-            return showMessageWithRedirect("올바르지 않은 접근입니다.", "/shop/list.do", Method.GET, null, model);
+            return showMessageWithRedirect("올바르지 않은 접근입니다.", "/shop/boardlist.do", Method.GET, null, model);
         }
 
         try {
             boolean isDeleted = boardService.deleteBoard(postNumber);
             if (isDeleted == false) {
-                return showMessageWithRedirect("게시글 삭제에 실패하였습니다.", "/shop/list.do", Method.GET, null, model);
+                return showMessageWithRedirect("게시글 삭제에 실패하였습니다.", "/shop/boardlist.do", Method.GET, null, model);
             }
         } catch (DataAccessException e) {
-            return showMessageWithRedirect("데이터베이스 처리 과정에 문제가 발생하였습니다.", "/shop/list.do", Method.GET, null, model);
+            return showMessageWithRedirect("데이터베이스 처리 과정에 문제가 발생하였습니다.", "/shop/boardlist.do", Method.GET, null, model);
 
         } catch (Exception e) {
-            return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/shop/list.do", Method.GET, null, model);
+            return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/shop/boardlist.do", Method.GET, null, model);
         }
 
-        return showMessageWithRedirect("게시글 삭제가 완료되었습니다.", "/shop/list.do", Method.GET, null, model);
+        return showMessageWithRedirect("게시글 삭제가 완료되었습니다.", "/shop/boardlist.do", Method.GET, null, model);
     }
 }

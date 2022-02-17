@@ -62,9 +62,9 @@
 						</form>
 
 						<div style="text-align: right;">
-							<a class="btn btn-primary" th:if="${session.userID != null}" th:href="@{/shop/write.do( postNumber=${board.postNumber} )}">수정하기</a>
+							<a class="btn btn-primary" th:if="${session.userID != null}" th:href="@{/shop/boardwrite.do( postNumber=${board.postNumber} )}">수정하기</a>
 							<button type="button" class="btn btn-danger" th:if="${session.userID != null}" th:onclick="deleteBoard([[ ${board.postNumber} ]])">삭제하기</button>
-							<a th:href="@{/shop/list.do}" class="btn btn-info">뒤로가기</a>
+							<a th:href="@{/shop/boardlist.do}" class="btn btn-info">뒤로가기</a>
 						</div>
 					</div>
 				</div>
@@ -83,7 +83,7 @@
 		function deleteBoard(postNumber) {
 
 			if (confirm(postNumber + "번 게시글을 삭제할까요?")) {
-				var uri = /*[[ @{/shop/delete.do} ]]*/null;
+				var uri = /*[[ @{/shop/boarddelete.do} ]]*/null;
 				var html = "";
 
 				html += '<form name="dataForm" action="'+uri+'" method="post">';
