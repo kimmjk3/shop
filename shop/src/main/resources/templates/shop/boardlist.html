@@ -30,7 +30,7 @@
 								<tr th:if="${not #lists.isEmpty( boardList )}" th:each="row : ${boardList}">
 									<td th:text="${row.postNumber}"></td>
 									<td>
-										<a th:href="@{/shop/view.do( postNumber=${row.postNumber} )}" th:text="${row.postTitle}"></a>
+										<a th:href="@{/shop/boardview.do( postNumber=${row.postNumber} )}" th:text="${row.postTitle}"></a>
 									</td>
 									<td th:text="${row.userID}"></td>
 									<td th:text="${row.postInputDate}"></td>
@@ -44,8 +44,8 @@
 						</table>
 
 						<div class="btn_wrap text-right">
-							<!-- <a th:href="@{/shop/write.do}" class="btn btn-primary waves-effect waves-light">글쓰기</a> -->
-							<a th:if="${session.userID != null}" th:href="@{/shop/write.do}" class="btn btn-primary waves-effect waves-light">글쓰기</a>
+							<!-- <a th:href="@{/shop/boardwrite.do}" class="btn btn-primary waves-effect waves-light">글쓰기</a> -->
+							<a th:if="${session.userID != null}" th:href="@{/shop/boardwrite.do}" class="btn btn-primary waves-effect waves-light">글쓰기</a>
 							<button type="button" th:if="${session.userID == null}" th:onclick="writeAlert()" class="btn btn-primary waves-effect waves-light">글쓰기</button>
 
 						</div>

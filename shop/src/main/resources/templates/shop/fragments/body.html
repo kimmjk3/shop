@@ -25,8 +25,8 @@
 					<!-- <li><a class="active" href="/shop/index.do">Home</a></li> -->
 					<li><a th:href="@{/shop/index.do}">메인</a></li>
                     <li><a th:href="@{#}">공지사항</a></li>
-					<li><a th:href="@{/shop/selllist.do}">상품</a></li>
-					<li><a th:href="@{/shop/list.do}">리뷰게시판</a></li>
+					<li><a th:href="@{/shop/productlist.do}">상품</a></li>
+					<li><a th:href="@{/shop/boardlist.do}">리뷰게시판</a></li>
 					<li><a th:href="@{#}">Q&A</a></li>
 				</ul>
 				<i class="bi bi-list mobile-nav-toggle"></i>
@@ -81,7 +81,11 @@
 	<script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
 	<script th:src="@{/assets/vendor/waypoints/noframework.waypoints.js}"></script>
 	<script th:src="@{/assets/vendor/php-email-form/validate.js}"></script>
-
+	
 	<!-- Template Main JS File -->
 	<script th:src="@{/assets/js/main.js}"></script>
+	
+	<script th:src="@{/scripts/jquery.min.js}"></script>
+    <script th:src="@{/scripts/main.js}"></script>
+    <script th:src="@{/scripts/common.js}"></script>
 </body>

@@ -71,7 +71,7 @@
 							</div>
 
 							<div class="btn_wrap text-center">
-								<a th:href="@{/shop/list.do}" class="btn btn-info">뒤로가기</a>
+								<a th:href="@{/shop/boardlist.do}" class="btn btn-info">뒤로가기</a>
 								<button type="submit" class="btn btn-primary">저장하기</button>
 							</div>
 						</form>
@@ -92,17 +92,19 @@
 
 		function registerBoard(form) {
 
-			var result = (isValid(form.userID, "작성자", null, null)
-					&& isValid(form.boardNumber, "게시판", null, null)
+			var result = (
+				       isValid(form.boardNumber, "게시판", null, null)
 					&& isValid(form.postCategory, "카테고리", null, null)
 					&& isValid(form.postScore, "별점", null, null)
-					&& isValid(form.postTitle, "제목", null, null) && isValid(
-					form.postContents, "내용", null, null));
+					&& isValid(form.postTitle, "제목", null, null)
+					&& isValid(form.postContents, "내용", null, null)
+			);
 
 			if (result == false) {
 				return false;
 			}
 		}
+
 		/*[- end of function -]*/
 
 		/*]]>*/

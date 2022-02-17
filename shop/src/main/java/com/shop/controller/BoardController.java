@@ -24,7 +24,7 @@ public class BoardController extends UiUtils {
     @Autowired
     private BoardService boardService;
 
-    @GetMapping(value = "/shop/write.do")
+    @GetMapping(value = "/shop/boardwrite.do")
     public String openBoardWrite(@RequestParam(value = "postNumber", required = false) Integer postNumber,
             Model model) {
         if (postNumber == null) {
@@ -37,7 +37,7 @@ public class BoardController extends UiUtils {
             model.addAttribute("board", board);
         }
 
-        return "shop/write";
+        return "shop/boardwrite";
     }
 
     /*
@@ -73,27 +73,27 @@ public class BoardController extends UiUtils {
 
             boolean isRegistered = boardService.registerBoard(params);
             if (isRegistered == false) {
-                return showMessageWithRedirect("게시글 등록에 실패하였습니다.", "/shop/list.do", Method.GET, null, model);
+                return showMessageWithRedirect("게시글 등록에 실패하였습니다.", "/shop/boardlist.do", Method.GET, null, model);
             }
         } catch (DataAccessException e) {
-            return showMessageWithRedirect("데이터베이스 처리 과정에 문제가 발생하였습니다.", "/shop/list.do", Method.GET, null, model);
+            return showMessageWithRedirect("데이터베이스 처리 과정에 문제가 발생하였습니다.", "/shop/boardlist.do", Method.GET, null, model);
 
         } catch (Exception e) {
-            return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/shop/list.do", Method.GET, null, model);
+            return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/shop/boardlist.do", Method.GET, null, model);
         }
 
-        return showMessageWithRedirect("게시글 등록이 완료되었습니다.", "/shop/list.do", Method.GET, null, model);
+        return showMessageWithRedirect("게시글 등록이 완료되었습니다.", "/shop/boardlist.do", Method.GET, null, model);
     }
 
-    @GetMapping(value = "/shop/list.do")
+    @GetMapping(value = "/shop/boardlist.do")
     public String openBoardList(Model model) {
         List<BoardDTO> boardList = boardService.getBoardList();
         model.addAttribute("boardList", boardList);
 
-        return "shop/list";
+        return "shop/boardlist";
     }
 
-    @GetMapping(value = "/shop/view.do")
+    @GetMapping(value = "/shop/boardview.do")
     public String openBoardDetail(@RequestParam(value = "postNumber", required = false) Integer postNumber,
             Model model) {
         if (postNumber == null) {
@@ -108,7 +108,7 @@ public class BoardController extends UiUtils {
         }
         model.addAttribute("board", board);
 
-        return "shop/view";
+        return "shop/boardview";
     }
 
     /*

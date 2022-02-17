@@ -33,18 +33,18 @@ public class UserController {
         return "shop/mypage";
     }
 
-    // 판매리스트 페이지 진입
-    @GetMapping(value = "/shop/selllist.do")
+    // 상품리스트 진입
+    @GetMapping(value = "/shop/productlist.do")
     public String openSellList(Model model) {
-        System.out.println("판매리스트 페이지 진입");
-        return "shop/selllist";
+        System.out.println("상품리스트 페이지 진입");
+        return "shop/productlist";
     }
 
-    // 판매 페이지 진입
-    @GetMapping(value = "/shop/sell.do")
+    // 상품구매 페이지 진입
+    @GetMapping(value = "/shop/productpurchase.do")
     public String openSell(Model model) {
-        System.out.println("판매페이지 진입");
-        return "shop/sell";
+        System.out.println("상품구매 페이지진입");
+        return "shop/productpurchase";
     }
 
 //회원가입 페이지 진입
