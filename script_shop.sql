@@ -23,7 +23,7 @@ CREATE TABLE `User` (
 CREATE TABLE `Product` (
 	`product_Number`	INT	NOT null auto_increment primary key	COMMENT 'AUTO_INCREMENT 추가',	#상품번호
 	`product_Category`	VARCHAR(20)	NOT NULL,	#상품카테고리
-	`product_State`	INT	NOT NULL	COMMENT '0:준비중 1:판매중',	#상품상태
+	`product_State`	INT	NOT NULL	COMMENT '0:삭제 1:준비중 2:판매중',	#상품상태
 	`product_Name`	VARCHAR(20)	NOT NULL,	#상품명
 	`product_Price`	INT	NOT NULL,	#상품가격
 	`product_Stock`	INT	NULL,	#상품재고
@@ -31,7 +31,8 @@ CREATE TABLE `Product` (
 	`product_Hits`	INT	NOT NULL	DEFAULT 0,	#상품조회수
 	`product_InputDate`	DATETIME	NOT NULL	DEFAULT NOW(),	#상품등록일
 	`product_Current`	DATETIME	NULL,	#상품수정일
-	`product_DeleteDate`	DATETIME	NULL	#상품삭제일
+	`product_DeleteDate`	DATETIME	NULL,	#상품삭제일
+	`user_ID`	VARCHAR(20)	NOT NULL
 );
 
 CREATE TABLE `Product_ImageFile` (
@@ -154,6 +155,14 @@ REFERENCES `User` (
 	`user_ID`
 );
 
+ALTER TABLE `Product` ADD CONSTRAINT `FK_User_TO_Product_1` FOREIGN KEY (
+	`user_ID`
+)
+REFERENCES `User` (
+	`user_ID`
+);
+
+
 ALTER TABLE `Comment` ADD CONSTRAINT `FK_Post_TO_Comment_1` FOREIGN KEY (
 	`post_Number`
 )
@@ -260,11 +269,12 @@ INSERT INTO `Product`(
 	`product_Stock`,
 	`product_Desc`,
 	`product_Hits`,
-	`product_Date`,
+	`product_InputDate`,
 	`product_Current`,
-	`product_DeleteDate`)
+	`product_DeleteDate`,
+	`user_id`)
 values
-	(default, 1, 1, '마우수수', '20000', 3, '신제품 마우수수', default, default, null, null)
+	(default, 1, 1, '마우수수', '20000', 3, '신제품 마우수수', default, default, null, NULL, 'idid1234')
 	;
 
 
