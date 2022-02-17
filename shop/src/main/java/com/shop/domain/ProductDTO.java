@@ -6,15 +6,16 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ProductDTO {
-    Integer product_Number; // 상품번호
-    String product_Category; // 상품카테고리
-    Integer product_State; // 상품상테(0:준비중 1:판매중)
-    String product_Name; // 상품명
-    Integer product_Price; // 상품가격
-    Integer product_Stock; // 상품재고
-    String product_Desc; // 상품상세내용
-    Integer product_Hits; // 상품조회수
-    String product_Date; // 상품등록일
-    String product_Current; // 상품수정일
-    String product_DeleteDate; // 상품삭제일
+    Integer productNumber; // 상품번호
+    String productCategory; // 상품카테고리
+    Integer productState; // 상품상테(0:준비중 1:판매중)
+    String productName; // 상품명
+    Integer productPrice; // 상품가격
+    Integer productStock; // 상품재고
+    String productDesc; // 상품상세내용
+    Integer productHits; // 상품조회수
+    String productInputDate; // 상품등록일
+    String productCurrent; // 상품수정일
+    String productDeleteDate; // 상품삭제일
+    String userID; // 상품 등록인
 }

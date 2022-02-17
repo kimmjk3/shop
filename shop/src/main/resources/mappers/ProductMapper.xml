@@ -3,7 +3,7 @@
 
 <mapper namespace="com.shop.mapper.ProductMapper">
 
-	<sql id="Post">
+	<sql id="Product">
 		product_Number    <!-- 상품번호 -->
 		,product_Category     <!-- 상품카테고리 -->
 		,product_State    <!-- 상품상테(0:준비중 1:판매중) -->
@@ -12,15 +12,16 @@
 		,product_Stock    <!-- 상품재고 -->
 		,product_Desc     <!-- 상품상세내용 -->
 		,product_Hits     <!-- 상품조회수 -->
-		,product_Date     <!-- 상품등록일 -->
+		,product_InputDate     <!-- 상품등록일 -->
 		,product_Current  <!-- 상품수정일 -->
 		,product_DeleteDate   <!-- 상품삭제일 -->
+        ,user_ID   <!-- 상품 등록인 -->
 	</sql>
 
 	<!--상품등록 -->
 	<insert id="insertProduct" parameterType="ProductDTO">
-		INSERT INTO Post (
-		<include refid="Post" />
+		INSERT INTO Product (
+		<include refid="Product" />
 		) VALUES (
 		DEFAULT
 		, #{productCategory}
@@ -33,13 +34,14 @@
 		, DEFAULT
 		, NULL
 		, NULL
+		, #{userID}
 		)
 	</insert>
 
 	<!--상품 보기 -->
 	<select id="selectProductDetail" parameterType="Integer" resultType="ProductDTO">
 		SELECT
-		<include refid="Post" />
+		<include refid="Product" />
 		FROM
 		Product
 		WHERE
@@ -50,13 +52,13 @@
 
 	<!--상품 수정 -->
 	<update id="updateProduct" parameterType="ProductDTO">
-		UPDATE Post
+		UPDATE Product
 		SET
 		product_Category = #{productCategory}
 		, product_State = #{productState}
 		, product_Name = #{productName}
 		, product_Price = #{productPrice}
-		, product_Stock = #{productPrice}
+		, product_Stock = #{productStock}
 		, product_Desc = #{productDesc}
 
 		WHERE
@@ -65,7 +67,7 @@
 
 	<!--상품 삭제 -->
 	<update id="deleteProduct" parameterType="Integer">
-		UPDATE Post
+		UPDATE Product
 		SET
 		product_DeleteDate = NOW()
 		WHERE
@@ -75,7 +77,7 @@
 	<!--상품 전체조회 -->
 	<select id="selectProductList" parameterType="ProductDTO" resultType="ProductDTO">
 		SELECT
-		<include refid="Post" />
+		<include refid="Product" />
 		FROM
 		Product
 		WHERE

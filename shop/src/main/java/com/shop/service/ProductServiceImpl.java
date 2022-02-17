@@ -18,15 +18,20 @@ public class ProductServiceImpl implements ProductService {
     // 상품 등록,수정
     @Override
     public boolean registerProduct(ProductDTO params) {
-        // TODO Auto-generated method stub
-        return false;
+        int queryResult = 0;
+
+        if (params.getProductNumber() == null) {
+            queryResult = productMapper.insertProduct(params);
+        } else {
+            queryResult = productMapper.updateProduct(params);
+        }
+        return (queryResult == 1) ? true : false;
     }
 
     // 상품 상세보기
     @Override
     public ProductDTO getProductDetail(Integer productNumber) {
-        // TODO Auto-generated method stub
-        return null;
+        return productMapper.selectProductDetail(productNumber);
     }
 
     // 상품 삭제

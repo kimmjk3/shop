@@ -2,7 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="shop/layout/basic">
 
 <th:block layout:fragment="title">
-	<title>리뷰게시판</title>
+	<title>상품관리</title>
 </th:block>
 
 <th:block layout:fragment="content">
@@ -47,7 +47,7 @@
 
 						<div class="btn_wrap text-right">
 							<!-- <a th:href="@{/shop/write.do}" class="btn btn-primary waves-effect waves-light">글쓰기</a> -->
-							<a th:if="${session.userID != null}" th:href="@{/shop/write.do}" class="btn btn-primary waves-effect waves-light">글쓰기</a>
+							<a th:if="${session.userID != null}" th:href="@{/shop/productregistration.do}" class="btn btn-primary waves-effect waves-light">상품등록</a>
 							<button type="button" th:if="${session.userID == null}" th:onclick="writeAlert()" class="btn btn-primary waves-effect waves-light">글쓰기</button>
 
 						</div>
