@@ -35,15 +35,14 @@ CREATE TABLE `Product` (
 	`user_ID`	VARCHAR(20)	NOT NULL
 );
 
-CREATE TABLE `Product_ImageFile` (
-	`file_Number`	INT	NOT null primary KEY,
-	`orgin_FileName`	VARCHAR(200)	NOT NULL,
-	`stored_FileName`	VARCHAR(200)	NOT NULL,
-	`stored_thumbNail`	VARCHAR(200)	NOT NULL,
-	`file_size`	INT	NOT NULL,
-	`create_Date`	DATETIME	NOT NULL	DEFAULT NOW(),
-	`delete_Date`	DATETIME	NULL,
-	`product_Number`	INT	NOT NULL
+CREATE TABLE `Attach` (
+	`attach_Number`	INT	NOT null AUTO_INCREMENT primary KEY,	#파일 번호
+	`product_Number`	INT	NOT NULL,		#상품번호
+	`attach_OriginalName` VARCHAR(200) NOT NULL,		#원본 파일명
+	`attach_SaveName`	VARCHAR(200)	NOT NULL,		#저장 파일명
+	`attach_Size`	INT	NOT NULL,		#파일 크기
+	`attach_InsertDate`	DATETIME	NOT NULL	DEFAULT NOW(),		#등록일
+	`attach_DeleteDate`	DATETIME	NULL	#삭제일
 );
 
 CREATE TABLE `userOrder_Detail` (
@@ -113,7 +112,7 @@ CREATE TABLE `Interest_Item` (
 	`product_Number`	INT	NOT NULL	#상품번호
 );
 
-ALTER TABLE `Product_ImageFile` ADD CONSTRAINT `FK_Product_TO_Product_ImageFile_1` FOREIGN KEY (
+ALTER TABLE `Attach` ADD CONSTRAINT `FK_Product_TO_Attach_1` FOREIGN KEY (
 	`product_Number`
 )
 REFERENCES `Product` (
