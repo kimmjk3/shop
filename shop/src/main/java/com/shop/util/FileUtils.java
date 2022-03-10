@@ -71,10 +71,10 @@ public class FileUtils {
 
                 /* 파일 정보 저장 */
                 AttachDTO attach = new AttachDTO();
-                attach.setBoardIdx(boardIdx);
-                attach.setOriginalName(file.getOriginalFilename());
-                attach.setSaveName(saveName);
-                attach.setSize(file.getSize());
+                attach.setProductNumber(productNumber);
+                attach.setAttachOriginalName(file.getOriginalFilename());
+                attach.setAttachSaveName(saveName);
+                attach.setAttachSize(file.getSize());
 
                 /* 파일 정보 추가 */
                 attachList.add(attach);
