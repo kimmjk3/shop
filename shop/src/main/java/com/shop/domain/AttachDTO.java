@@ -10,7 +10,7 @@ public class AttachDTO {
     Integer productNumber; // 게시글번호
     String attachOriginalName; // 원본 파일명
     String attachSaveName; // 저장 파일명
-    Integer attachSize; // 파일 크기
+    long attachSize; // 파일 크기
     String attachInsertDate; // 등록일
     String attachDeleteDate; // 삭제일
 }
