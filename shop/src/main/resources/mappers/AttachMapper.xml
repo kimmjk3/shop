@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shop.mapper.AttachMapper">
+
+    <sql id="AttachColumns">
+	    attach_Number    <!-- 파일 번호 -->
+	    ,product_Number <!-- 게시글번호 -->
+	    ,attach_OriginalName <!-- 원본 파일명 -->
+	    ,attach_SaveName <!-- 저장 파일명 -->
+	    ,attach_Size <!-- 파일 크기 -->
+	    ,attach_InsertDate <!-- 등록일 -->
+        ,attach_DeleteDate <!-- 삭제일 -->
+    </sql> 
+
+    <!-- 파일추가 -->
+    <insert id="insertAttach" parameterType="list">
+        INSERT INTO Attach (
+            <include refid="AttachColumns" />
+        ) VALUES
+        <foreach collection="list" item="item" separator=",">
+        (
+            #{item.attachNumber}
+            , #{item.productNumber}
+            , #{item.attachOriginalName}
+            , #{item.attachSaveName}
+            , #{item.attachSize}
+            , Now()
+            , null
+        )
+        </foreach>
+    </insert>
+
+    <!-- 파일보기 -->
+    <select id="selectAttachDetail" parameterType="long" resultType="AttachDTO">
+        SELECT
+            <include refid="AttachColumns" />
+        FROM
+            Attach
+        WHERE
+            attach_DeleteDate is null
+        AND
+            product_Number = #{productNumber}
+    </select>
+
+    <!-- 파일삭제 -->
+    <update id="deleteAttach" parameterType="long">
+        UPDATE Attach
+        SET
+            delete_Date = NOW()
+        WHERE
+            product_Number = #{productNumber}
+    </update>
+
+    <!-- 파일 리스트 -->
+    <select id="selectAttachList" parameterType="long" resultType="AttachDTO">
+        SELECT
+            <include refid="AttachColumns" />
+        FROM
+            Attach
+        WHERE
+            attach_DeleteDate is null
+        AND
+            product_Number = #{productNumber}
+    </select>
+    
+    <!-- 파일 카운트 -->
+    <select id="selectAttachTotalCount" parameterType="long" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            Attach
+        WHERE
+            attach_DeleteDate is null
+        AND
+            product_Number = #{productNumber}
+    </select>
+
+</mapper>

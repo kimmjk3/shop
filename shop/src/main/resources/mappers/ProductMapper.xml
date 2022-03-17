@@ -19,7 +19,7 @@
 	</sql>
 
 	<!--상품등록 -->
-	<insert id="insertProduct" parameterType="ProductDTO">
+	<insert id="insertProduct" parameterType="ProductDTO" useGeneratedKeys="true" keyProperty="productNumber">
 		INSERT INTO Product (
 		<include refid="Product" />
 		) VALUES (

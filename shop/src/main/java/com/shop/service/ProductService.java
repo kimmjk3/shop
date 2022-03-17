@@ -2,12 +2,17 @@ package com.shop.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.shop.domain.ProductDTO;
 
 public interface ProductService {
 
     // 상품등록, 수정
     public boolean registerProduct(ProductDTO params);
+
+    // 파일 업로드
+    public boolean registerProduct(ProductDTO params, MultipartFile[] files);
 
     // 상품상세보기
     public ProductDTO getProductDetail(Integer productNumber);
