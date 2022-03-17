@@ -15,7 +15,7 @@
 
 				<div class="row">
 					<div class="card-content">
-						<form class="form-horizontal" th:action="@{/shop/productregister.do}" th:object="${product}" method="post" onsubmit="return registerProduct(this)"
+						<form class="form-horizontal" th:action="@{/shop/productregister.do}" th:object="${product}" method="post" enctype="multipart/form-data" onsubmit="return registerProduct(this)"
 							style="width: 50%; margin: 0 auto;"
 						>
 							<!--/* update의 경우 서버로 전달할 게시글 번호 (PK) */-->
@@ -70,8 +70,24 @@
                                     <input type="text" th:field="*{productDesc}" class="form-control" placeholder="상품설명을 입력해 주세요" />
                                 </div>
                             </div>
+                            
+							<div data-name="fileDiv" class="form-group filebox bs3-primary">
+							    <label for="file_0" class="col-sm-2 control-label">파일1</label>
+							    <div class="col-sm-10">
+							        <input type="text" class="upload-name" value="파일 찾기" readonly />
+							        <label for="file_0" class="control-label">찾아보기</label>
+							        <input type="file" name="files" id="file_0" class="upload-hidden" onchange="changeFilename(this)" />
+							    
+							        <button type="button" onclick="addFile()" class="btn btn-bordered btn-xs visible-xs-inline visible-sm-inline visible-md-inline visible-lg-inline">
+							            <i class="fa fa-plus" aria-hidden="true"></i>
+							        </button>
+							        <button type="button" onclick="removeFile(this)" class="btn btn-bordered btn-xs visible-xs-inline visible-sm-inline visible-md-inline visible-lg-inline">
+							            <i class="fa fa-minus" aria-hidden="true"></i>
+							        </button>
+							    </div>
+							</div>
 
-							<div class="btn_wrap text-center">
+							<div id="btnDiv" class="btn_wrap text-center">
 								<a th:href="@{/shop/productmanagement.do}" class="btn btn-info">뒤로가기</a>
 								<button type="submit" class="btn btn-primary">저장하기</button>
 							</div>
@@ -90,7 +106,6 @@
 <th:block layout:fragment="script">
 	<script th:inline="javascript">
 		/*<![CDATA[*/
-
 		function registerProduct(form) {
 
 			var result = (
@@ -107,8 +122,65 @@
 			}
 		}
 		/*[- end of function -]*/
-
 		/*]]>*/
+		
+		//파일영역의 추가, 삭제, 변경을 처리하는 자바스크립트 함수
+		let fileIdx = 0; /*[- 파일 인덱스 처리용 전역 변수 -]*/
+		
+		function addFile() {
+		
+		    const fileDivs = $('div[data-name="fileDiv"]');
+		    if (fileDivs.length > 2) {
+		        alert('파일은 최대 세 개까지 업로드 할 수 있습니다.');
+		        return false;
+		    }
+		
+		    fileIdx++;
+		
+		    const fileHtml = `
+		        <div data-name="fileDiv" class="form-group filebox bs3-primary">
+		            <label for="file_${fileIdx}" class="col-sm-2 control-label"></label>
+		            <div class="col-sm-10">
+		                <input type="text" class="upload-name" value="파일 찾기" readonly />
+		                <label for="file_${fileIdx}" class="control-label">찾아보기</label>
+		                <input type="file" name="files" id="file_${fileIdx}" class="upload-hidden" onchange="changeFilename(this)" />
+		
+		                <button type="button" onclick="removeFile(this)" class="btn btn-bordered btn-xs visible-xs-inline visible-sm-inline visible-md-inline visible-lg-inline">
+		                    <i class="fa fa-minus" aria-hidden="true"></i>
+		                </button>
+		            </div>
+		        </div>
+		    `;
+		
+		    $('#btnDiv').before(fileHtml);
+		}
+		
+		//파일영역의 삭제를 처리하는 함수
+		function removeFile(elem) {
+
+		    const prevTag = $(elem).prev().prop('tagName');
+		    if (prevTag === 'BUTTON') {
+		        const file = $(elem).prevAll('input[type="file"]');
+		        const filename = $(elem).prevAll('input[type="text"]');
+		        file.val('');
+		        filename.val('파일 찾기');
+		        return false;
+		    }
+
+		    const target = $(elem).parents('div[data-name="fileDiv"]');
+		    target.remove();
+		}
+		
+		//업로드할 파일명을 렌더링 하는 역할
+		function changeFilename(file) {
+
+		    file = $(file);
+		    const filename = file[0].files[0].name;
+		    const target = file.prevAll('input');
+		    target.val(filename);
+		}
+		
+		
 	</script>
 </th:block>
 
