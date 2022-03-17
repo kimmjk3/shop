@@ -11,11 +11,11 @@ public interface AttachMapper {
 
     public int insertAttach(List<AttachDTO> attachList);
 
-    public AttachDTO selectAttachDetail(Long attachNumber);
+    public AttachDTO selectAttachDetail(Integer attachNumber);
 
-    public int deleteAttach(Long productNumber);
+    public int deleteAttach(Integer productNumber);
 
-    public List<AttachDTO> selectAttachList(Long productNumber);
+    public List<AttachDTO> selectAttachList(Integer productNumber);
 
-    public int selectAttachTotalCount(Long productNumber);
+    public int selectAttachTotalCount(Integer productNumber);
 }

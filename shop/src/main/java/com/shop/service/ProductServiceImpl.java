@@ -26,7 +26,7 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private FileUtils fileUtils;
 
-    // 상품 등록,수정
+    // 상품등록,수정
     @Override
     public boolean registerProduct(ProductDTO params) {
         int queryResult = 0;
@@ -58,20 +58,20 @@ public class ProductServiceImpl implements ProductService {
         return (queryResult > 0);
     }
 
-    // 상품 상세보기
+    // 상품상세보기
     @Override
     public ProductDTO getProductDetail(Integer productNumber) {
         return productMapper.selectProductDetail(productNumber);
     }
 
-    // 상품 삭제
+    // 상품삭제
     @Override
     public boolean deleteProduct(Integer productNumber) {
         // TODO Auto-generated method stub
         return false;
     }
 
-    // 상품 리스트
+    // 상품리스트
     @Override
     public List<ProductDTO> getProductList() {
         List<ProductDTO> productList = Collections.emptyList();
@@ -82,6 +82,17 @@ public class ProductServiceImpl implements ProductService {
             productList = productMapper.selectProductList();
         }
         return productList;
+    }
+
+    // 첨부리스트
+    @Override
+    public List<AttachDTO> getAttachFileList(Integer productNumber) {
+
+        int fileTotalCount = attachMapper.selectAttachTotalCount(productNumber);
+        if (fileTotalCount < 1) {
+            return Collections.emptyList();
+        }
+        return attachMapper.selectAttachList(productNumber);
     }
 
 }

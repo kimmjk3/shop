@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.shop.domain.AttachDTO;
 import com.shop.domain.ProductDTO;
 
 public interface ProductService {
@@ -22,5 +23,8 @@ public interface ProductService {
 
     // 상품리스트
     public List<ProductDTO> getProductList();
+
+    // 첨부리스트
+    public List<AttachDTO> getAttachFileList(Long productNumber);
 
 }
