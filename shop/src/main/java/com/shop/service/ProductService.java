@@ -25,6 +25,6 @@ public interface ProductService {
     public List<ProductDTO> getProductList();
 
     // 첨부리스트
-    public List<AttachDTO> getAttachFileList(Long productNumber);
+    public List<AttachDTO> getAttachFileList(Integer productNumber);
 
 }
