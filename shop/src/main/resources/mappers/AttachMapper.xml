@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.board.mapper.AttachMapper">
+<mapper namespace="com.shop.mapper.AttachMapper">
 
     <sql id="AttachColumns">
 	    attach_Number    <!-- 파일 번호 -->
@@ -11,7 +11,7 @@
 	    ,attach_Size <!-- 파일 크기 -->
 	    ,attach_InsertDate <!-- 등록일 -->
         ,attach_DeleteDate <!-- 삭제일 -->
-    </sql>
+    </sql> 
 
     <!-- 파일추가 -->
     <insert id="insertAttach" parameterType="list">
@@ -22,8 +22,8 @@
         (
             #{item.attachNumber}
             , #{item.productNumber}
-            , #{item.originalName}
-            , #{item.saveName}
+            , #{item.attachOriginalName}
+            , #{item.attachSaveName}
             , #{item.attachSize}
             , Now()
             , null
@@ -34,7 +34,7 @@
     <!-- 파일보기 -->
     <select id="selectAttachDetail" parameterType="long" resultType="AttachDTO">
         SELECT
-            <include refid="attachColumns" />
+            <include refid="AttachColumns" />
         FROM
             Attach
         WHERE

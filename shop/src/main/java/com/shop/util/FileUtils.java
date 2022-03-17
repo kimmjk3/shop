@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shop.domain.AttachDTO;
+import com.shop.exception.AttachFileException;
 
 @Component
 public class FileUtils {

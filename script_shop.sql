@@ -284,6 +284,7 @@ SELECT * FROM post;
 
 select * from product;
 SELECT * FROM board;
+SELECT * FROM ATTACH;
 
 
 
