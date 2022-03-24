@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shop.constant.Method;
+import com.shop.domain.AttachDTO;
 import com.shop.domain.ProductDTO;
 import com.shop.service.ProductService;
 import com.shop.util.UiUtils;
@@ -72,6 +73,9 @@ public class ProductController extends UiUtils {
                 return "redirect:/shop/productmanagement.do";
             }
             model.addAttribute("product", product);
+
+            List<AttachDTO> fileList = productService.getAttachFileList(productNumber);
+            model.addAttribute("fileList", fileList);
         }
 
         return "shop/productregistration";
