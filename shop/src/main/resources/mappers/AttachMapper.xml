@@ -47,7 +47,7 @@
     <update id="deleteAttach" parameterType="Integer">
         UPDATE Attach
         SET
-            delete_Date = NOW()
+            attach_deleteDate = NOW()
         WHERE
             product_Number = #{productNumber}
     </update>

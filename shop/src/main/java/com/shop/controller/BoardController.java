@@ -40,26 +40,6 @@ public class BoardController extends UiUtils {
         return "shop/boardwrite";
     }
 
-    /*
-     * @PostMapping(value = "/shop/register.do") public String registerBoard(final
-     * BoardDTO params) { try { boolean isRegistered =
-     * boardService.registerBoard(params); if (isRegistered == false) {
-     * System.out.println("게시글 등록 실패"); // TODO => 게시글 등록에 실패하였다는 메시지를 전달 } } catch
-     * (DataAccessException e) { System.out.println("게시글 번호 : " +
-     * params.getPostNumber()); System.out.println(params.getUserID());
-     * System.out.println(params.getBoardNumber());
-     * System.out.println(params.getPostCategory());
-     * System.out.println(params.getPostScore());
-     * System.out.println(params.getPostTitle());
-     * System.out.println(params.getPostContents()); System.out.println("DB처리 문제");
-     * // TODO => 데이터베이스 처리 과정에 문제가 발생하였다는 메시지를 전달
-     * 
-     * } catch (Exception e) { System.out.println("시스템 문제"); // TODO => 시스템에 문제가
-     * 발생하였다는 메시지를 전달 }
-     * 
-     * return "redirect:/shop/list.do"; }
-     */
-
     @PostMapping(value = "/shop/register.do")
     public String registerBoard(final BoardDTO params, Model model, HttpServletRequest request, HttpSession session) {
         try {
@@ -110,21 +90,6 @@ public class BoardController extends UiUtils {
 
         return "shop/boardview";
     }
-
-    /*
-     * @PostMapping(value = "/shop/delete.do") public String
-     * deleteBoard(@RequestParam(value = "postNumber", required = false) Integer
-     * postNumber) { if (postNumber == null) { // TODO => 올바르지 않은 접근이라는 메시지를 전달하고,
-     * 게시글 리스트로 리다이렉트 return "redirect:/shop/list.do"; }
-     * 
-     * try { boolean isDeleted = boardService.deleteBoard(postNumber); if (isDeleted
-     * == false) { // TODO => 게시글 삭제에 실패하였다는 메시지를 전달 } } catch (DataAccessException
-     * e) { // TODO => 데이터베이스 처리 과정에 문제가 발생하였다는 메시지를 전달
-     * 
-     * } catch (Exception e) { // TODO => 시스템에 문제가 발생하였다는 메시지를 전달 }
-     * 
-     * return "redirect:/shop/list.do"; }
-     */
 
     @PostMapping(value = "/shop/boarddelete.do")
     public String deleteBoard(@RequestParam(value = "postNumber", required = false) Integer postNumber, Model model) {

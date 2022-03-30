@@ -54,9 +54,8 @@
 						</form>
 
 						<div style="text-align: right;">
-							<a class="btn btn-primary" th:if="${session.userID != null}" th:href="@{/shop/productregistration.do( productNumber=${product.productNumber} )}">수정하기</a>
 							<button type="button" class="btn btn-danger" th:if="${session.userID != null}" th:onclick="deleteProduct([[ ${product.productNumber} ]])">삭제하기</button>
-							<a th:href="@{/shop/list.do}" class="btn btn-info">뒤로가기</a>
+							<a th:href="@{/shop/productmanagement.do}" class="btn btn-info">뒤로가기</a>
 						</div>
 					</div>
 				</div>
@@ -74,11 +73,11 @@
 
 		function deleteProduct(productNumber) {
 
-			if (confirm(productNumber + "번 게시글을 삭제할까요?")) {
-				var uri = /*[[ @{/shop/delete.do} ]]*/null;
+			if (confirm(productNumber + "번 상품을 삭제할까요?")) {
+				var uri = /*[[ @{/shop/productdelete.do} ]]*/null;
 				var html = "";
 
-				html += '<form name="dataForm" action="'+uri+'" method="product">';
+				html += '<form name="dataForm" action="'+uri+'" method="post">';
 				html += '<input type="hidden" name="productNumber" value="'+productNumber+'" />';
 				html += '</form>';
 

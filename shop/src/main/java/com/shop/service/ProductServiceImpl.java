@@ -67,8 +67,16 @@ public class ProductServiceImpl implements ProductService {
     // 상품삭제
     @Override
     public boolean deleteProduct(Integer productNumber) {
-        // TODO Auto-generated method stub
-        return false;
+        int queryResult = 0;
+
+        ProductDTO product = productMapper.selectProductDetail(productNumber);
+
+        if (product != null && product.getProductDeleteDate() == null) {
+            queryResult = productMapper.deleteProduct(productNumber);
+            attachMapper.deleteAttach(productNumber);
+        }
+
+        return (queryResult == 1) ? true : false;
     }
 
     // 상품리스트

@@ -64,15 +64,15 @@
 		WHERE
 		product_Number = #{productNumber}
 	</update>
-
-	<!--상품 삭제 -->
-	<update id="deleteProduct" parameterType="Integer">
-		UPDATE Product
-		SET
-		product_DeleteDate = NOW()
-		WHERE
-		product_Number = #{productNumber}
-	</update>
+	
+    <!--상품 삭제-->
+    <update id="deleteProduct" parameterType="Integer">
+        UPDATE Product
+        SET
+            product_DeleteDate = NOW()
+        WHERE
+            product_Number = #{productNumber}
+    </update>
 
 	<!--상품 전체조회 -->
 	<select id="selectProductList" parameterType="ProductDTO" resultType="ProductDTO">

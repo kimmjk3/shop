@@ -85,17 +85,43 @@ public class ProductController extends UiUtils {
     public String openProductDetail(@RequestParam(value = "productNumber", required = false) Integer productNumber,
             Model model) {
         if (productNumber == null) {
-            // TODO => 올바르지 않은 접근이라는 메시지를 전달하고, 게시글 리스트로 리다이렉트
-            return "redirect:/shop/list.do";
+            // TODO => 올바르지 않은 접근이라는 메시지를 전달하고, 상품관리 페이지로 리다이렉트
+            return "redirect:/shop/productmanagement.do";
         }
 
         ProductDTO product = productService.getProductDetail(productNumber);
         if (product == null || product.getProductDeleteDate() != null) {
-            // TODO => 없는 게시글이거나, 이미 삭제된 게시글이라는 메시지를 전달하고, 게시글 리스트로 리다이렉트
-            return "redirect:/shop/list.do";
+            // TODO => 없는 상품이거나, 이미 삭제된 상품이라는 메시지를 전달하고, 상품관리페이지로 리다이렉트
+            return "redirect:/shop/productmanagement.do";
         }
         model.addAttribute("product", product);
 
         return "shop/productview";
+    }
+
+    @PostMapping(value = "/shop/productdelete.do")
+    public String deleteProduct(@RequestParam(value = "productNumber", required = false) Integer productNumber,
+            Model model) {
+        System.out.println("/shop/productdelete.do 실행됨");
+
+        if (productNumber == null) {
+            return showMessageWithRedirect("올바르지 않은 접근입니다.", "/shop/productmanagement.do", Method.GET, null, model);
+        }
+
+        try {
+            boolean isDeleted = productService.deleteProduct(productNumber);
+            if (isDeleted == false) {
+                return showMessageWithRedirect("상품 삭제에 실패하였습니다.", "/shop/productmanagement.do", Method.GET, null,
+                        model);
+            }
+        } catch (DataAccessException e) {
+            return showMessageWithRedirect("데이터베이스 처리 과정에 문제가 발생하였습니다.", "/shop/productmanagement.do", Method.GET, null,
+                    model);
+
+        } catch (Exception e) {
+            return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/shop/productmanagement.do", Method.GET, null, model);
+        }
+
+        return showMessageWithRedirect("상품 삭제가 완료되었습니다.", "/shop/productmanagement.do", Method.GET, null, model);
     }
 }
