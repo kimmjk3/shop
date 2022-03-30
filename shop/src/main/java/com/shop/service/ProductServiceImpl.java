@@ -91,16 +91,4 @@ public class ProductServiceImpl implements ProductService {
         }
         return productList;
     }
-
-    // 첨부리스트
-    @Override
-    public List<AttachDTO> getAttachFileList(Integer productNumber) {
-
-        int fileTotalCount = attachMapper.selectAttachTotalCount(productNumber);
-        if (fileTotalCount < 1) {
-            return Collections.emptyList();
-        }
-        return attachMapper.selectAttachList(productNumber);
-    }
-
 }
