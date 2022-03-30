@@ -92,8 +92,8 @@
 							<div th:unless="${#lists.isEmpty( fileList )}" th:each="row, status : ${fileList}" data-name="fileDiv" class="form-group filebox bs3-primary">
 							    <label th:for="|file_${status.index}|" class="col-sm-2 control-label">[[ |파일${status.count}| ]]</label>
 							    <div class="col-sm-10">
-							        <input type="hidden" name="fileIdxs" th:value="${row.idx}" />
-							        <input type="text" class="upload-name" th:value="${row.originalName}" readonly />
+							        <input type="hidden" name="fileIdxs" th:value="${row.productNumber}" />
+							        <input type="text" class="upload-name" th:value="${row.attachOriginalName}" readonly />
 							        <label th:for="|file_${status.index}|" class="control-label">찾아보기</label>
 							        <input type="file" name="files" th:id="|file_${status.index}|" class="upload-hidden" onchange="changeFilename(this)" />
 							    

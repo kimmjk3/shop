@@ -32,7 +32,7 @@
     </insert>
 
     <!-- 파일보기 -->
-    <select id="selectAttachDetail" parameterType="long" resultType="AttachDTO">
+    <select id="selectAttachDetail" parameterType="Integer" resultType="AttachDTO">
         SELECT
             <include refid="AttachColumns" />
         FROM
@@ -44,7 +44,7 @@
     </select>
 
     <!-- 파일삭제 -->
-    <update id="deleteAttach" parameterType="long">
+    <update id="deleteAttach" parameterType="Integer">
         UPDATE Attach
         SET
             delete_Date = NOW()
@@ -53,7 +53,7 @@
     </update>
 
     <!-- 파일 리스트 -->
-    <select id="selectAttachList" parameterType="long" resultType="AttachDTO">
+    <select id="selectAttachList" parameterType="Integer" resultType="AttachDTO">
         SELECT
             <include refid="AttachColumns" />
         FROM
@@ -65,7 +65,7 @@
     </select>
     
     <!-- 파일 카운트 -->
-    <select id="selectAttachTotalCount" parameterType="long" resultType="int">
+    <select id="selectAttachTotalCount" parameterType="Integer" resultType="int">
         SELECT
             COUNT(*)
         FROM
