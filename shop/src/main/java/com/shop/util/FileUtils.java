@@ -24,7 +24,13 @@ public class FileUtils {
     private final String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyMMdd"));
 
     /** 업로드 경로 */
-    private final String uploadPath = Paths.get("C:", "develop", "upload", today).toString();
+    // private final String uploadPath = Paths.get("C:", "develop", "upload",
+    // today).toString();
+
+    // 프로젝트에 수동으로 경로설정 *추후 수정필요*
+    // C:\Users\audwls\Desktop\개발\shop\shop\src\main\resources\static\attach
+    private final String uploadPath = Paths.get("C:", "Users", "audwls", "Desktop", "개발", "shop", "shop", "src", "main",
+            "resources", "static", "attach").toString();
 
     /**
      * 서버에 생성할 파일명을 처리할 랜덤 문자열 반환
@@ -59,6 +65,10 @@ public class FileUtils {
         }
 
         /* 파일 개수만큼 forEach 실행 */
+        Integer n = 1; // 첨부 순서 구분
+
+        String staticPath = "/attach/"; // 파일 경로 수동으로 삽입 *추후 수정 필요!!*
+
         for (MultipartFile file : files) {
             try {
                 /* 파일 확장자 */
@@ -67,18 +77,21 @@ public class FileUtils {
                 final String saveName = getRandomString() + "." + extension;
 
                 /* 업로드 경로에 saveName과 동일한 이름을 가진 파일 생성 */
-                File target = new File(uploadPath, saveName);
+                File target = new File(uploadPath, n + saveName);
                 file.transferTo(target);
 
                 /* 파일 정보 저장 */
                 AttachDTO attach = new AttachDTO();
                 attach.setProductNumber(productNumber);
                 attach.setAttachOriginalName(file.getOriginalFilename());
-                attach.setAttachSaveName(saveName);
+                attach.setAttachSaveName(n + saveName);
                 attach.setAttachSize(file.getSize());
-
+                // attach.setAttachLocation(uploadPath + backslash + n + saveName);
+                attach.setAttachLocation(staticPath + n + saveName);
                 /* 파일 정보 추가 */
                 attachList.add(attach);
+
+                n++;
 
             } catch (IOException e) {
                 throw new AttachFileException("[" + file.getOriginalFilename() + "] failed to save file...");

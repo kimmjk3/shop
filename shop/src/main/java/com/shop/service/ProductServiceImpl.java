@@ -64,6 +64,19 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.selectProductDetail(productNumber);
     }
 
+    // 첨부파일 리스트
+    @Override
+    public List<AttachDTO> getAttachList(Integer productNumber) {
+        List<AttachDTO> attachList = Collections.emptyList();
+
+        int attachTotalCount = attachMapper.selectAttachTotalCount(productNumber);
+
+        if (attachTotalCount > 0) {
+            attachList = attachMapper.selectAttachList(productNumber);
+        }
+        return attachList;
+    }
+
     // 상품삭제
     @Override
     public boolean deleteProduct(Integer productNumber) {

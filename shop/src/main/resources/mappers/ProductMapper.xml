@@ -17,6 +17,11 @@
 		,product_DeleteDate   <!-- 상품삭제일 -->
         ,user_ID   <!-- 상품 등록인 -->
 	</sql>
+	
+    <sql id="Attach">
+        product_Number    <!-- 상품번호 -->
+        ,attach_Location     <!-- 첨부경로 -->
+    </sql>
 
 	<!--상품등록 -->
 	<insert id="insertProduct" parameterType="ProductDTO" useGeneratedKeys="true" keyProperty="productNumber">
@@ -86,7 +91,7 @@
 		product_Number DESC,
 		product_InputDate DESC
 	</select>
-
+	
 	<select id="selectProductTotalCount" parameterType="ProductDTO" resultType="int">
 		SELECT
 		COUNT(*)
@@ -95,5 +100,4 @@
 		WHERE
 		product_DeleteDate IS NULL
 	</select>
-
 </mapper>

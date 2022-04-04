@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shop.constant.Method;
+import com.shop.domain.AttachDTO;
 import com.shop.domain.ProductDTO;
 import com.shop.service.ProductService;
 import com.shop.util.UiUtils;
@@ -55,6 +56,7 @@ public class ProductController extends UiUtils {
                     model);
 
         } catch (Exception e) {
+            e.printStackTrace();
             return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/shop/productmanagement.do", Method.GET, null, model);
         }
 
@@ -91,6 +93,9 @@ public class ProductController extends UiUtils {
             return "redirect:/shop/productmanagement.do";
         }
         model.addAttribute("product", product);
+
+        List<AttachDTO> attachList = productService.getAttachList(productNumber);
+        model.addAttribute("attachList", attachList);
 
         return "shop/productview";
     }

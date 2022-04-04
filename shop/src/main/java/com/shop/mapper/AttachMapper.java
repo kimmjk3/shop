@@ -18,4 +18,5 @@ public interface AttachMapper {
     public List<AttachDTO> selectAttachList(Integer productNumber);
 
     public int selectAttachTotalCount(Integer productNumber);
+
 }

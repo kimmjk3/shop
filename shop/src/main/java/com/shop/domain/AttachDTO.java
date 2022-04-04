@@ -11,6 +11,7 @@ public class AttachDTO {
     String attachOriginalName; // 원본 파일명
     String attachSaveName; // 저장 파일명
     long attachSize; // 파일 크기
+    String attachLocation; // 경로
     String attachInsertDate; // 등록일
     String attachDeleteDate; // 삭제일
 }
