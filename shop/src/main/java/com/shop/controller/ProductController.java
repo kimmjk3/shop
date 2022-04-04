@@ -26,6 +26,18 @@ public class ProductController extends UiUtils {
     @Autowired
     private ProductService productService;
 
+    // 상품리스트 진입
+    @GetMapping(value = "/shop/productlist.do")
+    public String openSellList(Model model) {
+        System.out.println("상품리스트 페이지 진입");
+
+        List<ProductDTO> productList = productService.getProductList();
+        model.addAttribute("productList", productList);
+
+        return "shop/productlist";
+    }
+
+    // 상품관리
     @GetMapping(value = "/shop/productmanagement.do")
     public String openProductList(Model model) {
         List<ProductDTO> productList = productService.getProductList();
@@ -34,6 +46,7 @@ public class ProductController extends UiUtils {
         return "shop/productmanagement";
     }
 
+    // 상품등록
     @PostMapping(value = "/shop/productregister.do")
     public String registerProduct(final ProductDTO params, final MultipartFile[] files, Model model,
             HttpServletRequest request, HttpSession session) {
