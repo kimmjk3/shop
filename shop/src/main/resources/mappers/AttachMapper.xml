@@ -63,7 +63,7 @@
         WHERE
         product_Number = #{productNumber}
         ORDER BY
-        attach_Number DESC
+        attach_Number ASC
     </select>
     <!--첨푸파일 개수 카운트 -->
     <select id="selectAttachTotalCount" parameterType="AttachDTO" resultType="int">

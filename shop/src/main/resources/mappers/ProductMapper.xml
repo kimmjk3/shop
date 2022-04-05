@@ -79,7 +79,7 @@
             product_Number = #{productNumber}
     </update>
 
-	<!--상품 전체조회 -->
+	<!--상품 전체리스트 조회 -->
 	<select id="selectProductList" parameterType="ProductDTO" resultType="ProductDTO">
 		SELECT
 		<include refid="Product" />
@@ -92,6 +92,7 @@
 		product_InputDate DESC
 	</select>
 	
+	<!--상품 개수카운트-->
 	<select id="selectProductTotalCount" parameterType="ProductDTO" resultType="int">
 		SELECT
 		COUNT(*)
@@ -100,4 +101,12 @@
 		WHERE
 		product_DeleteDate IS NULL
 	</select>
+	
+	<!--상품 판매리스트 조회(productlist.html)-->
+    <select id="selectProductSellList" parameterType="ProductDTO" resultType="ProductDTO">
+        SELECT *
+        FROM Product LEFT JOIN attach ON product.PRODUCT_NUMBER = attach.PRODUCT_NUMBER
+        WHERE attach.ATTACH_NUMBER = (SELECT MAX(attach_number) FROM ATTACH)
+        AND product_DeleteDate IS NULL
+    </select>
 </mapper>

@@ -26,13 +26,13 @@ public class ProductController extends UiUtils {
     @Autowired
     private ProductService productService;
 
-    // 상품리스트 진입
+    // 상품 판매리스트 진입
     @GetMapping(value = "/shop/productlist.do")
     public String openSellList(Model model) {
-        System.out.println("상품리스트 페이지 진입");
+        System.out.println("상품 판매리스트 페이지 진입(productlist.html)");
 
-        List<ProductDTO> productList = productService.getProductList();
-        model.addAttribute("productList", productList);
+        List<ProductDTO> productSellList = productService.getProductSellList();
+        model.addAttribute("productSellList", productSellList);
 
         return "shop/productlist";
     }

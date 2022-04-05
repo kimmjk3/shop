@@ -286,4 +286,19 @@ SELECT * FROM post;
 select * from product;
 SELECT * FROM board;
 SELECT * FROM ATTACH;
-	
+
+
+		SELECT *
+		FROM Product LEFT JOIN attach ON product.PRODUCT_NUMBER = attach.PRODUCT_NUMBER
+		WHERE PRODUCT.PRODUCT_NUMBER =33
+	    AND attach.ATTACH_NUMBER = (SELECT max(attach_number) FROM ATTACH WHERE PRODUCT_NUMBER = 33);
+	   
+	   
+        SELECT *
+        FROM Product LEFT JOIN attach ON product.PRODUCT_NUMBER = attach.PRODUCT_NUMBER
+        WHERE attach.ATTACH_NUMBER = (SELECT MAX(attach_number) FROM ATTACH WHERE PRODUCT_NUMBER=PRODUCT_NUMBER)
+        AND product_DeleteDate IS NULL;
+       
+       SELECT *
+       FROM ATTACH
+       WHERE PRODUCT_NUMBER = 33;

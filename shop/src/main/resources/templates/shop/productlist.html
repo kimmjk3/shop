@@ -17,16 +17,13 @@
 						quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
 				</div>
 
-				<span style="width:33%; display:inline-block; text-align:center;" th:if="${not #lists.isEmpty( productList )}" th:each="row : ${productList}">
-					<div th:text="${row.productNumber}"></div>
-					<div th:text="${row.productCategory}"></div>
+				<span style="width:33%; display:inline-block; text-align:center;" th:if="${not #lists.isEmpty( productSellList )}" th:each="row : ${productSellList}">
+				    <div th:text="${row.productNumber}"></div>
+				    <div><img style="width:100%;height:100%;"th:src="${row.attachLocation}" alt="" /></div>
 					<div>
 						<a th:href="@{/shop/productview.do( productNumber=${row.productNumber} )}" th:text="${row.productName}"></a>
 					</div>
 					<div th:text="${row.productPrice}"></div>
-					<div th:text="${row.productStock}"></div>
-					<div th:text="${row.productState}"></div>
-					<div th:text="${row.productInputDate}"></div>
 				</span>
 
 			</div>

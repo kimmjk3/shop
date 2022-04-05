@@ -39,6 +39,7 @@ public class ProductServiceImpl implements ProductService {
         return (queryResult == 1) ? true : false;
     }
 
+    // 상품등록
     @Override
     public boolean registerProduct(ProductDTO params, MultipartFile[] files) {
         int queryResult = 1;
@@ -103,5 +104,19 @@ public class ProductServiceImpl implements ProductService {
             productList = productMapper.selectProductList();
         }
         return productList;
+    }
+
+    //
+    @Override
+    public List<ProductDTO> getProductSellList() {
+        List<ProductDTO> productSellList = Collections.emptyList();
+
+        int productTotalCount = productMapper.selectProductTotalCount();
+
+        if (productTotalCount > 0) {
+            productSellList = productMapper.selectProductSellList();
+        }
+
+        return productSellList;
     }
 }
