@@ -24,7 +24,7 @@ CREATE TABLE `Product` (
 	`product_Number`	INT	NOT null auto_increment primary key	COMMENT 'AUTO_INCREMENT 추가',	#상품번호
 	`product_Category`	VARCHAR(20)	NOT NULL,	#상품카테고리
 	`product_State`	INT	NOT NULL	COMMENT '0:삭제 1:준비중 2:판매중',	#상품상태
-	`product_Name`	VARCHAR(20)	NOT NULL,	#상품명
+	`product_Name`	VARCHAR(1000)	NOT NULL,	#상품명
 	`product_Price`	INT	NOT NULL,	#상품가격
 	`product_Stock`	INT	NULL,	#상품재고
 	`product_Desc`	VARCHAR(2000)	NOT NULL,	#상품상세내용
