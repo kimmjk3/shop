@@ -65,41 +65,50 @@ public class FileUtils {
         }
 
         /* 파일 개수만큼 forEach 실행 */
-        Integer n = 1; // 첨부 순서 구분
-
         String staticPath = "/attach/"; // 파일 경로 수동으로 삽입 *추후 수정 필요!!*
 
-        for (MultipartFile file : files) {
-            try {
-                /* 파일 확장자 */
-                final String extension = FilenameUtils.getExtension(file.getOriginalFilename());
-                /* 서버에 저장할 파일명 (랜덤 문자열 + 확장자) */
-                final String saveName = getRandomString() + "." + extension;
+        try {
+            /* Files[0]:내용 Files[1]:썸내일 */
 
-                /* 업로드 경로에 saveName과 동일한 이름을 가진 파일 생성 */
-                File target = new File(uploadPath, n + saveName);
-                file.transferTo(target);
+            /* 파일 확장자 */
+            final String extension0 = FilenameUtils.getExtension(files[0].getOriginalFilename());
+            final String extension1 = FilenameUtils.getExtension(files[1].getOriginalFilename());
 
-                /* 파일 정보 저장 */
-                AttachDTO attach = new AttachDTO();
-                attach.setProductNumber(productNumber);
-                attach.setAttachOriginalName(file.getOriginalFilename());
-                attach.setAttachSaveName(n + saveName);
-                attach.setAttachSize(file.getSize());
-                // attach.setAttachLocation(uploadPath + backslash + n + saveName);
-                attach.setAttachLocation(staticPath + n + saveName);
-                /* 파일 정보 추가 */
-                attachList.add(attach);
+            /* 서버에 저장할 파일명 (랜덤 문자열 + 확장자) */
+            final String saveName0 = getRandomString() + "." + extension0;
+            final String saveName1 = getRandomString() + "." + extension1;
 
-                n++;
+            /* 업로드 경로에 saveName과 동일한 이름을 가진 파일 생성 */
+            File target = new File(uploadPath, saveName0);
+            files[0].transferTo(target);
+            File target1 = new File(uploadPath, saveName1);
+            files[1].transferTo(target1);
 
-            } catch (IOException e) {
-                throw new AttachFileException("[" + file.getOriginalFilename() + "] failed to save file...");
+            /* 파일 정보 저장 */
+            AttachDTO attach = new AttachDTO();
+            attach.setProductNumber(productNumber);
 
-            } catch (Exception e) {
-                throw new AttachFileException("[" + file.getOriginalFilename() + "] failed to save file...");
-            }
-        } // end of for
+            // 썸네일
+            attach.setAttachThumbnailOriginalName(files[0].getOriginalFilename());
+            attach.setAttachThumbnailSaveName(saveName0);
+            attach.setAttachThumbnailSize(files[0].getSize());
+            attach.setAttachThumbnailLocation(staticPath + saveName0);
+
+            // 내용
+            attach.setAttachContentsOriginalName(files[1].getOriginalFilename());
+            attach.setAttachContentsSaveName(saveName1);
+            attach.setAttachContentsSize(files[1].getSize());
+            attach.setAttachContentsLocation(staticPath + saveName1);
+
+            /* 파일 정보 추가 */
+            attachList.add(attach);
+
+        } catch (IOException e) {
+            throw new AttachFileException("[" + files[0].getOriginalFilename() + "] failed to save file...");
+
+        } catch (Exception e) {
+            throw new AttachFileException("[" + files[0].getOriginalFilename() + "] failed to save file...");
+        }
 
         return attachList;
     }

@@ -38,10 +38,17 @@ CREATE TABLE `Product` (
 CREATE TABLE `Attach` (
 	`attach_Number`	INT	NOT null AUTO_INCREMENT primary KEY,	#파일 번호
 	`product_Number`	INT	NOT NULL,		#상품번호
-	`attach_OriginalName` VARCHAR(200) NOT NULL,		#원본 파일명
-	`attach_SaveName`	VARCHAR(200)	NOT NULL,		#저장 파일명
-	`attach_Size`	INT	NOT NULL,		#파일 크기
-	`attach_Location` VARCHAR(200) NOT NULL,	#경로
+	
+	`attach_ThumbnailOriginalName` VARCHAR(200) NOT NULL,		#원본 파일명
+	`attach_ThumbnailSaveName`	VARCHAR(200)	NOT NULL,		#저장 파일명
+	`attach_ThumbnailSize`	INT	NOT NULL,		#파일 크기
+	`attach_ThumbnailLocation` VARCHAR(200) NOT NULL,	#경로
+	
+	`attach_ContentsOriginalName` VARCHAR(200) NOT NULL,		#원본 파일명
+	`attach_ContentsSaveName`	VARCHAR(200)	NOT NULL,		#저장 파일명
+	`attach_ContentsSize`	INT	NOT NULL,		#파일 크기
+	`attach_ContentsLocation` VARCHAR(200) NOT NULL,	#경로
+	
 	`attach_InsertDate`	DATETIME	NOT NULL	DEFAULT NOW(),		#등록일
 	`attach_DeleteDate`	DATETIME	NULL	#삭제일
 );
@@ -302,3 +309,5 @@ SELECT * FROM ATTACH;
        SELECT *
        FROM ATTACH
        WHERE PRODUCT_NUMBER = 33;
+      
+      SELECT Max(attach_number) FROM ATTACH WHERE PRODUCT_NUMBER=PRODUCT_NUMBER;

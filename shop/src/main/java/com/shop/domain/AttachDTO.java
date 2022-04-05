@@ -8,10 +8,17 @@ import lombok.Setter;
 public class AttachDTO {
     Integer attachNumber; // 파일 번호
     Integer productNumber; // 게시글번호
-    String attachOriginalName; // 원본 파일명
-    String attachSaveName; // 저장 파일명
-    long attachSize; // 파일 크기
-    String attachLocation; // 경로
+
+    String attachThumbnailOriginalName; // 원본 파일명
+    String attachThumbnailSaveName; // 저장 파일명
+    long attachThumbnailSize; // 파일 크기
+    String attachThumbnailLocation; // 경로
+
+    String attachContentsOriginalName; // 원본 파일명
+    String attachContentsSaveName; // 저장 파일명
+    long attachContentsSize; // 파일 크기
+    String attachContentsLocation; // 경로
+
     String attachInsertDate; // 등록일
     String attachDeleteDate; // 삭제일
 }

@@ -4,12 +4,19 @@
 <mapper namespace="com.shop.mapper.AttachMapper">
 
     <sql id="AttachColumns">
-	    attach_Number    <!-- 파일 번호 -->
-	    ,product_Number <!-- 게시글번호 -->
-	    ,attach_OriginalName <!-- 원본 파일명 -->
-	    ,attach_SaveName <!-- 저장 파일명 -->
-	    ,attach_Size <!-- 파일 크기 -->
-	    ,attach_Location   <!--경로-->
+	    attach_Number    <!-- 첨부 번호 -->
+	    ,product_Number <!-- 파일 번호 -->
+	    
+	    ,attach_ThumbnailOriginalName <!-- 원본 파일명 -->
+	    ,attach_ThumbnailSaveName <!-- 저장 파일명 -->
+	    ,attach_ThumbnailSize <!-- 파일 크기 -->
+	    ,attach_ThumbnailLocation   <!--경로-->
+	    
+        ,attach_ContentsOriginalName <!-- 원본 파일명 -->
+        ,attach_ContentsSaveName <!-- 저장 파일명 -->
+        ,attach_ContentsSize <!-- 파일 크기 -->
+        ,attach_ContentsLocation   <!--경로-->
+	    
 	    ,attach_InsertDate <!-- 등록일 -->
         ,attach_DeleteDate <!-- 삭제일 -->
     </sql> 
@@ -23,10 +30,17 @@
         (
             #{item.attachNumber}
             , #{item.productNumber}
-            , #{item.attachOriginalName}
-            , #{item.attachSaveName}
-            , #{item.attachSize}
-            , #{item.attachLocation}
+            
+            , #{item.attachThumbnailOriginalName}
+            , #{item.attachThumbnailSaveName}
+            , #{item.attachThumbnailSize}
+            , #{item.attachThumbnailLocation}
+            
+            , #{item.attachContentsOriginalName}
+            , #{item.attachContentsSaveName}
+            , #{item.attachContentsSize}
+            , #{item.attachContentsLocation}
+            
             , Now()
             , null
         )
@@ -57,7 +71,7 @@
     <!--첨푸파일 조회 -->
     <select id="selectAttachList" parameterType="AttachDTO" resultType="AttachDTO">
         SELECT
-        attach_Number, attach_location
+        attach_Number, attach_Thumbnaillocation, attach_Contentslocation
         FROM
         Attach
         WHERE
@@ -65,6 +79,7 @@
         ORDER BY
         attach_Number ASC
     </select>
+    
     <!--첨푸파일 개수 카운트 -->
     <select id="selectAttachTotalCount" parameterType="AttachDTO" resultType="int">
         SELECT

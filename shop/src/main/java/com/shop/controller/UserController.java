@@ -33,13 +33,6 @@ public class UserController {
         return "shop/mypage";
     }
 
-    // 상품구매 페이지 진입
-    @GetMapping(value = "/shop/productpurchase.do")
-    public String openSell(Model model) {
-        System.out.println("상품구매 페이지진입");
-        return "shop/productpurchase";
-    }
-
 //회원가입 페이지 진입
     @GetMapping(value = "/shop/join.do") // 회원가입 주소
     public String openUserJoin(Model model) {

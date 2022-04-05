@@ -106,7 +106,6 @@
     <select id="selectProductSellList" parameterType="ProductDTO" resultType="ProductDTO">
         SELECT *
         FROM Product LEFT JOIN attach ON product.PRODUCT_NUMBER = attach.PRODUCT_NUMBER
-        WHERE attach.ATTACH_NUMBER = (SELECT MAX(attach_number) FROM ATTACH)
-        AND product_DeleteDate IS NULL
+        WHERE product_DeleteDate IS NULL
     </select>
 </mapper>
