@@ -68,7 +68,7 @@
             product_Number = #{productNumber}
     </update>
 
-    <!--첨푸파일 조회 -->
+    <!--첨푸파일 리스트조회 -->
     <select id="selectAttachList" parameterType="AttachDTO" resultType="AttachDTO">
         SELECT
         attach_Number, attach_Thumbnaillocation, attach_Contentslocation

@@ -37,6 +37,29 @@ public class ProductController extends UiUtils {
         return "shop/productlist";
     }
 
+    // 상품구매 페이지 진입
+    @GetMapping(value = "/shop/productpurchase.do")
+    public String openSell(Model model, Integer productNumber) {
+        System.out.println("상품구매 페이지진입");
+
+        if (productNumber == null) {
+            // TODO => 올바르지 않은 접근이라는 메시지를 전달하고, 상품관리 페이지로 리다이렉트
+            return "redirect:/shop/productmanagement.do";
+        }
+
+        ProductDTO product = productService.getProductDetail(productNumber);
+        if (product == null || product.getProductDeleteDate() != null) {
+            // TODO => 없는 상품이거나, 이미 삭제된 상품이라는 메시지를 전달하고, 상품관리페이지로 리다이렉트
+            return "redirect:/shop/productmanagement.do";
+        }
+        model.addAttribute("product", product);
+
+        AttachDTO attach = productService.getAttachDetail(productNumber);
+        model.addAttribute("attach", attach);
+
+        return "shop/productpurchase";
+    }
+
     // 상품관리
     @GetMapping(value = "/shop/productmanagement.do")
     public String openProductList(Model model) {
@@ -107,8 +130,8 @@ public class ProductController extends UiUtils {
         }
         model.addAttribute("product", product);
 
-        List<AttachDTO> attachList = productService.getAttachList(productNumber);
-        model.addAttribute("attachList", attachList);
+        AttachDTO attach = productService.getAttachDetail(productNumber);
+        model.addAttribute("attach", attach);
 
         return "shop/productview";
     }

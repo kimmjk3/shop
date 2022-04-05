@@ -25,7 +25,7 @@ public interface ProductService {
     public List<ProductDTO> getProductList();
 
     // 첨부파일 상세보기
-    public List<AttachDTO> getAttachList(Integer productNumber);
+    public AttachDTO getAttachDetail(Integer productNumber);
 
     // 상품판매리스트
     public List<ProductDTO> getProductSellList();

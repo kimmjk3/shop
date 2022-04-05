@@ -49,27 +49,22 @@
                                         <td style="width: 20%; background-color: #eeeeee;">조회수</td>
                                         <td style="width: 30%;" th:text="*{productHits}"></td>
                                     </tr>
-                                    <tr>
-                                        <td colspan="4" style="width: 20%; background-color: #eeeeee;">이미지</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width: 30%;" th:src"*{productInputDate}"></td>
-                                    </tr>
 								</tbody>
+							</table>
+						</form>
+						
+						<form th:object="${attach}">
+						  <table>
                                 <thead>
                                     <tr>
                                         <th colspan = "4">썸내일</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:if="${not #lists.isEmpty( attachList )}" th:each="row : ${attachList}">
-                                        <!-- <td colspan="1" th:text="${row.attachNumber}"></td> -->
+                                    <tr>
                                         <td colspan = "4">
-                                            <img style="width:100%;height:100%;"th:src="${row.attachThumbnailLocation}" alt="썸네일" />
+                                            <img style="width:100%;height:100%;"th:src="*{attachThumbnailLocation}" alt="썸네일" />
                                         </td>
-                                    </tr>
-                                    <tr th:unless="${not #lists.isEmpty( attachList )}">
-                                        <td colspan="4">조회된 결과가 없습니다.</td>
                                     </tr>
                                 </tbody>
                                 <thead>
@@ -78,18 +73,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:if="${not #lists.isEmpty( attachList )}" th:each="row : ${attachList}">
+                                    <tr>
                                         <!-- <td colspan="1" th:text="${row.attachNumber}"></td> -->
                                         <td colspan = "4">
-                                            <img style="width:100%;height:100%;"th:src="${row.attachContentsLocation}" alt="내용" />
+                                            <img style="width:100%;height:100%;"th:src="*{attachContentsLocation}" alt="내용" />
                                         </td>
                                     </tr>
-                                    <tr th:unless="${not #lists.isEmpty( attachList )}">
-                                        <td colspan="4">조회된 결과가 없습니다.</td>
-                                    </tr>
                                 </tbody>
-							</table>
-						</form>
+                            </table>
+                        </form>
 
 						<div style="width: 70%; margin-left: auto; margin-right: auto;">
 							<table class="table table-hover">

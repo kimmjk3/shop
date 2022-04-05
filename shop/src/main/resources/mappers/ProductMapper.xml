@@ -45,14 +45,13 @@
 
 	<!--상품 보기 -->
 	<select id="selectProductDetail" parameterType="Integer" resultType="ProductDTO">
-		SELECT
-		<include refid="Product" />
-		FROM
-		Product
-		WHERE
-		product_DeleteDate IS NULL
-		AND
-		product_Number = #{productNumber}
+        SELECT
+        *
+        FROM
+        Product left join attach on Product.PRODUCT_NUMBER =Attach.PRODUCT_NUMBER 
+        WHERE product_DeleteDate IS NULL 
+        AND 
+        product.product_Number = #{productNumber};
 	</select>
 
 	<!--상품 수정 -->

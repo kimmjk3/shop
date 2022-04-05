@@ -11,23 +11,20 @@
 				<div class="section-title">
 					<h2>상품구매</h2>
 				</div>
-
+				
 				<div class="row">
 					<div style="width: 90%; margin: 0 auto;">
 						<div class="row">
-							<div style="display: flex; width: 100%;">
+							<div th:object="${product}" style="display: flex; width: 100%;">
 								<div style="width: 70%;">
-									<div>
-										<img class="card-img-top" src="/image/keyboard1.jpg" alt="">
-									</div>
 									<div style="text-align: center;">
-										<img style="width: 100%" src="/image/im1.jpg" alt="">
+										<img class="card-img-top" th:src="*{attachContentsLocation}" alt="내용">
 									</div>
 								</div>
 
-								<div style="width: 30%; position: fixed; right: 10px; margin-top: 60px;">
-									<div style="margin-bottom: 10px;">타이폰 마르스프로 베스타 기계식 키보드</div>
-									<div style="margin-top: 10px; padding-bottom: 30px; text-align: right; border-bottom: 1px dashed #bbb;">174,000원</div>
+								<div style="width:30%; margin-top:60px; position:fixed; right:10px;">
+									<div style="margin-bottom: 10px;"  th:text="*{productName}"></div>
+									<div style="margin-top: 10px; padding-bottom: 30px; text-align: right; border-bottom: 1px dashed #bbb;" ><span th:text="*{productPrice}"></span><span>원</span></div>
 									<div style="display: flex; margin-left: 10px; text-align: center; margin-top: 30px; margin-bottom: 30px;">
 										<div style="width: 50%; text-align: center;">키보드색상</div>
 										<select style="width: 50%; text-align: center;" name="keyboardColor">
