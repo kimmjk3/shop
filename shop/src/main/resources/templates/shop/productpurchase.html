@@ -7,7 +7,7 @@
 <th:block layout:fragment="content">
 	<main id="main">
 		<section id="about" class="about">
-			<div class="container" data-aos="fade-up">
+			<div class="container">
 				<div class="section-title">
 					<h2>상품구매</h2>
 				</div>
@@ -16,13 +16,17 @@
 					<div style="width: 90%; margin: 0 auto;">
 						<div class="row">
 							<div th:object="${product}" style="display: flex; width: 100%;">
-								<div style="width: 70%;">
+								<span style="width: 70%;">
+                                    <div style="text-align: center;">
+                                        <img class="card-img-top" th:src="*{attachThumbnailLocation}" alt="썸네일">
+                                    </div> 
+                                    <br />
 									<div style="text-align: center;">
 										<img class="card-img-top" th:src="*{attachContentsLocation}" alt="내용">
 									</div>
-								</div>
+								</span>
 
-								<div style="width:30%; margin-top:60px; position:fixed; right:10px;">
+								<span style="width:30%; right:10px; margin-top:60px; position:fixed;">
 									<div style="margin-bottom: 10px;"  th:text="*{productName}"></div>
 									<div style="margin-top: 10px; padding-bottom: 30px; text-align: right; border-bottom: 1px dashed #bbb;" ><span th:text="*{productPrice}"></span><span>원</span></div>
 									<div style="display: flex; margin-left: 10px; text-align: center; margin-top: 30px; margin-bottom: 30px;">
@@ -60,7 +64,7 @@
 										</div>
 									</div>
 
-								</div>
+								</span>
 							</div>
 						</div>
 					</div>

@@ -284,12 +284,8 @@ values
 	(default, 1, 1, '마우수수', '20000', 3, '신제품 마우수수', default, default, null, NULL, 'idid1234')
 	;
 
-
-
 select * from user;
 SELECT * FROM post;
-
-
 select * from product;
 SELECT * FROM board;
 SELECT * FROM ATTACH;
