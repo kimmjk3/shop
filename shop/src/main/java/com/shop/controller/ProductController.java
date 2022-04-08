@@ -29,7 +29,7 @@ public class ProductController extends UiUtils {
     // 상품 판매리스트 진입
     @GetMapping(value = "/shop/productlist.do")
     public String openSellList(Model model) {
-        System.out.println("상품 판매리스트 페이지 진입(productlist.html)");
+        System.out.println("상품 리스트 페이지 진입(productlist.html)");
 
         List<ProductDTO> productSellList = productService.getProductSellList();
         model.addAttribute("productSellList", productSellList);
@@ -62,9 +62,14 @@ public class ProductController extends UiUtils {
 
     // 상품관리 페이지 진입
     @GetMapping(value = "/shop/productmanagement.do")
-    public String openProductList(Model model) {
+    public String openProductList(Model model, HttpSession session) {
         List<ProductDTO> productList = productService.getProductList();
         model.addAttribute("productList", productList);
+
+        int userAuthority = (int) session.getAttribute("userAuthority");
+        if (userAuthority == 1) {
+            return showMessageWithRedirect("권한이 없습니다.", "/shop/index.do", Method.GET, null, model);
+        }
 
         return "shop/productmanagement";
     }
