@@ -16,7 +16,7 @@ CREATE TABLE `User` (
 	`user_Email`	VARCHAR(20)	NOT NULL,	#이메일
 	`user_JoinDate`	DATETIME	NOT NULL	DEFAULT NOW(),	#가입일
 	`user_SecessionDate`	DATETIME	NULL,	#탈퇴일
-	`user_Authority`	INT	NOT NULL	DEFAULT 1	COMMENT '0:관리자 1:유저',	#권한
+	`user_Authority`	INT	NOT NULL	DEFAULT 0	COMMENT '0:관리자 1:유저',	#권한
 	`user_State`	INT	NOT NULL	DEFAULT 1	COMMENT '0:탈퇴 1:활동중 2:정지'	#활동상태
 );
 
@@ -220,7 +220,7 @@ REFERENCES `Product` (
 );
 
 
-#사용자 데이터삽입
+#사용자 샘플 데이터삽입
 INSERT INTO `USER`(
 	`user_ID`,
 	`user_PW`,
@@ -237,10 +237,11 @@ INSERT INTO `USER`(
 	`user_Authority`,
 	`user_State`)
 values
-	('idid1234','pwpw1234', '김명진', 1, '19961202', '123-456', '상세주소', '도로명주소', '010-3505-3471', 'kimmjk35@naver.com', default, null, 0, default)
+	('idid1234','pwpw1234', '김이름', 1, '19961202', '123-456', '상세주소', '도로명주소', '010-1234-5678', 'idid1234@naver.com', default, null, 0, default),
+	('idid12345','pwpw12345', '김성명', 1, '19971202', '123-456', '상세주소', '도로명주소', '010-3505-3471', 'kimmjk35@naver.com', default, null, 1, default)
 	;
 
-#게시판 데이터삽입
+#게시판 샘플 데이터삽입
 INSERT INTO `Board`(
 	`board_Number`,
 	`board_Name`,
@@ -290,5 +291,4 @@ select * from product;
 SELECT * FROM board;
 SELECT * FROM ATTACH;
 SELECT * FROM Interest_Item;
-		
 	

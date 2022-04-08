@@ -60,7 +60,7 @@ public class ProductController extends UiUtils {
         return "shop/productpurchase";
     }
 
-    // 상품관리
+    // 상품관리 페이지 진입
     @GetMapping(value = "/shop/productmanagement.do")
     public String openProductList(Model model) {
         List<ProductDTO> productList = productService.getProductList();

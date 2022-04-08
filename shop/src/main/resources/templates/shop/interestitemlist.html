@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="shop/layout/basic">
+
+<th:block layout:fragment="title">
+	<title>관심상품</title>
+</th:block>
+
+<th:block layout:fragment="content">
+	<main id="main">
+		<section id="about" class="about">
+			<div class="container" data-aos="fade-up">
+				<div class="section-title">
+					<h2>관심상품</h2>
+				</div>
+				<div class="row">
+					<div style="width: 80%; text-align: center; margin-left: auto; margin-right: auto;">
+						<table class="table table-hover" style = "vertical-align:middle;">
+							<thead>
+								<tr>
+									<th>이미지</th>
+									<th>상품정보</th>
+									<th>판매가</th>
+									<th>상태</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:if="${not #lists.isEmpty( interestItemList )}" th:each="row : ${interestItemList}">
+									<td><img style="width:50%;height:100px;position:top;"th:src="${row.attachThumbnailLocation}" alt="" /></td>
+									<td><a th:href="@{/shop/productpurchase.do(productNumber=${row.productNumber} )}" th:text="${row.productName}"></a></td>
+									<td><span th:text="${row.productPrice}"></span><span>₩</span></td>
+									<td th:if="${row.productState}==1">준비중</td>
+									<td th:if="${row.productState}==2">판매중</td>
+								</tr>
+								<tr th:unless="${not #lists.isEmpty( interestItemList )}">
+									<td colspan="7">조회된 결과가 없습니다.</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+			</div>
+		</section>
+	</main>
+</th:block>
+
+
+
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+
+		console.log("${session.userLo}");
+
+		function writeAlert() {
+			alert("로그인이 필요합니다. 로그인페이지로 이동합니다.");
+			location.href = "/shop/login.do";
+		}
+		/*[- end of function -]*/
+		/*]]>*/
+	</script>
+</th:block>
+
+</html>

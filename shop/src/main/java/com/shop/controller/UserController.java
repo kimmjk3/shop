@@ -1,5 +1,7 @@
 package com.shop.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.shop.constant.Method;
+import com.shop.domain.ProductDTO;
 import com.shop.domain.UserDTO;
 import com.shop.service.UserService;
 import com.shop.util.UiUtils;
@@ -104,18 +107,18 @@ public class UserController extends UiUtils {
         return "redirect:/shop/index.do";
     }
 
-    // 관심품목 등록
+    // 관심상품 등록
     @GetMapping(value = "/shop/interestitem.do")
     public String InterestItem(@RequestParam(value = "userID", required = false) String userID,
             @RequestParam(value = "productNumber", required = false) Integer productNumber, Model model) {
 
         try {
-            System.out.println("관심품목 등록");
+            System.out.println("관심상품 등록");
             System.out.println(userID + " " + productNumber);
             boolean isRegistered = userService.registerInterestItem(userID, productNumber);
             if (isRegistered == false) {
                 // TODO=> 등록 실패하였다는 메시지 전달
-                return showMessageWithRedirect("이미 등록된 상품입니다.", "/shop/productlist.do", Method.GET, null, model);
+                return showMessageWithRedirect("이미 관심 등록된 상품입니다.", "/shop/productlist.do", Method.GET, null, model);
             }
         } catch (DataAccessException e) {
             // TODO=> 데이터베이스 처리 과정에 문제가 발생하였다는 메시지를 전달
@@ -129,5 +132,14 @@ public class UserController extends UiUtils {
             return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/shop/productlist.do", Method.GET, null, model);
         }
         return showMessageWithRedirect("관심등록에 성공하였습니다.", "/shop/productlist.do", Method.GET, null, model);
+    }
+
+    // 관심상품 리스트 페이지 이동
+    @GetMapping(value = "/shop/interestitemlist.do")
+    public String openProductList(Model model, @RequestParam(value = "userID", required = false) String userID) {
+        List<ProductDTO> interestItemList = userService.getInterestItemList(userID);
+        model.addAttribute("interestItemList", interestItemList);
+
+        return "shop/interestitemlist";
     }
 }

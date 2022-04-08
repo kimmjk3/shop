@@ -6,10 +6,12 @@
 	<!-- ======= Header ======= -->
 	<header id="header" class="fixed-top">
 		<div style="float:right;" class="navbar">
-			<a style="margin-left:5px;margin-right:5px;" th:if="${session.userID == null}" th:href="@{/shop/login.do}">로그인</a>
-			<a style="margin-left:5px;margin-right:5px;" th:if="${session.userID != null}" th:href="@{/shop/logout}">로그아웃</a>
-			<a style="margin-left:5px;margin-right:5px;" th:href="@{/shop/mypage.do}">마이페이지</a>
-			<a style="margin-left:5px;margin-right:5px;" th:if="${session.userAuthority == 0}" th:href="@{/shop/productmanagement.do}">상품관리</a>
+			<a style="margin-left:5px;margin-right:5px;" th:if="${session.userID != null}" th:href="@{/shop/mypage.do}">마이페이지</a>
+			<a style="margin-left:5px;margin-right:5px;" th:if="${session.userID != null}" th:href="@{/shop/interestitemlist.do(userID=*{session.userID})}"><img src="/image/interestItem.png" style="width:15px;height:15px;vertical-align:top;"/></a>
+			<a style="margin-left:5px;margin-right:5px;" th:if="${session.userAuthority == 0}" th:href="@{/shop/productmanagement.do}">상품관리(관리자)</a>
+            <a style="margin-left:5px;margin-right:5px;" th:if="${session.userID == null}" th:href="@{/shop/login.do}">로그인</a>
+            <a style="margin-left:5px;margin-right:5px;" th:if="${session.userID != null && session.userAuthority == 0}" th:href="@{/shop/logout}">로그아웃(관리자)</a>
+            <a style="margin-left:5px;margin-right:5px;" th:if="${session.userID != null && session.userAuthority == 1}" th:href="@{/shop/logout}">로그아웃</a>
 		</div>
 
 		<div class="container-fluid d-flex justify-content-between align-items-center">

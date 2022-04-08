@@ -1,8 +1,12 @@
 package com.shop.service;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shop.domain.ProductDTO;
 import com.shop.domain.UserDTO;
 import com.shop.mapper.UserMapper;
 
@@ -57,5 +61,18 @@ public class UserServiceImpl implements UserService {
         } else
             queryResult = userMapper.insertInterestItem(userID, productNumber);
         return (queryResult == 1) ? true : false;
+    }
+
+    // 관심상품 리스트
+    @Override
+    public List<ProductDTO> getInterestItemList(String userID) {
+        List<ProductDTO> interestItemList = Collections.emptyList();
+
+        int interestItemTotalCount = userMapper.selectInterestItemTotalCount(userID);
+
+        if (interestItemTotalCount > 0) {
+            interestItemList = userMapper.selectInterestItemList();
+        }
+        return interestItemList;
     }
 }

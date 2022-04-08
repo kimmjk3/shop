@@ -26,8 +26,8 @@
 						</div>
 						<div>
 						   <span th:text="${row.productPrice}"></span>
-						   <span>원</span>
-						   <span th:if="${session.userID != null}" class="btn btn-dark"><a th:href="@{/shop/interestitem.do(productNumber=${row.productNumber}, userID=*{session.userID})}">+</a></span>
+						   <span>₩</span>
+						   <a th:href="@{/shop/interestitem.do(productNumber=${row.productNumber}, userID=*{session.userID})}"><img src="/image/interestItem.png" style = "width:20px;height:20px;vertical-align:top;" th:if="${session.userID != null}"></img></a>
 						</div>
 					</div>
 				</span>
