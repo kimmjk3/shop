@@ -57,13 +57,13 @@
 									</div>
 									<div style="padding-top: 30px; border-top: 1px dashed #bbb;">
 										<div>
-											<a th:href="@{#}" class="btn btn-dark" style="width: 100%;">BUY NOW</a>
+											<a th:href="@{#}" class="btn btn-dark" style="width: 100%;">구매하기</a>
 										</div>
 										<div>
-											<a th:href="@{#}" class="btn btn-primary" style="width: 100%;">ADD CART</a>
+											<a th:if="${session.userID != null}" th:href="@{/shop/interestitem.do(productNumber=*{productNumber}, userID=${session.userID})}" class="btn btn-primary" style="width: 100%;">관심상품</a>
+											<!-- <a th:if="${session.userID != null}" th:href="@{/shop/interestitem.do(productNumber=*{productNumber}, userID=*{session.userID})}"></a> -->
 										</div>
 									</div>
-
 								</span>
 							</div>
 						</div>
