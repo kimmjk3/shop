@@ -99,7 +99,7 @@ public class ProductServiceImpl implements ProductService {
         return productList;
     }
 
-    //
+    // 상품리스트 조회
     @Override
     public List<ProductDTO> getProductSellList() {
         List<ProductDTO> productSellList = Collections.emptyList();

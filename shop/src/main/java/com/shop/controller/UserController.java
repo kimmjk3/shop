@@ -107,8 +107,7 @@ public class UserController extends UiUtils {
     // 관심품목 등록
     @GetMapping(value = "/shop/interestitem.do")
     public String InterestItem(@RequestParam(value = "userID", required = false) String userID,
-            @RequestParam(value = "productNumber", required = false) Integer productNumber, HttpSession session,
-            Model model) {
+            @RequestParam(value = "productNumber", required = false) Integer productNumber, Model model) {
 
         try {
             System.out.println("관심품목 등록");
