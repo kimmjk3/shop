@@ -1,6 +1,7 @@
 package com.shop.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.shop.domain.UserDTO;
 
@@ -19,4 +20,9 @@ public interface UserMapper {
     // 로그인
     public UserDTO userLogin(UserDTO params);
 
+    // 관심물품 등록
+    public int insertInterestItem(@Param("userID") String userID, @Param("productNumber") Integer productNumber);
+
+    // 관심품목 상세보기
+    public int selectInterestItemDetail(@Param("userID") String userID, @Param("productNumber") Integer productNumber);
 }

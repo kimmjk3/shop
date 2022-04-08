@@ -46,4 +46,16 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    // 관심품목 등록
+    public boolean registerInterestItem(String userID, Integer productNumber) {
+        int queryResult = 0;
+        int queryResult2 = 0;
+
+        queryResult2 = userMapper.selectInterestItemDetail(userID, productNumber);
+        if (queryResult2 == 1) {
+            return false;
+        } else
+            queryResult = userMapper.insertInterestItem(userID, productNumber);
+        return (queryResult == 1) ? true : false;
+    }
 }

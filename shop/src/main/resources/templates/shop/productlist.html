@@ -27,6 +27,7 @@
 						<div>
 						   <span th:text="${row.productPrice}"></span>
 						   <span>원</span>
+						   <span class="btn btn-dark"><a th:href="@{/shop/interestitem.do(productNumber=${row.productNumber}, userID=*{session.userID})}">+</a></span>
 						</div>
 					</div>
 				</span>

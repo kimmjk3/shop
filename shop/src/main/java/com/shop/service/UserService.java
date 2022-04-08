@@ -15,4 +15,6 @@ public interface UserService {
     // 로그인
     public UserDTO loginUser(UserDTO params);
 
+    // 관심품목 등록
+    public boolean registerInterestItem(String userID, Integer productNumber);
 }

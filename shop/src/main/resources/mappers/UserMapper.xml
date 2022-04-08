@@ -2,108 +2,115 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shop.mapper.UserMapper">
 
-<sql id="userColumns">
-    user_ID,
-    user_PW,
-    user_Name,
-    user_Gender,
-    user_DOB,
-    user_Address1,
-    user_Address2,
-    user_Address3,
-    user_Phone,
-    user_Email,
-    user_JoinDate,
-    user_SecessionDate,
-    user_Authority,
-    user_State
-
-
-</sql>
-<!-- 회원가입 데이터 -->
-
-<insert id="insertUser" parameterType="UserDTO">
-INSERT INTO User(
-    <include refid="userColumns" />
-
-)VALUES(
-#{userID},
-#{userPW},
-#{userName},
-#{userGender},
-#{userDOB},
-#{userAddress1},
-#{userAddress2},
-#{userAddress3},
-#{userPhone},
-#{userEmail},
-NOW(),
-NULL,
-DEFAULT,
-DEFAULT
-
-)
-</insert>
-<!-- 로그인처리 -->
-<select id="userLogin" resultType="UserDTO">
-
-    SELECT 
-           user_ID,
-           user_PW,
-           user_Name,
-           user_Gender, 
-           user_DOB,
-           user_Address1,
-           user_Address2,
-           user_Address3,
-           user_Phone,
-           user_Email
-           user_JoinDate,
-           user_SecessionDate,
-           user_Authority,
-           user_State
-    FROM
-            User
-    WHERE
-            user_ID = #{userID} 
-    AND
-            user_PW = #{userPW}
-
-</select>
-<!-- 회원정보 보기 -->
-<select id="selectUserDetail" parameterType="String" resultType="UserDTO">
-        SELECT
-            <include refid="userColumns" />
-        FROM
-             User
-        WHERE
-            user_State = 1
-        AND
-           user_ID= #{userID}
-            
-</select>
-<!-- 회원정보 수정 -->
-
-<update id="updateUser" parameterType="UserDTO">
-        UPDATE User
-        SET
-          user_PW= #{userPW},
-          user_Address1= #{userAddress1},
-          user_Address2= #{userAddress2},
-          user_Address3= #{userAddress3}
-        WHERE
-           user_ID= #{userID}   
-</update>
-<!-- 회원정보 탈퇴 -->
-<update id="deleteUser" parameterType="String">
-        UPDATE User
-        SET user_SecessionDate =NOW()
-        
-        WHERE
-          user_ID=#{userID}
-            
-
-</update>
-
-
+	<sql id="userColumns">
+		user_ID,
+		user_PW,
+		user_Name,
+		user_Gender,
+		user_DOB,
+		user_Address1,
+		user_Address2,
+		user_Address3,
+		user_Phone,
+		user_Email,
+		user_JoinDate,
+		user_SecessionDate,
+		user_Authority,
+		user_State
+	</sql>
+	
+	<!-- 회원가입 데이터 -->
+	<insert id="insertUser" parameterType="UserDTO">
+		INSERT INTO User(
+		<include refid="userColumns" />
+		)VALUES(
+		#{userID},
+		#{userPW},
+		#{userName},
+		#{userGender},
+		#{userDOB},
+		#{userAddress1},
+		#{userAddress2},
+		#{userAddress3},
+		#{userPhone},
+		#{userEmail},
+		NOW(),
+		NULL,
+		DEFAULT,
+		DEFAULT
+		)
+	</insert>
+	
+	<!-- 로그인처리 -->
+	<select id="userLogin" resultType="UserDTO">
+		SELECT
+		user_ID,
+		user_PW,
+		user_Name,
+		user_Gender,
+		user_DOB,
+		user_Address1,
+		user_Address2,
+		user_Address3,
+		user_Phone,
+		user_Email
+		user_JoinDate,
+		user_SecessionDate,
+		user_Authority,
+		user_State
+		FROM
+		User
+		WHERE
+		user_ID = #{userID}
+		AND
+		user_PW = #{userPW}
+	</select>
+	
+	<!-- 회원정보 보기 -->
+	<select id="selectUserDetail" parameterType="String" resultType="UserDTO">
+		SELECT
+		<include refid="userColumns" />
+		FROM
+		User
+		WHERE
+		user_State = 1
+		AND
+		user_ID= #{userID}
+	</select>
+	
+	<!-- 회원정보 수정 -->
+	<update id="updateUser" parameterType="UserDTO">
+		UPDATE User
+		SET
+		user_PW= #{userPW},
+		user_Address1= #{userAddress1},
+		user_Address2= #{userAddress2},
+		user_Address3= #{userAddress3}
+		WHERE
+		user_ID= #{userID}
+	</update>
+	
+	<!-- 회원정보 탈퇴 -->
+	<update id="deleteUser" parameterType="String">
+		UPDATE User
+		SET user_SecessionDate =NOW()
+		WHERE
+		user_ID=#{userID}
+	</update>
+	
+    <!-- 관심품목 등록 -->
+    <insert id="insertInterestItem" parameterType="map">
+        INSERT INTO Interest_Item(
+        user_ID, product_Number
+        )VALUES(
+        #{userID},
+        #{productNumber}
+        )
+    </insert>
+    
+     <!-- 관심품목 자세히 -->
+    <select id="selectInterestItemDetail" parameterType="map" resultType = "int">
+    select EXISTS (select * from Interest_Item where user_ID=#{userID} AND PRODUCT_NUMBER=#{productNumber})
+    </select>
+	
 </mapper>

@@ -43,7 +43,6 @@ public class BoardController extends UiUtils {
     @PostMapping(value = "/shop/register.do")
     public String registerBoard(final BoardDTO params, Model model, HttpServletRequest request, HttpSession session) {
         try {
-
             // 세션값 userID params 입력
             String userID = null;
             if (session.getAttribute("userID") != null) {

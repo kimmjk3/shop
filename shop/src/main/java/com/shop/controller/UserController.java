@@ -9,12 +9,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.shop.constant.Method;
 import com.shop.domain.UserDTO;
 import com.shop.service.UserService;
+import com.shop.util.UiUtils;
 
 @Controller // 해당 클래스를 컨트롤러로 동작
-public class UserController {
+public class UserController extends UiUtils {
 
     @Autowired
     private UserService userService;
@@ -33,7 +36,7 @@ public class UserController {
         return "shop/mypage";
     }
 
-//회원가입 페이지 진입
+    // 회원가입 페이지 진입
     @GetMapping(value = "/shop/join.do") // 회원가입 주소
     public String openUserJoin(Model model) {
         System.out.println("회원가입 페이지 진입");
@@ -41,7 +44,7 @@ public class UserController {
         return "shop/join";
     }
 
-//회원가입 처리
+    // 회원가입 처리
     @PostMapping(value = "/shop/join.do")
     public String registerUser(UserDTO params) {
         try {
@@ -62,7 +65,7 @@ public class UserController {
         return "redirect:/shop/login.do";
     }
 
-//로그인 주소 진입
+    // 로그인 주소 진입
     @GetMapping(value = "/shop/login.do") // 로그인 주소
     public String openUserLogin(Model model) {
         model.addAttribute("user", new UserDTO());
@@ -99,5 +102,33 @@ public class UserController {
         // 세션제거
         session.invalidate();
         return "redirect:/shop/index.do";
+    }
+
+    // 관심품목 등록
+    @GetMapping(value = "/shop/interestitem.do")
+    public String InterestItem(@RequestParam(value = "userID", required = false) String userID,
+            @RequestParam(value = "productNumber", required = false) Integer productNumber, HttpSession session,
+            Model model) {
+
+        try {
+            System.out.println("관심품목 등록");
+            System.out.println(userID + " " + productNumber);
+            boolean isRegistered = userService.registerInterestItem(userID, productNumber);
+            if (isRegistered == false) {
+                // TODO=> 등록 실패하였다는 메시지 전달
+                return showMessageWithRedirect("이미 등록된 상품입니다.", "/shop/productlist.do", Method.GET, null, model);
+            }
+        } catch (DataAccessException e) {
+            // TODO=> 데이터베이스 처리 과정에 문제가 발생하였다는 메시지를 전달
+            System.out.println("데이터베이스 처리 오류");
+            e.printStackTrace();
+            return showMessageWithRedirect("데이터베이스 오류가 발생하였습니다.", "/shop/productlist.do", Method.GET, null, model);
+        } catch (Exception e) {
+            // TODO=> 시스템에 문제가 발생하였다는 메시지 전달
+            System.out.println("시스템에 문제가 발생");
+            e.printStackTrace();
+            return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/shop/productlist.do", Method.GET, null, model);
+        }
+        return showMessageWithRedirect("관심등록에 성공하였습니다.", "/shop/productlist.do", Method.GET, null, model);
     }
 }

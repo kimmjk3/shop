@@ -289,5 +289,6 @@ SELECT * FROM post;
 select * from product;
 SELECT * FROM board;
 SELECT * FROM ATTACH;
+SELECT * FROM Interest_Item;
 		
 	
