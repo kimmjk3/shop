@@ -220,7 +220,7 @@ REFERENCES `Product` (
 );
 
 
-#사용자 샘플 데이터삽입
+#유저 샘플 데이터삽입
 INSERT INTO `USER`(
 	`user_ID`,
 	`user_PW`,
@@ -251,21 +251,10 @@ INSERT INTO `Board`(
 values
 	(default, '리뷰', default, null, null)
 	;
+
 #게시글 데이터 삽입
 INSERT INTO Post 
-	VALUES (
-              DEFAULT
-            , 1
-            , 'ㅎㅇ'
-            , 'ㅎㅇㅎㅇ'
-            , 1
-            , 5
-            , NOW()
-            , NULL
-            , NULL
-            , default
-            , 'idid1234'
-        );
+	VALUES (DEFAULT, 1, '첫번째 글', '첫뻔재 작성글', 1, 5, NOW(), NULL, NULL, default, 'idid1234');
 
 #상품 데이터삽입
 INSERT INTO `Product`(
@@ -282,7 +271,39 @@ INSERT INTO `Product`(
 	`product_DeleteDate`,
 	`user_id`)
 values
-	(default, 1, 1, '마우수수', '20000', 3, '신제품 마우수수', default, default, null, NULL, 'idid1234')
+	(default, 1, 1, '마타이폰 마르스프로 기계식 키보드 mk3', '172500', 50, '타이폰 마르스프로 기계식 키보드 mk3', default, default, null, NULL, 'idid1234'),
+	(default, 1, 1, '풀튜닝 타이폰 마르스프로 슈팅스타 기계식 키보드', '185000', 40, '풀튜닝 타이폰 마르스프로 슈팅스타 기계식 키보드', default, default, null, NULL, 'idid1234'),
+	(default, 1, 1, '풀튜닝 타이폰 마르스프로 베스타 기계식 키보드', '197000', 35, '풀튜닝 타이폰 마르스프로 베스타 기계식 키보드', default, default, null, NULL, 'idid1234'),
+	(default, 1, 1, '타이폰 마르스프로 슈팅스타 기계식 키보드', '172500', 45, '타이폰 마르스프로 슈팅스타 기계식 키보드', default, default, null, NULL, 'idid1234'),
+	(default, 1, 1, '타이폰 마르스 프로 베스타 기계식 키보드', '174000', 25, '타이폰 마르스 프로 베스타 기계식 키보드', default, default, null, NULL, 'idid1234'),
+	(default, 1, 1, '풀튜닝 마르스프로 MK3 기계식 키보드', '197000', 15, '풀튜닝 마르스프로 MK3 기계식 키보드', default, default, null, NULL, 'idid1234')
+	;
+
+#첨부 이미지 데이터삽입
+INSERT INTO `Attach`(
+	`attach_Number`,	#파일 번호
+	`product_Number`,#상품번호
+	
+	`attach_ThumbnailOriginalName`,		#원본 파일명
+	`attach_ThumbnailSaveName`,		#저장 파일명
+	`attach_ThumbnailSize`,		#파일 크기
+	`attach_ThumbnailLocation`,	#경로
+	
+	`attach_ContentsOriginalName`,		#원본 파일명
+	`attach_ContentsSaveName`,		#저장 파일명
+	`attach_ContentsSize`,		#파일 크기
+	`attach_ContentsLocation`,	#경로
+	
+	`attach_InsertDate`,	#등록일
+	`attach_DeleteDate`	#삭제일
+	)
+values
+	(default, '1', '원썸1.jpg', '샘플썸네일1.jpg', 500, "/attach/샘플썸네일1.jpg", '원내1', '샘플내용1', 500, "/attach/샘플내용1.jpg", default, null),
+	(default, '2', '원썸2.jpg', '샘플썸네일2.jpg', 500, "/attach/샘플썸네일2.jpg", '원내2', '샘플내용2', 500, "/attach/샘플내용2.jpg", default, null),
+	(default, '3', '원썸3.jpg', '샘플썸네일3.jpg', 500, "/attach/샘플썸네일3.jpg", '원내3', '샘플내용3', 500, "/attach/샘플내용3.jpg", default, null),
+	(default, '4', '원썸4.jpg', '샘플썸네일4.jpg', 500, "/attach/샘플썸네일4.jpg", '원내4', '샘플내용4', 500, "/attach/샘플내용4.jpg", default, null),
+	(default, '5', '원썸5.jpg', '샘플썸네일5.jpg', 500, "/attach/샘플썸네일5.jpg", '원내5', '샘플내용5', 500, "/attach/샘플내용5.jpg", default, null),
+	(default, '6', '원썸6.jpg', '샘플썸네일6.jpg', 500, "/attach/샘플썸네일6.jpg", '원내6', '샘플내용6', 500, "/attach/샘플내용6.jpg", default, null)
 	;
 
 select * from user;
