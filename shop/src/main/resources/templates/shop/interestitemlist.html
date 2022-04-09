@@ -21,6 +21,7 @@
 									<th>상품정보</th>
 									<th>판매가</th>
 									<th>상태</th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -30,6 +31,7 @@
 									<td><span th:text="${row.productPrice}"></span><span>₩</span></td>
 									<td th:if="${row.productState}==1">준비중</td>
 									<td th:if="${row.productState}==2">판매중</td>
+									<td><a th:href="@{/shop/interestitemdelete.do(productNumber=${row.productNumber}, userID=${session.userID})}">삭제</a></td>
 								</tr>
 								<tr th:unless="${not #lists.isEmpty( interestItemList )}">
 									<td colspan="7">조회된 결과가 없습니다.</td>

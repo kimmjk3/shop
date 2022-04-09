@@ -110,7 +110,7 @@
     
     <!-- 관심품목 자세히 -->
     <select id="selectInterestItemDetail" parameterType="map" resultType = "int">
-    select EXISTS (select * from Interest_Item where user_ID=#{userID} AND PRODUCT_NUMBER=#{productNumber})
+    select EXISTS (select * from Interest_Item where user_ID=#{userID} AND PRODUCT_NUMBER=#{productNumber} and Interest_ItemDeleteDate is null)
     </select>
     
     <!--관심상품 개수카운트-->
@@ -120,14 +120,22 @@
         FROM
         interest_Item
         WHERE
-        user_ID = #{userID}
+        user_ID = #{userID} AND Interest_ItemDeleteDate is null
     </select>
     
     <!--관심상품 리스트 조회-->
     <select id="selectInterestItemList" parameterType="ProductDTO" resultType="ProductDTO">
         SELECT *
         FROM interest_Item LEFT JOIN product ON interest_Item.PRODUCT_NUMBER = product.PRODUCT_NUMBER LEFT JOIN attach on interest_item.product_number = attach.product_number
-        WHERE product_DeleteDate IS NULL
+        WHERE product_DeleteDate IS NULL and Interest_ItemDeleteDate is null and interest_Item.user_ID=#{userID}
     </select>
+    
+    <!-- 관심상품 삭제 -->
+    <update id="deleteInterestItem" parameterType="map">
+        UPDATE Interest_Item
+        SET interest_ItemDeleteDate = now()
+        WHERE
+        user_ID=#{userID} AND product_Number=#{productNumber}
+    </update>
 	
 </mapper>

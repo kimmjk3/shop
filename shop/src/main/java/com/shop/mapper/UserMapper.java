@@ -33,5 +33,8 @@ public interface UserMapper {
     public int selectInterestItemTotalCount(@Param("userID") String userID);
 
     // 관심상품 리스트 조회
-    public List<ProductDTO> selectInterestItemList();
+    public List<ProductDTO> selectInterestItemList(@Param("userID") String userID);
+
+    // 관심상품 삭제
+    public int deleteInterestItem(@Param("userID") String userID, @Param("productNumber") Integer productNumber);
 }

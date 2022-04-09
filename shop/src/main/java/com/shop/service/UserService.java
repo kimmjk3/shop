@@ -23,4 +23,7 @@ public interface UserService {
 
     // 관심상품 리스트
     public List<ProductDTO> getInterestItemList(String userID);
+
+    // 관심상품 제거
+    public boolean deleteInterestItem(String userID, Integer productNumber);
 }

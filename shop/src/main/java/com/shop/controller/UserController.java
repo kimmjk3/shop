@@ -142,4 +142,31 @@ public class UserController extends UiUtils {
 
         return "shop/interestitemlist";
     }
+
+    @GetMapping(value = "/shop/interestitemdelete.do")
+    public String deleteBoard(@RequestParam(value = "userID", required = false) String userID,
+            @RequestParam(value = "productNumber", required = false) Integer productNumber, Model model) {
+        System.out.println("/shop/boarddelete.do 실행됨");
+
+        if (userID == null && productNumber == null) {
+            return showMessageWithRedirect("올바르지 않은 접근입니다.", "/shop/interestitemlist.do", Method.GET, null, model);
+        }
+
+        try {
+            boolean isDeleted = userService.deleteInterestItem(userID, productNumber);
+            if (isDeleted == false) {
+                return showMessageWithRedirect("관심상품 삭제에 실패하였습니다.", "/shop/interestitemlist.do", Method.GET, null,
+                        model);
+            }
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+            return showMessageWithRedirect("데이터베이스 처리 과정에 문제가 발생하였습니다.", "/shop/interestitemlist.do", Method.GET, null,
+                    model);
+
+        } catch (Exception e) {
+            return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/shop/interestitemlist.do", Method.GET, null, model);
+        }
+
+        return showMessageWithRedirect("관심상품 삭제가 완료되었습니다.", "/shop/interestitemlist.do", Method.GET, null, model);
+    }
 }

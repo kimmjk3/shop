@@ -35,7 +35,8 @@
 									</td>
 									<td th:text="${row.productPrice}"></td>
 									<td th:text="${row.productStock}"></td>
-									<td th:text="${row.productState}"></td>
+									<td th:if="${row.productState} == 1" th:text="준비중"></td>
+									<td th:if="${row.productState} == 2" th:text="판매중"></td>
 									<td th:text="${row.productInputDate}"></td>
 								</tr>
 								<tr th:unless="${not #lists.isEmpty( productList )}">

@@ -117,7 +117,8 @@ CREATE TABLE `cart_Item` (
 CREATE TABLE `Interest_Item` (
 	`Interest_ItemNumber`	INT	NOT null auto_increment primary key	COMMENT 'AUTO_INCREMENT 추가',	#관심 풀품번호
 	`user_ID`	VARCHAR(20)	NOT NULL,	#아이디
-	`product_Number`	INT	NOT NULL	#상품번호
+	`product_Number`	INT	NOT NULL,	#상품번호
+	`Interest_ItemDeleteDate` DATETIME NULL
 );
 
 ALTER TABLE `Attach` ADD CONSTRAINT `FK_Product_TO_Attach_1` FOREIGN KEY (
@@ -312,4 +313,8 @@ select * from product;
 SELECT * FROM board;
 SELECT * FROM ATTACH;
 SELECT * FROM Interest_Item;
+
+        SELECT *
+        FROM interest_Item LEFT JOIN product ON interest_Item.PRODUCT_NUMBER = product.PRODUCT_NUMBER LEFT JOIN attach on interest_item.product_number = attach.product_number
+        WHERE product_DeleteDate IS NULL and Interest_ItemDeleteDate is null and interest_item.user_id = "idid12345"
 	
