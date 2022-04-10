@@ -26,9 +26,14 @@ public class BoardController extends UiUtils {
 
     @GetMapping(value = "/shop/boardwrite.do")
     public String openBoardWrite(@RequestParam(value = "postNumber", required = false) Integer postNumber,
-            Model model) {
+            @RequestParam(value = "boardNumber", required = false) Integer boardNumber, Model model) {
+
+        model.addAttribute("boardNumber", boardNumber);
+
         if (postNumber == null) {
-            model.addAttribute("board", new BoardDTO());
+            BoardDTO board = new BoardDTO();
+            board.setBoardNumber(boardNumber);
+            model.addAttribute("board", board);
         } else {
             BoardDTO board = boardService.getBoardDetail(postNumber);
             if (board == null) {
@@ -36,7 +41,6 @@ public class BoardController extends UiUtils {
             }
             model.addAttribute("board", board);
         }
-
         return "shop/boardwrite";
     }
 
@@ -55,6 +59,7 @@ public class BoardController extends UiUtils {
                 return showMessageWithRedirect("게시글 등록에 실패하였습니다.", "/shop/boardlist.do", Method.GET, null, model);
             }
         } catch (DataAccessException e) {
+            e.printStackTrace();
             return showMessageWithRedirect("데이터베이스 처리 과정에 문제가 발생하였습니다.", "/shop/boardlist.do", Method.GET, null, model);
 
         } catch (Exception e) {

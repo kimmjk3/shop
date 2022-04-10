@@ -118,7 +118,7 @@ public class UserController extends UiUtils {
             boolean isRegistered = userService.registerInterestItem(userID, productNumber);
             if (isRegistered == false) {
                 // TODO=> 등록 실패하였다는 메시지 전달
-                return showMessageWithRedirect("이미 관심 등록된 상품입니다.", "/shop/productlist.do", Method.GET, null, model);
+                return showMessageWithRedirect("이미 관심등록된 상품입니다.", "/shop/productlist.do", Method.GET, null, model);
             }
         } catch (DataAccessException e) {
             // TODO=> 데이터베이스 처리 과정에 문제가 발생하였다는 메시지를 전달
@@ -131,7 +131,7 @@ public class UserController extends UiUtils {
             e.printStackTrace();
             return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/shop/productlist.do", Method.GET, null, model);
         }
-        return showMessageWithRedirect("관심등록에 성공하였습니다.", "/shop/productlist.do", Method.GET, null, model);
+        return showMessageWithRedirect("관심등록 되었습니다.", "/shop/productlist.do", Method.GET, null, model);
     }
 
     // 관심상품 리스트 페이지 이동
