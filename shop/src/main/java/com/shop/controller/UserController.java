@@ -109,8 +109,13 @@ public class UserController extends UiUtils {
 
     // 관심상품 등록
     @GetMapping(value = "/shop/interestitem.do")
-    public String InterestItem(@RequestParam(value = "userID", required = false) String userID,
-            @RequestParam(value = "productNumber", required = false) Integer productNumber, Model model) {
+    public String InterestItem(@RequestParam(value = "productNumber", required = false) Integer productNumber,
+            Model model, HttpSession session) {
+
+        String userID = null;
+        if (session.getAttribute("userID") != null) {
+            userID = (String) session.getAttribute("userID");
+        }
 
         try {
             System.out.println("관심상품 등록");
@@ -136,7 +141,13 @@ public class UserController extends UiUtils {
 
     // 관심상품 리스트 페이지 이동
     @GetMapping(value = "/shop/interestitemlist.do")
-    public String openProductList(Model model, @RequestParam(value = "userID", required = false) String userID) {
+    public String openProductList(Model model, HttpSession session) {
+
+        String userID = null;
+        if (session.getAttribute("userID") != null) {
+            userID = (String) session.getAttribute("userID");
+        }
+
         List<ProductDTO> interestItemList = userService.getInterestItemList(userID);
         model.addAttribute("interestItemList", interestItemList);
 
@@ -144,9 +155,14 @@ public class UserController extends UiUtils {
     }
 
     @GetMapping(value = "/shop/interestitemdelete.do")
-    public String deleteBoard(@RequestParam(value = "userID", required = false) String userID,
-            @RequestParam(value = "productNumber", required = false) Integer productNumber, Model model) {
+    public String deleteBoard(@RequestParam(value = "productNumber", required = false) Integer productNumber,
+            Model model, HttpSession session) {
         System.out.println("/shop/boarddelete.do 실행됨");
+
+        String userID = null;
+        if (session.getAttribute("userID") != null) {
+            userID = (String) session.getAttribute("userID");
+        }
 
         if (userID == null && productNumber == null) {
             return showMessageWithRedirect("올바르지 않은 접근입니다.", "/shop/interestitemlist.do", Method.GET, null, model);

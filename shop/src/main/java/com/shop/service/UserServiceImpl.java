@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
         int queryResult2 = 0;
 
         // 등록된 관심상품이 이미 있다면 false반환(이미 등록된 상품입니다.)
-        queryResult2 = userMapper.selectInterestItemDetail(userID, productNumber);
+        queryResult1 = userMapper.selectInterestItemDetail(userID, productNumber);
         if (queryResult1 == 1) {
             return false;
         } else
