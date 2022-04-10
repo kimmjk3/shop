@@ -14,14 +14,12 @@
 				</div>
 				<div class="row">
 					<div style="width: 80%; text-align: center; margin-left: auto; margin-right: auto;">
-						<table class="table table-hover">
+						<table class="type04" style="text-align:center;">
 							<thead>
 								<tr>
 									<th>상품번호</th>
 									<th>상품카테고리</th>
 									<th>상품명</th>
-									<th>상품가격</th>
-									<th>상품재고</th>
 									<th>상품상태</th>
 									<th>상품등록일</th>
 								</tr>
@@ -29,18 +27,19 @@
 							<tbody>
 								<tr th:if="${not #lists.isEmpty( productList )}" th:each="row : ${productList}">
 									<td th:text="${row.productNumber}"></td>
-									<td th:text="${row.productCategory}"></td>
+									<td>
+									   <span th:if="${row.productCategory}==1" th:text="키보드"/>
+									   <span th:if="${row.productCategory}==2" th:text="마우스"/>
+									</td>
 									<td>
 										<a th:href="@{/shop/productview.do( productNumber=${row.productNumber} )}" th:text="${row.productName}"></a>
 									</td>
-									<td th:text="${row.productPrice}"></td>
-									<td th:text="${row.productStock}"></td>
-									<td th:if="${row.productState} == 1" th:text="준비중"></td>
-									<td th:if="${row.productState} == 2" th:text="판매중"></td>
-									<td th:text="${row.productInputDate}"></td>
+									<td th:if="${row.productState} == 1" th:text="준비중"/>
+									<td th:if="${row.productState} == 2" th:text="판매중"/>
+									<td th:text="${row.productInputDate}"/>
 								</tr>
 								<tr th:unless="${not #lists.isEmpty( productList )}">
-									<td colspan="7">조회된 결과가 없습니다.</td>
+									<td colspan="5">조회된 결과가 없습니다.</td>
 								</tr>
 							</tbody>
 						</table>

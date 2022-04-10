@@ -16,14 +16,14 @@
 
 				<div class="row">
 					<div style="width: 70%; text-align: center; margin-left: auto; margin-right: auto;">
-						<table class="table table-hover">
+						<table class="type04">
 							<thead>
 								<tr>
 									<th>번호</th>
 									<th>제목</th>
 									<th>작성자</th>
 									<th>등록일</th>
-									<th>추천수</th>
+									<th>별점</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -35,7 +35,11 @@
 									<td th:text="${row.userID}"></td>
 									<td th:text="${row.postInputDate}"></td>
 									<!-- <td th:text="${#temporals.format( row.postInputDate, 'yyyy-MM-dd' )}"></td> -->
-									<td th:text="${row.postRecommend}"></td>
+									<td th:if="${row.postScore} == 1"><span>☆☆☆☆★</span></td>
+									<td th:if="${row.postScore} == 2"><span>☆☆☆★★</span></td>
+									<td th:if="${row.postScore} == 3"><span>☆☆★★★</span></td>
+									<td th:if="${row.postScore} == 4"><span>☆★★★★</span></td>
+									<td th:if="${row.postScore} == 5"><span>★★★★★</span></td>
 								</tr>
 								<tr th:unless="${not #lists.isEmpty( boardList )}">
 									<td colspan="5">조회된 결과가 없습니다.</td>

@@ -16,46 +16,53 @@
 				<div class="row">
 					<div style="width: 70%; margin-left: auto; margin-right: auto;">
 						<form th:object="${board}">
-							<table class="table table-bordered" style="text-align: center; border: 3px solid #dddddd;">
-								<thead>
-									<tr>
-										<td colspan="4">게시글</td>
-									</tr>
-								</thead>
+
+							<table class="type04">
 								<tbody>
 									<tr>
-										<td style="width: 20%; background-color: #eeeeee;">게시판</td>
-										<td th:if="*{boardNumber} == 1">리뷰게시판</td>
-										<td th:if="*{boardNumber} == 2">Q&A게시판</td>
-										<td style="width: 20%; background-color: #eeeeee;">카테고리</td>
-										<td th:if="*{postCategory} == 1">키보드</td>
-										<td th:if="*{postCategory} == 2">마우스</td>
+										<th colspan="1" scope="row">제목</th>
+										<td colspan="3">
+											<span th:text="*{postTitle}"></span>
+										</td>
 									</tr>
 									<tr>
-										<td style="width: 20%; background-color: #eeeeee;">작성자</td>
-										<td style="width: 30%;" th:text="*{userID}"></td>
-										<td style="width: 20%; background-color: #eeeeee;">등록일</td>
-										<td style="width: 30%;" th:text="*{postInputDate}"></td>
+										<th colspan="1" scope="row">작성자</th>
+										<td colspan="3">
+											<span th:text="*{userID}"></span>
+										</td>
 									</tr>
 									<tr>
-										<td style="width: 20%; background-color: #eeeeee;">별점</td>
-										<td th:if="*{postScore} == 1">1점</td>
-										<td th:if="*{postScore} == 2">2점</td>
-										<td th:if="*{postScore} == 3">3점</td>
-										<td th:if="*{postScore} == 4">4점</td>
-										<td th:if="*{postScore} == 5">5점</td>
-										<td style="width: 20%; background-color: #eeeeee;">추천수</td>
-										<td style="width: 30%;" th:text="*{postRecommend}"></td>
+										<th colspan="1" scope="row">카테고리</th>
+										<td colspan="3">
+											<span th:if="*{postCategory} == 1">키보드</span> <span th:if="*{postCategory} == 2">마우스</span>
+										</td>
 									</tr>
 									<tr>
-										<td colspan="1" style="background-color: #eeeeee;">제목</td>
-										<td colspan="3" th:text="*{postTitle}"></td>
+										<th>작성일</th>
+										<td>
+											<span th:text="*{postInputDate}"></span>
+										</td>
+										<th>별점</th>
+										<td th:if="*{postScore} == 1">
+											<span>☆☆☆☆★</span>
+										</td>
+										<td th:if="*{postScore} == 2">
+											<span>☆☆☆★★점</span>
+										</td>
+										<td th:if="*{postScore} == 3">
+											<span>☆☆★★★</span>
+										</td>
+										<td th:if="*{postScore} == 4">
+											<span>☆★★★★</span>
+										</td>
+										<td th:if="*{postScore} == 5">
+											<span>★★★★★</span>
+										</td>
 									</tr>
-									<tr>
-										<td colspan="4" style="background-color: #eeeeee;">내용</td>
-									</tr>
-									<tr>
-										<td style="height: 400px; text-align: left;" colspan="4" th:text="*{postContents}"></td>
+									<tr style="height:400px;">
+										<td colspan="4">
+											<div th:text="*{postContents}"></div>
+										</td>
 									</tr>
 								</tbody>
 							</table>
