@@ -14,86 +14,83 @@
 				</div>
 
 				<div class="row">
-					<div class="card-content">
-						<form class="form-horizontal" th:action="@{/shop/productregister.do}" th:object="${product}" method="post" enctype="multipart/form-data" onsubmit="return registerProduct(this)"
-							style="width: 50%; margin: 0 auto;"
-						>
-							<!--/* update의 경우 서버로 전달할 게시글 번호 (PK) */-->
-							<input type="hidden" th:if="*{productNumber != null and productNumber > 0}" th:field="*{productNumber}" />
+					<form class="form-horizontal" th:action="@{/shop/productregister.do}" th:object="${product}" method="post" enctype="multipart/form-data"
+						onsubmit="return registerProduct(this)" style="width: 50%; margin: 0 auto;"
+					>
+						<!--/* update의 경우 서버로 전달할 게시글 번호 (PK) */-->
+						<input type="hidden" th:if="*{productNumber != null and productNumber > 0}" th:field="*{productNumber}" />
 
-							<div class="form-group">
-								<label for="productCategory" class="col-sm-2 control-label">카테고리</label>
-								<div class="col-sm-10">
-									<select type="number" th:field="*{productCategory}" style="width: 100%;">
-										<option value="">카테고리를 선택해 주세요</option>
-										<option value="1">키보드</option>
-										<option value="2">마우스</option>
-									</select>
-								</div>
+						<div class="form-group">
+							<label for="productCategory">카테고리</label>
+							<div>
+								<select type="number" th:field="*{productCategory}" style="width: 100%;">
+									<option value="">카테고리를 선택해 주세요</option>
+									<option value="1">키보드</option>
+									<option value="2">마우스</option>
+								</select>
 							</div>
+						</div>
 
-							<div class="form-group">
-								<label for="productName" class="col-sm-2 control-label">상품명</label>
-								<div class="col-sm-10">
-                                    <input type="text" th:field="*{productName}" class="form-control" placeholder="상품명을 입력해 주세요." />
-								</div>
+						<div>
+							<label for="productName">상품명</label>
+							<div>
+								<input style="height:50px;width:100%" type="text" th:field="*{productName}" placeholder="상품명을 입력해 주세요." />
 							</div>
+						</div>
 
-                            <div class="form-group">
-                                <label for="productPrice" class="col-sm-2 control-label">상품가격</label>
-                                <div class="col-sm-10">
-                                    <input type="number" th:field="*{productPrice}" class="form-control" placeholder="상품가격을 입력해 주세요." />
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="productState" class="col-sm-2 control-label">상품상태</label>
-                                <div class="col-sm-10">
-                                    <select type="number" th:field="*{productState}" style="width: 100%;">
-                                        <option value="">상품상태</option>
-                                        <option value="1">준비중</option>
-                                        <option value="2">판매중</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="productStock" class="col-sm-2 control-label">재고</label>
-                                <div class="col-sm-10">
-                                    <input type="number" th:field="*{productStock}" class="form-control" placeholder="재고를 입력해 주세요." />
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="productDesc" class="col-sm-2 control-label">상품설명</label>
-                                <div class="col-sm-10">
-                                    <input type="text" th:field="*{productDesc}" class="form-control" placeholder="상품설명을 입력해 주세요" />
-                                </div>
-                            </div>
-                            
-							<div data-name="fileDiv" class="form-group filebox bs3-primary">
-							    <label for="file_0" class="col-sm-2 control-label">파일1</label>
-							    <div class="col-sm-10">
-							        <input type="text" class="upload-name" value="파일 찾기" readonly />
-							        <label for="file_0" class="control-label">찾아보기</label>
-							        <input type="file" name="files" id="file_0" class="upload-hidden" onchange="changeFilename(this)" />
-							    
-							        <button type="button" onclick="addFile()" class="btn btn-bordered btn-xs visible-xs-inline visible-sm-inline visible-md-inline visible-lg-inline">
-							            <i class="fa fa-plus" aria-hidden="true"></i>
-							        </button>
-							        <button type="button" onclick="removeFile(this)" class="btn btn-bordered btn-xs visible-xs-inline visible-sm-inline visible-md-inline visible-lg-inline">
-							            <i class="fa fa-minus" aria-hidden="true"></i>
-							        </button>
-							    </div>
+						<div>
+							<label for="productPrice">상품가격</label>
+							<div>
+								<input style="height:50px;width:100%" type="number" th:field="*{productPrice}" placeholder="상품가격을 입력해 주세요." />
 							</div>
+						</div>
 
-							<div id="btnDiv" class="btn_wrap text-center">
-								<a th:href="@{/shop/productmanagement.do}" class="btn btn-info">뒤로가기</a>
-								<button type="submit" class="btn btn-primary">저장하기</button>
+						<div>
+							<label for="productState">상품상태</label>
+							<div>
+								<select type="number" th:field="*{productState}" style="width: 100%;">
+									<option value="">상품상태</option>
+									<option value="1">준비중</option>
+									<option value="2">판매중</option>
+								</select>
 							</div>
-						</form>
-					</div>
-					<!-- /.card-content -->
+						</div>
+
+						<div>
+							<label for="productStock">재고</label>
+							<div>
+								<input style="height:50px;width:100%" type="number" th:field="*{productStock}" placeholder="재고를 입력해 주세요." />
+							</div>
+						</div>
+
+						<div>
+							<label for="productDesc">상품설명</label>
+							<div>
+								<textarea style="resize:none;height:200px;width:100%;" th:field="*{productDesc}" placeholder="상품설명을 입력해 주세요" />
+							</div>
+						</div>
+
+						<div data-name="fileDiv" class="form-group filebox bs3-primary">
+							<label for="file_0">썸네일 이미지</label>
+							<div class="col-sm-10">
+								<input type="text" class="upload-name" value="파일 찾기" readonly /> <label for="file_0" class="control-label">찾아보기</label> <input type="file"
+									name="files" id="file_0" class="upload-hidden" onchange="changeFilename(this)"
+								/>
+							</div>
+							
+                            <label for="file_1">내용 이미지</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="upload-name" value="파일 찾기" readonly /> <label for="file_1" class="control-label">찾아보기</label> <input type="file"
+                                    name="files" id="file_1" class="upload-hidden" onchange="changeFilename(this)"
+                                />
+                            </div>
+						</div>
+
+						<div id="btnDiv" class="btn_wrap text-center">
+							<a th:href="@{/shop/productmanagement.do}" class="btn btn-info">뒤로가기</a>
+							<button type="submit" class="btn btn-primary">저장하기</button>
+						</div>
+					</form>
 				</div>
 
 			</div>
@@ -124,53 +121,7 @@
 		/*[- end of function -]*/
 		/*]]>*/
 		
-		//파일영역의 추가, 삭제, 변경을 처리하는 자바스크립트 함수
-		let fileIdx = 0; /*[- 파일 인덱스 처리용 전역 변수 -]*/
-		
-		function addFile() {
-		
-		    const fileDivs = $('div[data-name="fileDiv"]');
-		    if (fileDivs.length > 2) {
-		        alert('파일은 최대 세 개까지 업로드 할 수 있습니다.');
-		        return false;
-		    }
-		
-		    fileIdx++;
-		
-		    const fileHtml = `
-		        <div data-name="fileDiv" class="form-group filebox bs3-primary">
-		            <label for="file_${fileIdx}" class="col-sm-2 control-label"></label>
-		            <div class="col-sm-10">
-		                <input type="text" class="upload-name" value="파일 찾기" readonly />
-		                <label for="file_${fileIdx}" class="control-label">찾아보기</label>
-		                <input type="file" name="files" id="file_${fileIdx}" class="upload-hidden" onchange="changeFilename(this)" />
-		
-		                <button type="button" onclick="removeFile(this)" class="btn btn-bordered btn-xs visible-xs-inline visible-sm-inline visible-md-inline visible-lg-inline">
-		                    <i class="fa fa-minus" aria-hidden="true"></i>
-		                </button>
-		            </div>
-		        </div>
-		    `;
-		
-		    $('#btnDiv').before(fileHtml);
-		}
-		
-		//파일영역의 삭제를 처리하는 함수
-		function removeFile(elem) {
 
-		    const prevTag = $(elem).prev().prop('tagName');
-		    if (prevTag === 'BUTTON') {
-		        const file = $(elem).prevAll('input[type="file"]');
-		        const filename = $(elem).prevAll('input[type="text"]');
-		        file.val('');
-		        filename.val('파일 찾기');
-		        return false;
-		    }
-
-		    const target = $(elem).parents('div[data-name="fileDiv"]');
-		    target.remove();
-		}
-		
 		//업로드할 파일명을 렌더링 하는 역할
 		function changeFilename(file) {
 
@@ -179,8 +130,6 @@
 		    const target = file.prevAll('input');
 		    target.val(filename);
 		}
-		
-		
 	</script>
 </th:block>
 
