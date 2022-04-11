@@ -14,8 +14,8 @@
 				</div>
 
 				<div class="row">
-					<div style="width: 70%; margin-left: auto; margin-right: auto;">
-						<form th:object="${board}">
+					<div style="width: 70%; margin-left: auto; margin-right: auto;" th:object="${board}">
+						<form>
 
 							<table class="type04">
 								<tbody>
@@ -69,8 +69,8 @@
 						</form>
 
 						<div style="text-align: right;">
-							<a class="btn btn-primary" th:if="${session.userID != null}" th:href="@{/shop/boardwrite.do( postNumber=${board.postNumber} )}">수정하기</a>
-							<button type="button" class="btn btn-danger" th:if="${session.userID != null}" th:onclick="deleteBoard([[ ${board.postNumber} ]])">삭제하기</button>
+							<a class="btn btn-primary" th:if="${session.userID} == *{userID}" th:href="@{/shop/boardwrite.do( postNumber=${board.postNumber} )}">수정하기</a>
+							<button type="button" class="btn btn-danger" th:if="${session.userID} == *{userID}" th:onclick="deleteBoard([[ ${board.postNumber} ]])">삭제하기</button>
 							<a th:href="@{/shop/boardlist.do}" class="btn btn-info">뒤로가기</a>
 						</div>
 					</div>

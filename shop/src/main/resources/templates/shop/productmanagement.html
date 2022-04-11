@@ -13,7 +13,7 @@
 					<h2>상품관리</h2>
 				</div>
 				<div class="row">
-					<div style="width: 80%; text-align: center; margin-left: auto; margin-right: auto;">
+					<div style="width:80%;margin-left:auto; margin-right:auto;">
 						<table class="type04" style="text-align:center;">
 							<thead>
 								<tr>
@@ -44,11 +44,8 @@
 							</tbody>
 						</table>
 
-						<div class="btn_wrap text-right">
-							<!-- <a th:href="@{/shop/write.do}" class="btn btn-primary waves-effect waves-light">글쓰기</a> -->
+						<div style="text-align:right;">
 							<a th:if="${session.userID != null}" th:href="@{/shop/productregistration.do}" class="btn btn-primary waves-effect waves-light">상품등록</a>
-							<button type="button" th:if="${session.userID == null}" th:onclick="writeAlert()" class="btn btn-primary waves-effect waves-light">글쓰기</button>
-
 						</div>
 					</div>
 				</div>

@@ -239,6 +239,7 @@ INSERT INTO `USER`(
 	`user_State`)
 values
 	('idid1234','pwpw1234', '김이름', 1, '19961202', '123-456', '상세주소', '도로명주소', '010-1234-5678', 'idid1234@naver.com', default, null, 0, default),
+	('idid2234','pwpw2234', '김이름', 1, '19961202', '123-456', '상세주소', '도로명주소', '010-1234-5678', 'idid1234@naver.com', default, null, 0, default),
 	('idid12345','pwpw12345', '김성명', 1, '19971202', '123-456', '상세주소', '도로명주소', '010-3505-3471', 'kimmjk35@naver.com', default, null, 1, default)
 	;
 
@@ -255,7 +256,7 @@ values
 
 #게시글 데이터 삽입
 INSERT INTO Post 
-	VALUES (DEFAULT, 1, '첫번째 글', '첫뻔재 작성글', 1, 5, NOW(), NULL, NULL, default, 'idid1234');
+	VALUES (DEFAULT, 1, '첫번째 리뷰', '첫번재 리뷰 내용', 1, 5, NOW(), NULL, NULL, default, 'idid1234');
 
 #상품 데이터삽입
 INSERT INTO `Product`(
@@ -272,7 +273,7 @@ INSERT INTO `Product`(
 	`product_DeleteDate`,
 	`user_id`)
 values
-	(default, 1, 1, '마타이폰 마르스프로 기계식 키보드 mk3', '172500', 50, '타이폰 마르스프로 기계식 키보드 mk3', default, default, null, NULL, 'idid1234'),
+	(default, 1, 1, '타이폰 마르스프로 기계식 키보드 mk3', '172500', 50, '타이폰 마르스프로 기계식 키보드 mk3', default, default, null, NULL, 'idid1234'),
 	(default, 1, 1, '풀튜닝 타이폰 마르스프로 슈팅스타 기계식 키보드', '185000', 40, '풀튜닝 타이폰 마르스프로 슈팅스타 기계식 키보드', default, default, null, NULL, 'idid1234'),
 	(default, 1, 1, '풀튜닝 타이폰 마르스프로 베스타 기계식 키보드', '197000', 35, '풀튜닝 타이폰 마르스프로 베스타 기계식 키보드', default, default, null, NULL, 'idid1234'),
 	(default, 1, 1, '타이폰 마르스프로 슈팅스타 기계식 키보드', '172500', 45, '타이폰 마르스프로 슈팅스타 기계식 키보드', default, default, null, NULL, 'idid1234'),
@@ -313,8 +314,3 @@ select * from product;
 SELECT * FROM board;
 SELECT * FROM ATTACH;
 SELECT * FROM Interest_Item;
-
-        SELECT *
-        FROM interest_Item LEFT JOIN product ON interest_Item.PRODUCT_NUMBER = product.PRODUCT_NUMBER LEFT JOIN attach on interest_item.product_number = attach.product_number
-        WHERE product_DeleteDate IS NULL and Interest_ItemDeleteDate is null and interest_item.user_id = "idid12345"
-	
