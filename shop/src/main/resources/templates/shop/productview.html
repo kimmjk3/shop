@@ -14,8 +14,8 @@
 				</div>
 				
 				<div class="row">
-					<div style="width: 70%; margin-left: auto; margin-right: auto;">
-						<form th:object="${product}">
+					<div style="width: 70%; margin-left: auto; margin-right: auto;" th:object="${product}">
+						<form>
 							<table class="type04">
 								<tbody>
                                     <tr>
@@ -54,7 +54,7 @@
 						  <table>
                                 <thead>
                                     <tr>
-                                        <th>썸내일</th>
+                                        <th>썸네일 이미지</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -66,7 +66,7 @@
                                 </tbody>
                                 <thead>
                                     <tr>
-                                        <th>내용</th>
+                                        <th>내용 이미지</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -86,7 +86,7 @@
 							</table>
 						</div>
 						<div style="text-align: right;">
-							<button type="button" class="btn btn-danger" th:if="${session.userID != null}" th:onclick="deleteProduct([[ ${product.productNumber} ]])">삭제하기</button>
+							<button type="button" class="btn btn-danger" th:if="${session.userID} == *{userID}" th:onclick="deleteProduct([[ ${product.productNumber} ]])">삭제하기</button>
 							<a th:href="@{/shop/productmanagement.do}" class="btn btn-info">뒤로가기</a>
 						</div>
 					</div>

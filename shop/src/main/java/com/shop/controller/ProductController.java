@@ -122,7 +122,13 @@ public class ProductController extends UiUtils {
 
     @GetMapping(value = "/shop/productview.do")
     public String openProductDetail(@RequestParam(value = "productNumber", required = false) Integer productNumber,
-            Model model) {
+            Model model, HttpSession session) {
+
+        int userAuthority = (int) session.getAttribute("userAuthority");
+        if (userAuthority == 1) {
+            return showMessageWithRedirect("권한이 없습니다.", "/shop/index.do", Method.GET, null, model);
+        }
+
         if (productNumber == null) {
             // TODO => 올바르지 않은 접근이라는 메시지를 전달하고, 상품관리 페이지로 리다이렉트
             return "redirect:/shop/productmanagement.do";
