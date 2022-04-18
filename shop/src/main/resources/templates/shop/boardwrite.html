@@ -62,7 +62,7 @@
 						<div>
 							<label for="postTitle">제목</label>
 							<div>
-								<input style="height:50px;width:100%" type="text" th:field="*{postTitle}" placeholder="제목을 입력해 주세요." />
+								<input style="height:50px;width:100%" type="text" th:field="*{postTitle}" placeholder="제목을 입력해 주세요."/>
 							</div>
 						</div>
 
@@ -95,8 +95,8 @@
 
 			var result = (
 				       isValid(form.boardNumber, "게시판", null, null)
-					&& isValid(form.postCategory, "카테고리", null, null)
 					&& isValid(form.postScore, "별점", null, null)
+                    && isValid(form.postCategory, "카테고리", null, null)
 					&& isValid(form.postTitle, "제목", null, null)
 					&& isValid(form.postContents, "내용", null, null)
 			);

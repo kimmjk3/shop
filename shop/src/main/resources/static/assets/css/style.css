@@ -8,6 +8,8 @@
 /*------------------------------------------------------------
 #추가
 ---------------------------------------------------------------*/
+
+/* 테이블 디자인 */
 select {
 width: 200px;
 padding: .8em .5em;
@@ -47,6 +49,44 @@ table.type04 td {
     vertical-align: top;
     border-bottom: 1px solid #ccc;
 }
+
+.aText{
+	font-family: 'Do Hyeon', sans-serif;
+	margin-top:20px;
+}
+.aButton{
+	font-family: 'Do Hyeon', sans-serif;
+	width:100%;
+	margin-top:10px;
+	font-family: 'Do Hyeon', sans-serif;
+}
+.aatag{
+	color:black;
+	float:right;
+	font-family: 'Do Hyeon', sans-serif;
+}
+#joinForm{
+	width:50%;
+	margin: 0 auto;
+	border:solid #E6E6E6;
+	padding:50px;
+}
+
+#loginForm{
+	width:30%;
+	margin: 0 auto;
+	border:solid #E6E6E6;
+	padding:50px;
+}
+.batag{
+    color:black;
+    font-family: 'Do Hyeon', sans-serif;
+}
+.btext{
+    font-family: 'Do Hyeon', sans-serif;
+}
+
+
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
