@@ -48,7 +48,7 @@ public class FileUtils {
      * @param productNumber - 게시글 번호
      * @return 업로드 파일 목록
      */
-    public List<AttachDTO> uploadFiles(MultipartFile[] files, Integer productNumber) {
+    public List<AttachDTO> uploadFiles(MultipartFile[] files, Integer Number) {
 
         /* 파일이 비어있으면 비어있는 리스트 반환 */
         if (files[0].getSize() < 1) {
@@ -68,7 +68,7 @@ public class FileUtils {
         String staticPath = "/attach/"; // 파일 경로 수동으로 삽입 *추후 수정 필요!!*
 
         try {
-            /* Files[0]:내용 Files[1]:썸내일 */
+            /* Files[0]:썸네일 Files[1]:내용 */
 
             /* 파일 확장자 */
             final String extension0 = FilenameUtils.getExtension(files[0].getOriginalFilename());
@@ -86,7 +86,8 @@ public class FileUtils {
 
             /* 파일 정보 저장 */
             AttachDTO attach = new AttachDTO();
-            attach.setProductNumber(productNumber);
+            attach.setProductNumber(Number);
+            attach.setPostNumber(Number);
 
             // 썸네일
             attach.setAttachThumbnailOriginalName(files[0].getOriginalFilename());
@@ -95,10 +96,17 @@ public class FileUtils {
             attach.setAttachThumbnailLocation(staticPath + saveName0);
 
             // 내용
-            attach.setAttachContentsOriginalName(files[1].getOriginalFilename());
-            attach.setAttachContentsSaveName(saveName1);
-            attach.setAttachContentsSize(files[1].getSize());
-            attach.setAttachContentsLocation(staticPath + saveName1);
+            if (files[1].getSize() < 1) {
+                attach.setAttachContentsOriginalName(null);
+                attach.setAttachContentsSaveName(null);
+                attach.setAttachContentsSize(0);
+                attach.setAttachContentsLocation(null);
+            } else {
+                attach.setAttachContentsOriginalName(files[1].getOriginalFilename());
+                attach.setAttachContentsSaveName(saveName1);
+                attach.setAttachContentsSize(files[1].getSize());
+                attach.setAttachContentsLocation(staticPath + saveName1);
+            }
 
             /* 파일 정보 추가 */
             attachList.add(attach);

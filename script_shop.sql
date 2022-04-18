@@ -37,17 +37,18 @@ CREATE TABLE `Product` (
 
 CREATE TABLE `Attach` (
 	`attach_Number`	INT	NOT null AUTO_INCREMENT primary KEY,	#파일 번호
-	`product_Number`	INT	NOT NULL,		#상품번호
+	`product_Number`	INT,		#상품번호
+	`post_Number` INT,				#게시글번호
 	
-	`attach_ThumbnailOriginalName` VARCHAR(200) NOT NULL,		#원본 파일명
+	`attach_ThumbnailOriginalName` VARCHAR(200) NOT NULL ,		#원본 파일명
 	`attach_ThumbnailSaveName`	VARCHAR(200)	NOT NULL,		#저장 파일명
 	`attach_ThumbnailSize`	INT	NOT NULL,		#파일 크기
 	`attach_ThumbnailLocation` VARCHAR(200) NOT NULL,	#경로
 	
-	`attach_ContentsOriginalName` VARCHAR(200) NOT NULL,		#원본 파일명
-	`attach_ContentsSaveName`	VARCHAR(200)	NOT NULL,		#저장 파일명
-	`attach_ContentsSize`	INT	NOT NULL,		#파일 크기
-	`attach_ContentsLocation` VARCHAR(200) NOT NULL,	#경로
+	`attach_ContentsOriginalName` VARCHAR(200),		#원본 파일명
+	`attach_ContentsSaveName`	VARCHAR(200),		#저장 파일명
+	`attach_ContentsSize`	INT,		#파일 크기
+	`attach_ContentsLocation` VARCHAR(200),	#경로
 	
 	`attach_InsertDate`	DATETIME	NOT NULL	DEFAULT NOW(),		#등록일
 	`attach_DeleteDate`	DATETIME	NULL	#삭제일
@@ -126,6 +127,13 @@ ALTER TABLE `Attach` ADD CONSTRAINT `FK_Product_TO_Attach_1` FOREIGN KEY (
 )
 REFERENCES `Product` (
 	`product_Number`
+);
+
+ALTER TABLE `Attach` ADD CONSTRAINT `FK_Post_TO_Attach_2` FOREIGN KEY (
+	`post_Number`
+)
+REFERENCES `Post` (
+	`post_Number`
 );
 
 ALTER TABLE `userOrder_Detail` ADD CONSTRAINT `FK_user_Order_TO_userOrder_Detail_1` FOREIGN KEY (
@@ -238,9 +246,9 @@ INSERT INTO `USER`(
 	`user_Authority`,
 	`user_State`)
 values
-	('idid1234','pwpw1234', '김이름', 1, '19961202', '123-456', '상세주소', '도로명주소', '010-1234-5678', 'idid1234@naver.com', default, null, 0, default),
-	('idid2234','pwpw2234', '김이름', 1, '19961202', '123-456', '상세주소', '도로명주소', '010-1234-5678', 'idid1234@naver.com', default, null, 0, default),
-	('idid12345','pwpw12345', '김성명', 1, '19971202', '123-456', '상세주소', '도로명주소', '010-3505-3471', 'kimmjk35@naver.com', default, null, 1, default)
+	('idid1234','pwpw1234', '김이름', 1, '19960000', '123-456', '상세주소', '도로명주소', '010-1234-5678', 'idid1234@naver.com', default, null, 0, default),
+	('qwqw1234','qwqw1234', '김이름', 1, '19960000', '123-456', '상세주소', '도로명주소', '010-1234-5678', 'idid1234@naver.com', default, null, 0, default),
+	('asas1234','asas1234', '김성명', 1, '19960000', '123-456', '상세주소', '도로명주소', '010-1234-5678', 'idid1234@naver.com', default, null, 0, default)
 	;
 
 #게시판 샘플 데이터삽입
@@ -255,8 +263,24 @@ values
 	;
 
 #게시글 데이터 삽입
-INSERT INTO Post 
-	VALUES (DEFAULT, 1, '첫번째 리뷰', '첫번재 리뷰 내용', 1, 5, NOW(), NULL, NULL, default, 'idid1234');
+INSERT INTO `Post`(
+	`post_Number`,
+	`board_Number`,
+	`post_Title`,
+	`post_Contents`,
+	`post_Category`,
+	`post_Score`,
+	`post_InputDate`,
+	`post_Correct`,
+	`post_DeleteDate`,
+	`post_Recommend`,
+	`user_ID`
+) 
+	VALUES
+		(DEFAULT, 1, '첫번째 리뷰', '첫번재 리뷰 내용', 1, 5, NOW(), NULL, NULL, default, 'idid1234'),
+		(DEFAULT, 1, '두번째 리뷰', '두번재 리뷰 내용', 1, 3, NOW(), NULL, NULL, default, 'qwqw1234'),
+		(DEFAULT, 1, '세번째 리뷰', '세번재 리뷰 내용', 1, 4, NOW(), NULL, NULL, default, 'asas1234')
+		;
 
 #상품 데이터삽입
 INSERT INTO `Product`(
@@ -281,7 +305,7 @@ values
 	(default, 1, 1, '풀튜닝 마르스프로 MK3 기계식 키보드', '197000', 15, '풀튜닝 마르스프로 MK3 기계식 키보드', default, default, null, NULL, 'idid1234')
 	;
 
-#첨부 이미지 데이터삽입
+#상품 이미지 첨부
 INSERT INTO `Attach`(
 	`attach_Number`,	#파일 번호
 	`product_Number`,#상품번호
@@ -306,6 +330,30 @@ values
 	(default, '4', '원썸4.jpg', '샘플썸네일4.jpg', 500, "/attach/샘플썸네일4.jpg", '원내4', '샘플내용4', 500, "/attach/샘플내용4.jpg", default, null),
 	(default, '5', '원썸5.jpg', '샘플썸네일5.jpg', 500, "/attach/샘플썸네일5.jpg", '원내5', '샘플내용5', 500, "/attach/샘플내용5.jpg", default, null),
 	(default, '6', '원썸6.jpg', '샘플썸네일6.jpg', 500, "/attach/샘플썸네일6.jpg", '원내6', '샘플내용6', 500, "/attach/샘플내용6.jpg", default, null)
+	;
+
+# 게시글 이미지 첨부
+INSERT INTO `Attach`(
+	`attach_Number`,	#파일 번호
+	`post_Number`,#게시글번호
+	
+	`attach_ThumbnailOriginalName`,		#원본 파일명
+	`attach_ThumbnailSaveName`,		#저장 파일명
+	`attach_ThumbnailSize`,		#파일 크기
+	`attach_ThumbnailLocation`,	#경로
+	
+	`attach_ContentsOriginalName`,		#원본 파일명
+	`attach_ContentsSaveName`,		#저장 파일명
+	`attach_ContentsSize`,		#파일 크기
+	`attach_ContentsLocation`,	#경로
+	
+	`attach_InsertDate`,	#등록일
+	`attach_DeleteDate`	#삭제일
+	)
+values
+	(default, '1', '리샘1.jpg', '리뷰샘플1.jpg', 500, "/attach/리뷰샘플1.jpg", '리샘1-1', '리뷰샘플1-2', 500, "/attach/리뷰샘플1-2.jpg", default, null),
+	(default, '2', '리샘2.jpg', '리뷰샘플2.jpg', 500, "/attach/리뷰샘플2.jpg", null, null, 0, null, default, null),
+	(default, '3', '리샘3.jpg', '리뷰샘플3.jpg', 500, "/attach/리뷰샘플3.jpg", null, null, 0, null, default, null)
 	;
 
 select * from user;

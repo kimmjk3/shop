@@ -74,6 +74,23 @@ public class ProductController extends UiUtils {
         return "shop/productmanagement";
     }
 
+    // 상품등록 페이지
+    @GetMapping(value = "/shop/productregistration.do")
+    public String openProductRegistration(
+            @RequestParam(value = "productNumber", required = false) Integer productNumber, Model model) {
+        if (productNumber == null) {
+            model.addAttribute("product", new ProductDTO());
+        } else {
+            ProductDTO product = productService.getProductDetail(productNumber);
+            if (product == null) {
+                return "redirect:/shop/productmanagement.do";
+            }
+            model.addAttribute("product", product);
+        }
+
+        return "shop/productregistration";
+    }
+
     // 상품등록
     @PostMapping(value = "/shop/productregister.do")
     public String registerProduct(final ProductDTO params, final MultipartFile[] files, Model model,
@@ -104,22 +121,7 @@ public class ProductController extends UiUtils {
         return showMessageWithRedirect("제품 등록이 완료되었습니다.", "/shop/productmanagement.do", Method.GET, null, model);
     }
 
-    @GetMapping(value = "/shop/productregistration.do")
-    public String openProductRegistration(
-            @RequestParam(value = "productNumber", required = false) Integer productNumber, Model model) {
-        if (productNumber == null) {
-            model.addAttribute("product", new ProductDTO());
-        } else {
-            ProductDTO product = productService.getProductDetail(productNumber);
-            if (product == null) {
-                return "redirect:/shop/productmanagement.do";
-            }
-            model.addAttribute("product", product);
-        }
-
-        return "shop/productregistration";
-    }
-
+    // 상품보기
     @GetMapping(value = "/shop/productview.do")
     public String openProductDetail(@RequestParam(value = "productNumber", required = false) Integer productNumber,
             Model model, HttpSession session) {
@@ -147,6 +149,7 @@ public class ProductController extends UiUtils {
         return "shop/productview";
     }
 
+    // 상품삭제
     @PostMapping(value = "/shop/productdelete.do")
     public String deleteProduct(@RequestParam(value = "productNumber", required = false) Integer productNumber,
             Model model) {

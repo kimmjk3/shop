@@ -89,5 +89,77 @@
         WHERE
         product_Number = #{productNumber}
     </select>
+    
+    
+    
+    
+    <!-- 게시글 첨부 -->
+    <!-- 파일추가 -->
+    <insert id="insertPostAttach" parameterType="list">
+        INSERT INTO Attach (
+            attach_Number,post_Number,attach_ThumbnailOriginalName,attach_ThumbnailSaveName,attach_ThumbnailSize,attach_ThumbnailLocation
+            ,attach_ContentsOriginalName,attach_ContentsSaveName,attach_ContentsSize,attach_ContentsLocation,attach_InsertDate,attach_DeleteDate
+        ) VALUES
+        <foreach collection="list" item="item" separator=",">
+        (
+            #{item.attachNumber}
+            , #{item.postNumber}
+            , #{item.attachThumbnailOriginalName}
+            , #{item.attachThumbnailSaveName}
+            , #{item.attachThumbnailSize}
+            , #{item.attachThumbnailLocation}
+            , #{item.attachContentsOriginalName}
+            , #{item.attachContentsSaveName}
+            , #{item.attachContentsSize}
+            , #{item.attachContentsLocation}
+            , Now()
+            , null
+        )
+        </foreach>
+    </insert>
+
+    <!-- 파일보기 -->
+    <select id="selectPostAttachDetail" parameterType="Integer" resultType="AttachDTO">
+        SELECT
+            attach_Number,post_Number,attach_ThumbnailOriginalName,attach_ThumbnailSaveName,attach_ThumbnailSize,attach_ThumbnailLocation
+            ,attach_ContentsOriginalName,attach_ContentsSaveName,attach_ContentsSize,attach_ContentsLocation,attach_InsertDate,attach_DeleteDate
+        FROM
+            Attach
+        WHERE
+            attach_DeleteDate is null
+        AND
+            post_Number = #{postNumber}
+    </select>
+
+    <!-- 파일삭제 -->
+    <update id="deletePostAttach" parameterType="Integer">
+        UPDATE Attach
+        SET
+            attach_deleteDate = NOW()
+        WHERE
+            post_Number = #{postNumber}
+    </update>
+
+    <!--첨푸파일 리스트조회 -->
+    <select id="selectPostAttachList" parameterType="AttachDTO" resultType="AttachDTO">
+        SELECT
+        attach_Number, attach_Thumbnaillocation, attach_Contentslocation
+        FROM
+        Attach
+        WHERE
+        post_Number = #{postNumber}
+        ORDER BY
+        attach_Number ASC
+    </select>
+    
+    <!--첨푸파일 개수 카운트 -->
+    <select id="selectPostAttachTotalCount" parameterType="AttachDTO" resultType="int">
+        SELECT
+        COUNT(*)
+        FROM
+        Attach
+        WHERE
+        post_Number = #{postNumber}
+    </select>
 
 </mapper>

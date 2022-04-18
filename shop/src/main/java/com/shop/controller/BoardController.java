@@ -12,8 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.shop.constant.Method;
+import com.shop.domain.AttachDTO;
 import com.shop.domain.BoardDTO;
 import com.shop.service.BoardService;
 import com.shop.util.UiUtils;
@@ -24,6 +26,7 @@ public class BoardController extends UiUtils {
     @Autowired
     private BoardService boardService;
 
+    // 게시글등록 페이지
     @GetMapping(value = "/shop/boardwrite.do")
     public String openBoardWrite(@RequestParam(value = "postNumber", required = false) Integer postNumber,
             @RequestParam(value = "boardNumber", required = false) Integer boardNumber, Model model) {
@@ -44,8 +47,10 @@ public class BoardController extends UiUtils {
         return "shop/boardwrite";
     }
 
+    // 게시글 등록
     @PostMapping(value = "/shop/register.do")
-    public String registerBoard(final BoardDTO params, Model model, HttpServletRequest request, HttpSession session) {
+    public String registerBoard(final BoardDTO params, final MultipartFile[] files, Model model,
+            HttpServletRequest request, HttpSession session) {
         try {
             // 세션값 userID params 입력
             String userID = null;
@@ -54,7 +59,7 @@ public class BoardController extends UiUtils {
             }
             params.setUserID(userID);
 
-            boolean isRegistered = boardService.registerBoard(params);
+            boolean isRegistered = boardService.registerBoard(params, files);
             if (isRegistered == false) {
                 return showMessageWithRedirect("게시글 등록에 실패하였습니다.", "/shop/boardlist.do", Method.GET, null, model);
             }
@@ -77,6 +82,7 @@ public class BoardController extends UiUtils {
         return "shop/boardlist";
     }
 
+    // 게시글보기
     @GetMapping(value = "/shop/boardview.do")
     public String openBoardDetail(@RequestParam(value = "postNumber", required = false) Integer postNumber,
             Model model) {
@@ -91,6 +97,9 @@ public class BoardController extends UiUtils {
             return "redirect:/shop/list.do";
         }
         model.addAttribute("board", board);
+
+        AttachDTO attach = boardService.getAttachDetail(postNumber);
+        model.addAttribute("attach", attach);
 
         return "shop/boardview";
     }

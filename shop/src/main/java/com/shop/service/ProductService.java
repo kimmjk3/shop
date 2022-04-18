@@ -12,7 +12,7 @@ public interface ProductService {
     // 상품등록, 수정
     public boolean registerProduct(ProductDTO params);
 
-    // 파일 업로드
+    // 상품등록(파일 업로드)
     public boolean registerProduct(ProductDTO params, MultipartFile[] files);
 
     // 상품상세보기

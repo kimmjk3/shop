@@ -39,7 +39,7 @@ public class ProductServiceImpl implements ProductService {
         return (queryResult == 1) ? true : false;
     }
 
-    // 상품등록
+    // 상품등록(파일)
     @Override
     public boolean registerProduct(ProductDTO params, MultipartFile[] files) {
         int queryResult = 1;
@@ -63,12 +63,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDTO getProductDetail(Integer productNumber) {
         return productMapper.selectProductDetail(productNumber);
-    }
-
-    // 첨부파일 리스트
-    @Override
-    public AttachDTO getAttachDetail(Integer productNumber) {
-        return attachMapper.selectAttachDetail(productNumber);
     }
 
     // 상품삭제
@@ -99,7 +93,13 @@ public class ProductServiceImpl implements ProductService {
         return productList;
     }
 
-    // 상품리스트 조회
+    // 첨부파일 상세보기
+    @Override
+    public AttachDTO getAttachDetail(Integer productNumber) {
+        return attachMapper.selectAttachDetail(productNumber);
+    }
+
+    // 상품판매리스트 조회
     @Override
     public List<ProductDTO> getProductSellList() {
         List<ProductDTO> productSellList = Collections.emptyList();

@@ -6,8 +6,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AttachDTO {
-    Integer attachNumber; // 파일 번호
-    Integer productNumber; // 게시글번호
+    Integer attachNumber; // 첨부 번호
+    Integer productNumber; // 제품번호
+    Integer postNumber; // 게시글번호
 
     String attachThumbnailOriginalName; // 원본 파일명
     String attachThumbnailSaveName; // 저장 파일명
