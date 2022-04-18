@@ -15,7 +15,7 @@
 				</div>
 
 				<div class="row">
-					<div class="btext" style="width:80%; margin-left:auto; margin-right:auto;">
+					<div class="bText" style="width:80%; margin-left:auto; margin-right:auto;">
 						<table class="type04" style="text-align:center;">
 							<thead>
 								<tr>
@@ -49,7 +49,7 @@
 
 						<div style="text-align:right;">
 							<a th:if="${session.userID != null}" th:href="@{/shop/boardwrite.do(boardNumber=1)}" class="btn btn-primary waves-effect waves-light">글쓰기</a>
-							<button type="button" th:if="${session.userID == null}" th:onclick="writeAlert()" class="btn btn-primary waves-effect waves-light">글쓰기</button>
+							<button type="button" th:if="${session.userID == null}" th:onclick="writeAlert()" class="btn btn-secondary waves-effect waves-light">글쓰기</button>
 						</div>
 					</div>
 				</div>

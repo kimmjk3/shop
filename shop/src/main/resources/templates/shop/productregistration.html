@@ -21,7 +21,7 @@
 						<input type="hidden" th:if="*{productNumber != null and productNumber > 0}" th:field="*{productNumber}" />
 
 						<div class="form-group">
-							<label for="productCategory">카테고리</label>
+							<label class="bText" for="productCategory">카테고리</label>
 							<div>
 								<select type="number" th:field="*{productCategory}" style="width: 100%;">
 									<option value="">카테고리를 선택해 주세요</option>
@@ -32,21 +32,21 @@
 						</div>
 
 						<div>
-							<label for="productName">상품명</label>
+							<label class="bText" for="productName">상품명</label>
 							<div>
 								<input style="height:50px;width:100%" type="text" th:field="*{productName}" placeholder="상품명을 입력해 주세요." />
 							</div>
 						</div>
 
 						<div>
-							<label for="productPrice">상품가격</label>
+							<label class="bText" for="productPrice">가격</label>
 							<div>
 								<input style="height:50px;width:100%" type="number" th:field="*{productPrice}" placeholder="상품가격을 입력해 주세요." />
 							</div>
 						</div>
 
 						<div>
-							<label for="productState">상품상태</label>
+							<label class="bText" for="productState">상태</label>
 							<div>
 								<select type="number" th:field="*{productState}" style="width: 100%;">
 									<option value="">상품상태</option>
@@ -57,28 +57,28 @@
 						</div>
 
 						<div>
-							<label for="productStock">재고</label>
+							<label class="bText" for="productStock">재고</label>
 							<div>
 								<input style="height:50px;width:100%" type="number" th:field="*{productStock}" placeholder="재고를 입력해 주세요." />
 							</div>
 						</div>
 
 						<div>
-							<label for="productDesc">상품설명</label>
+							<label class="bText" for="productDesc">설명</label>
 							<div>
 								<textarea style="resize:none;height:200px;width:100%;" th:field="*{productDesc}" placeholder="상품설명을 입력해 주세요" />
 							</div>
 						</div>
 
 						<div data-name="fileDiv" class="form-group filebox bs3-primary">
-							<label for="file_0">썸네일 이미지</label>
+							<label class="bText" for="file_0">썸네일 이미지</label>
 							<div class="col-sm-10">
 								<input type="text" class="upload-name" value="파일 찾기" readonly /> <label for="file_0" class="control-label">찾아보기</label> <input type="file"
 									name="files" id="file_0" class="upload-hidden" onchange="changeFilename(this)"
 								/>
 							</div>
 							
-                            <label for="file_1">내용 이미지</label>
+                            <label class="bText" for="file_1">내용 이미지</label>
                             <div class="col-sm-10">
                                 <input type="text" class="upload-name" value="파일 찾기" readonly /> <label for="file_1" class="control-label">찾아보기</label> <input type="file"
                                     name="files" id="file_1" class="upload-hidden" onchange="changeFilename(this)"
@@ -87,8 +87,8 @@
 						</div>
 
 						<div style="text-align:right;">
-							<a th:href="@{/shop/productmanagement.do}" class="btn btn-info">취소</a>
-							<button type="submit" class="btn btn-primary">등록</button>
+							<a th:href="@{/shop/productmanagement.do}" class="btn btn-primary bText">뒤로가기</a>
+							<button type="submit" class="btn btn-secondary bText">등록</button>
 						</div>
 					</form>
 				</div>

@@ -53,17 +53,20 @@ table.type04 td {
 .aText{
 	font-family: 'Do Hyeon', sans-serif;
 	margin-top:20px;
+	font-size:20px;
 }
 .aButton{
 	font-family: 'Do Hyeon', sans-serif;
 	width:100%;
 	margin-top:10px;
 	font-family: 'Do Hyeon', sans-serif;
+	font-size:20px;
 }
 .aatag{
 	color:black;
 	float:right;
 	font-family: 'Do Hyeon', sans-serif;
+	font-size:20px;
 }
 #joinForm{
 	width:50%;
@@ -81,10 +84,21 @@ table.type04 td {
 .batag{
     color:black;
     font-family: 'Do Hyeon', sans-serif;
+    font-size:20px;
 }
-.btext{
+.bText{
     font-family: 'Do Hyeon', sans-serif;
+    font-size:20px;
 }
+
+.cText{
+    font-family: 'Do Hyeon', sans-serif;
+    font-size:20px;
+    width: 50%;
+    text-align: center;
+    vertical-align:middle;
+}
+
 
 
 /*--------------------------------------------------------------

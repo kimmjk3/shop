@@ -19,32 +19,37 @@
 							<table class="type04">
 								<tbody>
                                     <tr>
-                                        <th colspan="1">카테고리</th>
+                                        <th class="bText" colspan="1">카테고리</th>
                                         <td colspan="3" th:if="*{productCategory} == 1">키보드</td>
                                         <td colspan="3" th:if="*{productCategory} == 2">마우스</td>
                                     </tr>
                                     <tr>
-                                        <th colspan="1">상품명</th>
+                                        <th class="bText" colspan="1">상품명</th>
                                         <td colspan="3" th:text="*{productName}"></td>
                                     </tr>
 									<tr>
-                                        <th>등록인</th>
+                                        <th class="bText" >등록인</th>
                                         <td th:text="*{userID}"></td>
-                                        <th>상태</th>
+                                        <th class="bText" >상태</th>
                                         <td th:if="*{productState} == 1">준비중</td>
                                         <td th:if="*{productState} == 2">판매중</td>
 									</tr>
                                     <tr>
-                                        <th>상품가격</th>
+                                        <th class="bText" >상품가격</th>
                                         <td><span th:text="*{productPrice}"></span><span>₩</span></td>
-                                        <th>재고</th>
+                                        <th class="bText" >재고</th>
                                         <td th:text="*{productStock}"></td>
                                     </tr>
                                     <tr>
-                                        <th>등록일</th>
+                                        <th class="bText" >등록일</th>
                                         <td th:text="*{productInputDate}"></td>
-                                        <th>조회수</th>
+                                        <th class="bText" >조회수</th>
                                         <td th:text="*{productHits}"></td>
+                                    </tr>
+                                    <tr style="height:100px;width:100%">
+                                        <td colspan="4">
+                                            <div th:text="*{productDesc}" style="padding-bottom:10px;word-break:break-all;"></div>
+                                        </td>
                                     </tr>
 								</tbody>
 							</table>
@@ -54,7 +59,7 @@
 						  <table>
                                 <thead>
                                     <tr>
-                                        <th>썸네일 이미지</th>
+                                        <th class="bText" >썸네일 이미지</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -66,7 +71,7 @@
                                 </tbody>
                                 <thead>
                                     <tr>
-                                        <th>내용 이미지</th>
+                                        <th class="bText" >내용 이미지</th>
                                     </tr>
                                 </thead>
                                 <tbody>

@@ -27,10 +27,10 @@
 								</span>
 
 								<span style="width:38%;padding-right:10%; margin-top:60px; display:inline-block; position:fixed; right:0;">
-									<div style="margin-bottom: 10px;"  th:text="*{productName}"></div>
-									<div style="margin-top: 10px; padding-bottom: 30px; text-align: right; border-bottom: 1px dashed #bbb;" ><span th:text="*{productPrice}"></span><span>₩</span></div>
+									<div class="bText" style="margin-bottom:10px;font-size:25px;"  th:text="*{productName}"></div>
+									<div class="bText" style="margin-top:10px;padding-bottom:30px;text-align: right;border-bottom:1px dashed #bbb;font-size:25px;" ><span th:text="*{productPrice}"></span><span>₩</span></div>
 									<div style="display: flex; margin-left: 10px; text-align: center; margin-top: 30px; margin-bottom: 30px;">
-										<div style="width: 50%; text-align: center;">키보드색상</div>
+										<div class="cText">키보드색상</div>
 										<select style="width: 50%; text-align: center;" name="keyboardColor">
 											<option value="">색상선택</option>
 											<option value="블랙">블랙</option>
@@ -38,7 +38,7 @@
 										</select>
 									</div>
 									<div style="display: flex; margin-left: 10px; text-align: center; margin-top: 30px; margin-bottom: 30px;">
-										<div style="width: 50%; text-align: center;">폰트</div>
+										<div class="cText">폰트</div>
 										<select style="width: 50%; text-align: center;" name="keyboardColor">
 											<option value="">폰트선택</option>
 											<option value="한글">한글</option>
@@ -46,7 +46,7 @@
 										</select>
 									</div>
 									<div style="display: flex; margin-left: 10px; text-align: center; margin-top: 30px; margin-bottom: 30px;">
-										<div style="width: 50%; text-align: center;">스위치</div>
+										<div class="cText">스위치</div>
 										<select style="width: 50%; text-align: center;" name="keyboardColor">
 											<option value="">스위치종류</option>
 											<option value="청축">청축</option>
@@ -57,10 +57,10 @@
 									</div>
 									<div style="padding-top: 30px; border-top: 1px dashed #bbb;">
 										<div>
-											<a th:href="@{#}" class="btn btn-dark" style="width: 100%;">구매하기</a>
+											<a th:href="@{#}" class="btn btn-primary" style="width: 100%;">구매하기</a>
 										</div>
 										<div>
-											<a th:if="${session.userID != null}" th:href="@{/shop/interestitem.do(productNumber=*{productNumber}, userID=${session.userID})}" class="btn btn-primary" style="width: 100%;">관심상품</a>
+											<a th:if="${session.userID != null}" th:href="@{/shop/interestitem.do(productNumber=*{productNumber}, userID=${session.userID})}" class="btn btn-warning" style="width: 100%;">관심상품</a>
 											<!-- <a th:if="${session.userID != null}" th:href="@{/shop/interestitem.do(productNumber=*{productNumber}, userID=*{session.userID})}"></a> -->
 										</div>
 									</div>
