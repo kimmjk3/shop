@@ -99,6 +99,16 @@ table.type04 td {
     vertical-align:middle;
 }
 
+.aImage{
+	height:20px;
+	vertical-align:middle;
+}
+.aImage:hover{
+    content:url("/image/star2.png");
+    width:20px;
+    height:20px;
+}
+
 
 
 /*--------------------------------------------------------------
