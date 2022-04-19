@@ -60,7 +60,7 @@
 									</tr>
 									<tr style="height:400px;width:100%">
 										<td colspan="4">
-											<div th:text="*{postContents}" style="padding-bottom:10px;word-break:break-all;"></div>
+											<div th:text="*{postContents}" style="padding-bottom:10px;word-break:break-all;white-space:pre;"></div>
 					                        <div th:if="${attach} != null" th:object="${attach}">
 					                           <img th:src="*{attachThumbnailLocation}" alt="이미지1" style="width:49%;float:left;"/>
                                                <img th:if="*{attachContentsLocation} != null" th:src="*{attachContentsLocation}" alt="이미지2" style="width:49%;float:left;margin-left:2%;"/>

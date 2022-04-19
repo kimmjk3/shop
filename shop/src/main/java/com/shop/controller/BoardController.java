@@ -68,6 +68,7 @@ public class BoardController extends UiUtils {
             return showMessageWithRedirect("데이터베이스 처리 과정에 문제가 발생하였습니다.", "/shop/boardlist.do", Method.GET, null, model);
 
         } catch (Exception e) {
+            e.printStackTrace();
             return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/shop/boardlist.do", Method.GET, null, model);
         }
 
@@ -96,6 +97,7 @@ public class BoardController extends UiUtils {
             // TODO => 없는 게시글이거나, 이미 삭제된 게시글이라는 메시지를 전달하고, 게시글 리스트로 리다이렉트
             return "redirect:/shop/list.do";
         }
+
         model.addAttribute("board", board);
 
         AttachDTO attach = boardService.getAttachDetail(postNumber);

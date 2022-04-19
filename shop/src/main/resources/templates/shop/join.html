@@ -28,13 +28,13 @@
 							<div>
 								<label for="userPW" class="aText">비밀번호</label>
 								<div>
-									<input type="text" th:field="*{userPW}" class="form-control" placeholder="영문+숫자 8~16자" maxlength="16" />
+									<input type="password" th:field="*{userPW}" class="form-control" placeholder="영문+숫자 8~16자" maxlength="16" />
 								</div>
 							</div>
 							<div>
 								<label for="userPW" class="aText">비밀번호확인</label>
 								<div>
-									<input type="text" class="form-control" placeholder="영문+숫자 8~16자" maxlength="16" />
+									<input type="password" class="form-control" placeholder="영문+숫자 8~16자" maxlength="16" />
 								</div>
 							</div>
 							<div>
@@ -53,7 +53,7 @@
 							<div>
 								<label for="userDOB" class="aText">생년월일</label>
 								<div>
-									<input type="text" th:field="*{userDOB}" class="form-control" placeholder="8자리숫자" maxlength="8" />
+									<input type="date" th:field="*{userDOB}" class="form-control" placeholder="8자리숫자" maxlength="8" />
 								</div>
 							</div>
 							<div>
@@ -67,7 +67,7 @@
 							<div>
 								<label for="userPhone" class="aText">연락처</label>
 								<div>
-									<input type="text" th:field="*{userPhone}" class="form-control" placeholder="번호11자리" maxlength="11" />
+									<input type="number" th:field="*{userPhone}" class="form-control" placeholder="번호11자리" maxlength="11" />
 								</div>
 							</div>
 							<div>
