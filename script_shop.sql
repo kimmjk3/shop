@@ -8,7 +8,7 @@ CREATE TABLE `User` (
 	`user_PW`	VARCHAR(20)	NOT NULL,	#비밀번호
 	`user_Name`	VARCHAR(20)	NOT NULL,	#이름
 	`user_Gender`	INT	NOT NULL	COMMENT '1:남성 2:여성',	#성별
-	`user_DOB`	VARCHAR(8)	NOT NULL	COMMENT 'ex)20211213',	#생년월일
+	`user_DOB`	VARCHAR(15)	NOT NULL	COMMENT 'ex)20211213',	#생년월일
 	`user_Address1`	VARCHAR(20)	NOT NULL	COMMENT '우편번호',	#주소1
 	`user_Address2`	VARCHAR(100)	NOT NULL	COMMENT '기본주소',	#주소2
 	`user_Address3`	VARCHAR(100)	NOT NULL	COMMENT '상세주소',	#주소3
@@ -16,7 +16,7 @@ CREATE TABLE `User` (
 	`user_Email`	VARCHAR(20)	NOT NULL,	#이메일
 	`user_JoinDate`	DATETIME	NOT NULL	DEFAULT NOW(),	#가입일
 	`user_SecessionDate`	DATETIME	NULL,	#탈퇴일
-	`user_Authority`	INT	NOT NULL	DEFAULT 0	COMMENT '0:관리자 1:유저',	#권한
+	`user_Authority`	INT	NOT NULL	DEFAULT 1	COMMENT '0:관리자 1:유저',	#권한
 	`user_State`	INT	NOT NULL	DEFAULT 1	COMMENT '0:탈퇴 1:활동중 2:정지'	#활동상태
 );
 
@@ -248,7 +248,8 @@ INSERT INTO `USER`(
 values
 	('idid1234','pwpw1234', '김이름', 1, '19960000', '123-456', '상세주소', '도로명주소', '010-1234-5678', 'idid1234@naver.com', default, null, 0, default),
 	('qwqw1234','qwqw1234', '김이름', 1, '19960000', '123-456', '상세주소', '도로명주소', '010-1234-5678', 'idid1234@naver.com', default, null, 0, default),
-	('asas1234','asas1234', '김성명', 1, '19960000', '123-456', '상세주소', '도로명주소', '010-1234-5678', 'idid1234@naver.com', default, null, 0, default)
+	('asas1234','asas1234', '김성명', 1, '19960000', '123-456', '상세주소', '도로명주소', '010-1234-5678', 'idid1234@naver.com', default, null, 0, default),
+	('kimidid123','pwpw1234', '김성명', 1, '19960000', '123-456', '상세주소', '도로명주소', '010-1234-5678', 'idid1234@naver.com', default, null, 1, default)
 	;
 
 #게시판 샘플 데이터삽입
@@ -277,9 +278,9 @@ INSERT INTO `Post`(
 	`user_ID`
 ) 
 	VALUES
-		(DEFAULT, 1, '첫번째 리뷰', '첫번재 리뷰 내용', 1, 5, NOW(), NULL, NULL, default, 'idid1234'),
-		(DEFAULT, 1, '두번째 리뷰', '두번재 리뷰 내용', 1, 3, NOW(), NULL, NULL, default, 'qwqw1234'),
-		(DEFAULT, 1, '세번째 리뷰', '세번재 리뷰 내용', 1, 4, NOW(), NULL, NULL, default, 'asas1234')
+		(DEFAULT, 1, '첫번째 리뷰 샘플', '첫번재 리뷰 내용', 1, 5, NOW(), NULL, NULL, default, 'idid1234'),
+		(DEFAULT, 1, '두번째 리뷰 샘플', '두번재 리뷰 내용', 1, 3, NOW(), NULL, NULL, default, 'qwqw1234'),
+		(DEFAULT, 1, '세번째 리뷰 샘플', '세번재 리뷰 내용', 1, 4, NOW(), NULL, NULL, default, 'asas1234')
 		;
 
 #상품 데이터삽입
@@ -297,12 +298,12 @@ INSERT INTO `Product`(
 	`product_DeleteDate`,
 	`user_id`)
 values
-	(default, 1, 1, '타이폰 마르스프로 기계식 키보드 mk3', '172500', 50, '타이폰 마르스프로 기계식 키보드 mk3', default, default, null, NULL, 'idid1234'),
-	(default, 1, 1, '풀튜닝 타이폰 마르스프로 슈팅스타 기계식 키보드', '185000', 40, '풀튜닝 타이폰 마르스프로 슈팅스타 기계식 키보드', default, default, null, NULL, 'idid1234'),
-	(default, 1, 1, '풀튜닝 타이폰 마르스프로 베스타 기계식 키보드', '197000', 35, '풀튜닝 타이폰 마르스프로 베스타 기계식 키보드', default, default, null, NULL, 'idid1234'),
-	(default, 1, 1, '타이폰 마르스프로 슈팅스타 기계식 키보드', '172500', 45, '타이폰 마르스프로 슈팅스타 기계식 키보드', default, default, null, NULL, 'idid1234'),
-	(default, 1, 1, '타이폰 마르스 프로 베스타 기계식 키보드', '174000', 25, '타이폰 마르스 프로 베스타 기계식 키보드', default, default, null, NULL, 'idid1234'),
-	(default, 1, 1, '풀튜닝 마르스프로 MK3 기계식 키보드', '197000', 15, '풀튜닝 마르스프로 MK3 기계식 키보드', default, default, null, NULL, 'idid1234')
+	(default, 1, 2, '타이폰 마르스프로 기계식 키보드 mk3', '172500', 50, '타이폰 마르스프로 기계식 키보드 mk3', default, default, null, NULL, 'idid1234'),
+	(default, 1, 2, '풀튜닝 타이폰 마르스프로 슈팅스타 기계식 키보드', '185000', 40, '풀튜닝 타이폰 마르스프로 슈팅스타 기계식 키보드', default, default, null, NULL, 'idid1234'),
+	(default, 1, 2, '풀튜닝 타이폰 마르스프로 베스타 기계식 키보드', '197000', 35, '풀튜닝 타이폰 마르스프로 베스타 기계식 키보드', default, default, null, NULL, 'idid1234'),
+	(default, 1, 2, '타이폰 마르스프로 슈팅스타 기계식 키보드', '172500', 45, '타이폰 마르스프로 슈팅스타 기계식 키보드', default, default, null, NULL, 'idid1234'),
+	(default, 1, 2, '타이폰 마르스 프로 베스타 기계식 키보드', '174000', 25, '타이폰 마르스 프로 베스타 기계식 키보드', default, default, null, NULL, 'idid1234'),
+	(default, 1, 2, '풀튜닝 마르스프로 MK3 기계식 키보드', '197000', 15, '풀튜닝 마르스프로 MK3 기계식 키보드', default, default, null, NULL, 'idid1234')
 	;
 
 #상품 이미지 첨부
