@@ -70,7 +70,7 @@
 							</div>
 						</div>
 
-						<div data-name="fileDiv" class="form-group filebox bs3-primary">
+						<div th:if="*{productNumber == null}" data-name="fileDiv" class="form-group filebox bs3-primary">
 							<label class="bText" for="file_0">썸네일 이미지</label>
 							<div class="col-sm-10">
 								<input type="text" class="upload-name" value="파일 찾기" readonly /> <label for="file_0" class="control-label">찾아보기</label> <input type="file"
@@ -85,10 +85,27 @@
                                 />
                             </div>
 						</div>
+						
+						<!-- 상품수정 파일첨부 오류방지 -->
+                        <div data-name="fileDiv" class="form-group filebox bs3-primary" style="display:none">
+                            <label class="bText" for="file_0">썸네일 이미지</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="upload-name" value="파일 찾기" readonly /> <label for="file_0" class="control-label">찾아보기</label> <input type="file"
+                                    name="files" id="file_0" class="upload-hidden" onchange="changeFilename(this)"
+                                />
+                            </div>
+                            
+                            <label class="bText" for="file_1">내용 이미지</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="upload-name" value="파일 찾기" readonly /> <label for="file_1" class="control-label">찾아보기</label> <input type="file"
+                                    name="files" id="file_1" class="upload-hidden" onchange="changeFilename(this)"
+                                />
+                            </div>
+                        </div>
 
 						<div style="text-align:right;padding-top:30px;">
-							<a th:href="@{/shop/productmanagement.do}" class="btn btn-primary bText">뒤로가기</a>
-							<button type="submit" class="btn btn-secondary bText">등록</button>
+							<a th:href="@{/shop/productmanagement.do}" class="btn btn-secondary bText">뒤로가기</a>
+							<button type="submit" class="btn btn-primary bText">등록</button>
 						</div>
 					</form>
 				</div>
