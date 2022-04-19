@@ -140,7 +140,7 @@ public class UserController extends UiUtils {
             e.printStackTrace();
             return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/shop/productlist.do", Method.GET, null, model);
         }
-        return showMessageWithRedirect("관심등록 되었습니다.", "/shop/productlist.do", Method.GET, null, model);
+        return showMessageWithRedirect("관심상품 등록 되었습니다.", "/shop/productlist.do", Method.GET, null, model);
     }
 
     // 관심상품 리스트 페이지 이동
