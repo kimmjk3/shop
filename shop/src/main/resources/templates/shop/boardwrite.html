@@ -73,7 +73,8 @@
 							</div>
 						</div>
 						
-                        <div data-name="fileDiv" class="form-group filebox bs3-primary">
+						<!-- 게시글 수정시 표시x-->
+                        <div th:if="*{postNumber == null}" data-name="fileDiv" class="form-group filebox bs3-primary">
                             <label class="bText" for="file_0">이미지1</label>
                             <div class="col-sm-10">
                                 <input type="text" class="upload-name" value="파일 찾기" readonly /> <label for="file_0" class="control-label">찾아보기</label> <input type="file"
