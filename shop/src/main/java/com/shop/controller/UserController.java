@@ -49,23 +49,26 @@ public class UserController extends UiUtils {
 
     // 회원가입 처리
     @PostMapping(value = "/shop/join.do")
-    public String registerUser(UserDTO params) {
+    public String registerUser(UserDTO params, Model model) {
         try {
             System.out.println("접속테스트");
             boolean isRegistered = userService.registerUser(params);
             if (isRegistered == false) {
                 // TODO=> 회원가입 등록 실패하였다는 메시지 전달
                 System.out.println("회원가입 실패");
+                return showMessageWithRedirect("회원가입 실패하였습니다.", "/shop/login.do", Method.GET, null, model);
             }
         } catch (DataAccessException e) {
             // TODO=> 데이터베이스 처리 과정에 문제가 발생하였다는 메시지를 전달
             System.out.println("데이터베이스 처리 오류");
             e.printStackTrace();
+            return showMessageWithRedirect("테이터베이스 처리 오류가 발생하였습니다.", "/shop/login.do", Method.GET, null, model);
         } catch (Exception e) {
             // TODO=> 시스템에 문제가 발생하였다는 메시지 전달
             System.out.println("시스템에 문제가 발생");
+            return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/shop/login.do", Method.GET, null, model);
         }
-        return "redirect:/shop/login.do";
+        return showMessageWithRedirect("회원가입 성공하였습니다.", "/shop/login.do", Method.GET, null, model);
     }
 
     // 로그인 주소 진입
@@ -78,7 +81,7 @@ public class UserController extends UiUtils {
 
     // 로그인 처리
     @PostMapping(value = "/shop/login.do")
-    public String loginPOST(HttpServletRequest request, UserDTO params, HttpSession session) {
+    public String loginPOST(HttpServletRequest request, UserDTO params, HttpSession session, Model model) {
         // System.out.println("로그인 메서드 진입");
         // System.out.println("전달된 데이터:" + params);
 
@@ -88,7 +91,8 @@ public class UserController extends UiUtils {
 
         if (user == null) { // 일치하지 않은 아이디와 비밀번호 입력 할 경우
             session.setAttribute("userID", null);
-            return "redirect:/shop/login.do";
+            return showMessageWithRedirect("아이디 또는 비밀번호를 잘못 입력했습니다.\n입력하신 내용을 다시 확인해주세요.", "/shop/login.do", Method.GET,
+                    null, model);
         } else {
             // 일치하는 아이디, 비밀번호 입력 할 경우 로그인 성공 세션값 부여
             session.setAttribute("userID", user.getUserID());
