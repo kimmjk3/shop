@@ -26,7 +26,7 @@ public class UserController extends UiUtils {
     private UserService userService;
 
     // 메인페이지 진입
-    @GetMapping(value = "/shop/index.do")
+    @GetMapping(value = "/")
     public String openMain(Model model) {
         System.out.println("index페이지 진입");
         return "shop/index";
