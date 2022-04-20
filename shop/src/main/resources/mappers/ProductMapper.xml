@@ -36,7 +36,7 @@
 		, #{productStock}
 		, #{productDesc}
 		, DEFAULT
-		, DEFAULT
+		, NOW()
 		, NULL
 		, NULL
 		, #{userID}
