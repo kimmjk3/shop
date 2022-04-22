@@ -15,7 +15,7 @@
 
 		<div class="container-fluid d-flex justify-content-between align-items-center">
 			<h1 class="logo me-auto me-lg-0">
-				<a href="/shop/index.do"> <img th:src="@{/assets/img/shop_logo-1-01.png}" alt="" />
+				<a th:href="@{/}"> <img th:src="@{/assets/img/shop_logo-1-01.png}" alt="" />
 				</a>
 			</h1>
 			<!-- Uncomment below if you prefer to use an image logo -->
@@ -23,9 +23,8 @@
 
 			<nav id="navbar" class="navbar order-last order-lg-0">
 				<ul>
-					<!-- <li><a class="active" href="/shop/index.do">Home</a></li> -->
-					<li><a style="padding-right:50px" th:href="@{/shop/index.do}">메인</a></li>
-                    <li><a style="padding-right:50px" th:href="@{#}">공지사항</a></li>
+					<li><a style="padding-right:50px" th:href="@{/}">메인</a></li>
+                    <li><a style="padding-right:50px" th:href="@{/shop/notice.do}">공지사항</a></li>
 					<li><a style="padding-right:50px" th:href="@{/shop/productlist.do}">상품</a></li>
 					<li><a style="padding-right:50px" th:href="@{/shop/boardlist.do}">리뷰</a></li>
 				</ul>

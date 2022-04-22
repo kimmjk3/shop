@@ -32,11 +32,18 @@ public class UserController extends UiUtils {
         return "shop/index";
     }
 
+    // 공지사항 페이지
+    @GetMapping(value = "/shop/notice.do")
+    public String openNotice(Model model) {
+        System.out.println("공지사항 페이지 진입");
+        return showMessageWithRedirect("페이지 준비중입니다.", "/", Method.GET, null, model);
+    }
+
     // 마이페이지 진입
     @GetMapping(value = "/shop/mypage.do")
     public String openMypage(Model model) {
         System.out.println("마이페이지 진입");
-        return "shop/mypage";
+        return showMessageWithRedirect("페이지 준비중입니다.", "/", Method.GET, null, model);
     }
 
     // 회원가입 페이지 진입
@@ -91,8 +98,8 @@ public class UserController extends UiUtils {
 
         if (user == null) { // 일치하지 않은 아이디와 비밀번호 입력 할 경우
             session.setAttribute("userID", null);
-            return showMessageWithRedirect("아이디 또는 비밀번호를 잘못 입력했습니다.\n입력하신 내용을 다시 확인해주세요.", "/shop/login.do", Method.GET,
-                    null, model);
+            return showMessageWithRedirect("아이디 또는 비밀번호를 잘못 입력했습니다.\n입력하신 내용을 다시 확인해주세요.", "/", Method.GET, null,
+                    model);
         } else {
             // 일치하는 아이디, 비밀번호 입력 할 경우 로그인 성공 세션값 부여
             session.setAttribute("userID", user.getUserID());
@@ -100,7 +107,7 @@ public class UserController extends UiUtils {
             session.setAttribute("userAuthority", user.getUserAuthority());
         }
 
-        return "redirect:/shop/index.do";
+        return "redirect:/";
     }
 
     // 로그아웃
@@ -108,7 +115,7 @@ public class UserController extends UiUtils {
     public String logout(HttpSession session) {
         // 세션제거
         session.invalidate();
-        return "redirect:/shop/index.do";
+        return "redirect:/";
     }
 
     // 관심상품 등록

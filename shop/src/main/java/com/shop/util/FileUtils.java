@@ -29,8 +29,13 @@ public class FileUtils {
 
     // 프로젝트에 수동으로 경로설정 *추후 수정필요*
     // C:\Users\audwls\Desktop\개발\shop\shop\src\main\resources\static\attach
-    private final String uploadPath = Paths.get("C:", "Users", "audwls", "Desktop", "개발", "shop", "shop", "src", "main",
-            "resources", "static", "attach").toString();
+    /*
+     * private final String uploadPath = Paths.get("C:", "Users", "audwls",
+     * "Desktop", "개발", "shop", "shop", "src", "main", "resources", "static",
+     * "attach").toString();
+     */
+    private final String uploadPath = Paths.get("webapps", "tshop", "WEB-INF", "classes", "static", "attach")
+            .toString();
 
     /**
      * 서버에 생성할 파일명을 처리할 랜덤 문자열 반환

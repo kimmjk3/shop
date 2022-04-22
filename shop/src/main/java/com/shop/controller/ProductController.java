@@ -68,7 +68,7 @@ public class ProductController extends UiUtils {
 
         int userAuthority = (int) session.getAttribute("userAuthority");
         if (userAuthority == 1) {
-            return showMessageWithRedirect("권한이 없습니다.", "/shop/index.do", Method.GET, null, model);
+            return showMessageWithRedirect("권한이 없습니다.", "/", Method.GET, null, model);
         }
 
         return "shop/productmanagement";
@@ -128,7 +128,7 @@ public class ProductController extends UiUtils {
 
         int userAuthority = (int) session.getAttribute("userAuthority");
         if (userAuthority == 1) {
-            return showMessageWithRedirect("권한이 없습니다.", "/shop/index.do", Method.GET, null, model);
+            return showMessageWithRedirect("권한이 없습니다.", "/", Method.GET, null, model);
         }
 
         if (productNumber == null) {

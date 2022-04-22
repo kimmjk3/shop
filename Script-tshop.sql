@@ -298,7 +298,7 @@ INSERT INTO `Product`(
 	`product_DeleteDate`,
 	`user_id`)
 values
-	(default, 1, 2, '(서버)타이폰 마르스프로 기계식 키보드 mk3', '172500', 50, '타이폰 마르스프로 기계식 키보드 mk3', default, now(), null, NULL, 'idid1234'),
+	(default, 1, 2, '타이폰S 마르스프로 기계식 키보드 mk3', '172500', 50, '타이폰 마르스프로 기계식 키보드 mk3', default, now(), null, NULL, 'idid1234'),
 	(default, 1, 2, '풀튜닝 타이폰 마르스프로 슈팅스타 기계식 키보드', '185000', 40, '풀튜닝 타이폰 마르스프로 슈팅스타 기계식 키보드', default, now(), null, NULL, 'idid1234'),
 	(default, 1, 2, '풀튜닝 타이폰 마르스프로 베스타 기계식 키보드', '197000', 35, '풀튜닝 타이폰 마르스프로 베스타 기계식 키보드', default, now(), null, NULL, 'idid1234'),
 	(default, 1, 2, '타이폰 마르스프로 슈팅스타 기계식 키보드', '172500', 45, '타이폰 마르스프로 슈팅스타 기계식 키보드', default, now(), null, NULL, 'idid1234'),
