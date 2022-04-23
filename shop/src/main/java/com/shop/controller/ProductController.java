@@ -67,7 +67,7 @@ public class ProductController extends UiUtils {
         model.addAttribute("productList", productList);
 
         int userAuthority = (int) session.getAttribute("userAuthority");
-        if (userAuthority == 1) {
+        if (userAuthority != 0) {
             return showMessageWithRedirect("권한이 없습니다.", "/shop/index.do", Method.GET, null, model);
         }
 
@@ -77,7 +77,14 @@ public class ProductController extends UiUtils {
     // 상품등록 페이지
     @GetMapping(value = "/shop/productregistration.do")
     public String openProductRegistration(
-            @RequestParam(value = "productNumber", required = false) Integer productNumber, Model model) {
+            @RequestParam(value = "productNumber", required = false) Integer productNumber, Model model,
+            HttpSession session) {
+
+        int userAuthority = (int) session.getAttribute("userAuthority");
+        if (userAuthority != 0) {
+            return showMessageWithRedirect("권한이 없습니다.", "/shop/index.do", Method.GET, null, model);
+        }
+
         if (productNumber == null) {
             model.addAttribute("product", new ProductDTO());
         } else {
@@ -127,7 +134,7 @@ public class ProductController extends UiUtils {
             Model model, HttpSession session) {
 
         int userAuthority = (int) session.getAttribute("userAuthority");
-        if (userAuthority == 1) {
+        if (userAuthority != 0) {
             return showMessageWithRedirect("권한이 없습니다.", "/shop/index.do", Method.GET, null, model);
         }
 
