@@ -14,7 +14,7 @@
 				</div>
 
 				<div class="row">
-						<form th:action="@{/shop/join.do}" th:object="${user}" method="post" onsubmit="return registerUser(this)"
+						<form th:action="@{/shop/joinAction.do}" th:object="${user}" method="post" onsubmit="return registerUser(this)"
 							id="joinForm"
 						>
 							<!--/* update의 경우 서버로 전달할 게시글 번호 (PK) */-->
