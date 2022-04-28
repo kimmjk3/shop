@@ -32,20 +32,6 @@ public class UserController extends UiUtils {
         return "shop/index";
     }
 
-    // 공지사항 페이지
-    @GetMapping(value = "/shop/notice.do")
-    public String openNotice(Model model) {
-        System.out.println("공지사항 페이지 진입");
-        return showMessageWithRedirect("페이지 준비중입니다.", "/shop/index.do", Method.GET, null, model);
-    }
-
-    // 마이페이지 진입
-    @GetMapping(value = "/shop/mypage.do")
-    public String openMypage(Model model) {
-        System.out.println("마이페이지 진입");
-        return showMessageWithRedirect("페이지 준비중입니다.", "/shop/index.do", Method.GET, null, model);
-    }
-
     // 회원가입 페이지 진입
     @GetMapping(value = "/shop/join.do") // 회원가입 주소
     public String openUserJoin(Model model, HttpSession session) {

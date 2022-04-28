@@ -57,7 +57,7 @@
 									</div>
 									<div style="padding-top: 30px; border-top: 1px dashed #bbb;text-align:center;">
 										<div>
-											<a th:href="@{#}" class="btn btn-dark bText" style="width:100%;font-size:15px;">BUY NOW</a>
+											<a th:href="@{#}" class="btn btn-dark bText" style="width:100%;font-size:15px;" onclick="prepareMessage()">BUY NOW</a>
 										</div>
 										<div>
 											<a th:if="${session.userID != null}" th:href="@{/shop/interestitem.do(productNumber=*{productNumber}, userID=${session.userID})}" class="btn btn-warning bText" style="width:100%;font-size:15px;">ADD TO INTEREST ITEM</a>
@@ -69,10 +69,8 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</section>
 	</main>
 </th:block>
-
 </html>

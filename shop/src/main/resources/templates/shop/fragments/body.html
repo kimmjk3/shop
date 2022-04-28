@@ -7,7 +7,7 @@
 	<header id="header" class="fixed-top">
 		<div style="float:right;" class="navbar">
             <a style="margin-left:5px;margin-right:5px;" th:if="${session.userID != null}" th:href="@{/shop/interestitemlist.do}"><img src="/image/star2.png" style="width:20px;height:20px;vertical-align:top;"/></a>
-			<a style="margin-left:5px;margin-right:5px;" th:if="${session.userID != null}" th:href="@{/shop/mypage.do}">마이페이지</a>
+			<a style="margin-left:5px;margin-right:5px;" th:if="${session.userID != null}" th:href="@{#}" onclick="prepareMessage()">마이페이지</a>
 			<a style="margin-left:5px;margin-right:5px;" th:if="${session.userAuthority == 0}" th:href="@{/shop/productmanagement.do}">상품관리(관리자)</a>
             <a style="margin-left:5px;margin-right:30px;" th:if="${session.userID == null}" th:href="@{/shop/login.do}">로그인</a>
             <a style="margin-left:5px;margin-right:30px;" th:if="${session.userID != null}" th:href="@{/shop/logoutAction.do}">로그아웃</a>
@@ -24,7 +24,7 @@
 			<nav id="navbar" class="navbar order-last order-lg-0">
 				<ul>
 					<li><a style="padding-right:50px" th:href="@{/shop/index.do}">메인</a></li>
-                    <li><a style="padding-right:50px" th:href="@{/shop/notice.do}">공지사항</a></li>
+                    <li><a style="padding-right:50px" th:href="@{#}" onclick="prepareMessage()">공지사항</a></li>
 					<li><a style="padding-right:50px" th:href="@{/shop/productlist.do}">상품</a></li>
 					<li><a style="padding-right:50px" th:href="@{/shop/boardlist.do}">리뷰</a></li>
 				</ul>
@@ -87,4 +87,13 @@
 	<script th:src="@{/scripts/jquery.min.js}"></script>
     <script th:src="@{/scripts/main.js}"></script>
     <script th:src="@{/scripts/common.js}"></script>
+    
+    
+    <script th:inline="javascript">
+        //페이지 준비중 메세지
+        function prepareMessage() {
+            alert('페이지 준비중입니다.');
+        }
+    </script>
+</th:block>
 </body>
