@@ -24,6 +24,12 @@ public class UserController extends UiUtils {
 
     @Autowired
     private UserService userService;
+    
+    // 메인페이지 진입
+    @GetMapping(value = "/")
+    public String openMain1(Model model) {
+        return "shop/index";
+    }
 
     // 메인페이지 진입
     @GetMapping(value = "/shop/index.do")
