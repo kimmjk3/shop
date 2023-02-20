@@ -3,139 +3,150 @@
 <mapper namespace="com.shop.mapper.UserMapper">
 
 	<sql id="userColumns">
-		user_ID,
-		user_PW,
-		user_Name,
-		user_Gender,
-		user_DOB,
-		user_Address1,
-		user_Address2,
-		user_Address3,
-		user_Phone,
-		user_Email,
-		user_JoinDate,
-		user_SecessionDate,
-		user_Authority,
-		user_State
+		user_id
+		,user_pw
+		,user_name
+		,user_gender
+		,user_dob
+		,user_address1
+		,user_address2
+		,user_address3
+		,user_phone
+		,user_email
+		,user_join_date
+		,user_secession_date
+		,user_authority
+		,user_state
 	</sql>
 	
 	<!-- 회원가입 데이터 -->
 	<insert id="insertUser" parameterType="UserDTO">
 		INSERT INTO User(
-		<include refid="userColumns" />
+			<include refid="userColumns" />
 		)VALUES(
-		#{userID},
-		#{userPW},
-		#{userName},
-		#{userGender},
-		#{userDOB},
-		#{userAddress1},
-		#{userAddress2},
-		#{userAddress3},
-		#{userPhone},
-		#{userEmail},
-		NOW(),
-		NULL,
-		DEFAULT,
-		DEFAULT
+			#{userID}
+			,#{userPW}
+			,#{userName}
+			,#{userGender}
+			,#{userDOB}
+			,#{userAddress1}
+			,#{userAddress2}
+			,#{userAddress3}
+			,#{userPhone}
+			,#{userEmail}
+			,NOW()
+			,NULL
+			,DEFAULT
+			,DEFAULT
 		)
 	</insert>
 	
 	<!-- 로그인처리 -->
 	<select id="userLogin" resultType="UserDTO">
 		SELECT
-		user_ID,
-		user_PW,
-		user_Name,
-		user_Gender,
-		user_DOB,
-		user_Address1,
-		user_Address2,
-		user_Address3,
-		user_Phone,
-		user_Email
-		user_JoinDate,
-		user_SecessionDate,
-		user_Authority,
-		user_State
+			user_id
+			, user_pw
+			, user_name
+			, user_gender
+			, user_dob
+			, user_address1
+			, user_address2
+			, user_address3
+			, user_phone
+			, user_email
+			, user_join_date
+			, user_secession_date
+			, user_authority
+			, user_state
 		FROM
-		User
+			user
 		WHERE
-		user_ID = #{userID}
+			user_id = #{userID}
 		AND
-		user_PW = #{userPW}
+			user_pw = #{userPW}
 	</select>
 	
 	<!-- 회원정보 보기 -->
 	<select id="selectUserDetail" parameterType="String" resultType="UserDTO">
 		SELECT
-		<include refid="userColumns" />
+			<include refid="userColumns" />
 		FROM
-		User
+			user
 		WHERE
-		user_State = 1
+			user_state = 1
 		AND
-		user_ID= #{userID}
+			user_id= #{userID}
 	</select>
 	
 	<!-- 회원정보 수정 -->
 	<update id="updateUser" parameterType="UserDTO">
-		UPDATE User
+		UPDATE user
 		SET
-		user_PW= #{userPW},
-		user_Address1= #{userAddress1},
-		user_Address2= #{userAddress2},
-		user_Address3= #{userAddress3}
+			user_pw= #{userPW},
+			user_address1= #{userAddress1},
+			user_address2= #{userAddress2},
+			user_address3= #{userAddress3}
 		WHERE
-		user_ID= #{userID}
+			user_id= #{userID}
 	</update>
 	
 	<!-- 회원정보 탈퇴 -->
 	<update id="deleteUser" parameterType="String">
-		UPDATE User
-		SET user_SecessionDate =NOW()
-		WHERE
-		user_ID=#{userID}
+		UPDATE user
+		SET user_secession_date = NOW()
+		WHERE user_id=#{userID}
 	</update>
 	
     <!-- 관심품목 등록 -->
     <insert id="insertInterestItem" parameterType="map">
-        INSERT INTO Interest_Item(
-        user_ID, product_Number
+        INSERT INTO interest_item(
+        	user_id, product_number
         )VALUES(
-        #{userID},
-        #{productNumber}
+        	#{userID},
+        	#{productNumber}
         )
     </insert>
     
     <!-- 관심품목 자세히 -->
     <select id="selectInterestItemDetail" parameterType="map" resultType = "int">
-    select EXISTS (select * from Interest_Item where user_ID=#{userID} AND PRODUCT_NUMBER=#{productNumber} and Interest_ItemDeleteDate is null)
+    	select
+    		EXISTS (select * 
+    				from Interest_item 
+    				where user_ID = #{userID} 
+    				and product_number = #{productNumber}
+    				and interest_item_delete_date is null
+    				)
     </select>
     
     <!--관심상품 개수카운트-->
     <select id="selectInterestItemTotalCount" parameterType="map" resultType="int">
         SELECT
-        COUNT(*)
+        	COUNT(*)
         FROM
-        interest_Item
+        	interest_item
         WHERE
-        user_ID = #{userID} AND Interest_ItemDeleteDate is null
+        	user_id = #{userID} AND interest_item_delete_date is null
     </select>
     
     <!--관심상품 리스트 조회-->
     <select id="selectInterestItemList" parameterType="ProductDTO" resultType="ProductDTO">
         SELECT *
-        FROM interest_Item LEFT JOIN product ON interest_Item.PRODUCT_NUMBER = product.PRODUCT_NUMBER LEFT JOIN attach on interest_item.product_number = attach.product_number
-        WHERE product_DeleteDate IS NULL and Interest_ItemDeleteDate is null and interest_Item.user_ID=#{userID}
+        FROM interest_Item 
+        LEFT JOIN product 
+        ON interest_item.product_number = product.product_number
+        LEFT JOIN attach
+        ON interest_item.product_number = attach.product_number
+        WHERE product_delete_date IS NULL
+        AND interest_item_delete_date is null 
+        AND interest_item.user_ID = #{userID}
     </select>
     
     <!-- 관심상품 삭제 -->
     <update id="deleteInterestItem" parameterType="map">
-        UPDATE Interest_Item
-        SET interest_ItemDeleteDate = now()
-        WHERE
-        user_ID=#{userID} AND product_Number=#{productNumber}
+        UPDATE interest_item
+        SET interest_item_delete_date = now()
+        WHERE user_id = #{userID} 
+        AND product_number = #{productNumber}
     </update>
 	
 </mapper>

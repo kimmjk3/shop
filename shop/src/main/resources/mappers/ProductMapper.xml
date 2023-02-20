@@ -4,23 +4,23 @@
 <mapper namespace="com.shop.mapper.ProductMapper">
 
 	<sql id="Product">
-		product_Number    <!-- 상품번호 -->
-		,product_Category     <!-- 상품카테고리 -->
-		,product_State    <!-- 상품상테(0:준비중 1:판매중) -->
-		,product_Name     <!-- 상품명 -->
-		,product_Price    <!-- 상품가격 -->
-		,product_Stock    <!-- 상품재고 -->
-		,product_Desc     <!-- 상품상세내용 -->
-		,product_Hits     <!-- 상품조회수 -->
-		,product_InputDate     <!-- 상품등록일 -->
-		,product_Current  <!-- 상품수정일 -->
-		,product_DeleteDate   <!-- 상품삭제일 -->
+		product_number    <!-- 상품번호 -->
+		,product_category     <!-- 상품카테고리 -->
+		,product_state    <!-- 상품상테(0:준비중 1:판매중) -->
+		,product_name     <!-- 상품명 -->
+		,product_price    <!-- 상품가격 -->
+		,product_stock    <!-- 상품재고 -->
+		,product_desc     <!-- 상품상세내용 -->
+		,product_hits     <!-- 상품조회수 -->
+		,product_input_date     <!-- 상품등록일 -->
+		,product_current  <!-- 상품수정일 -->
+		,product_delete_date   <!-- 상품삭제일 -->
         ,user_ID   <!-- 상품 등록인 -->
 	</sql>
 	
     <sql id="Attach">
-        product_Number    <!-- 상품번호 -->
-        ,attach_Location     <!-- 첨부경로 -->
+        product_number    <!-- 상품번호 -->
+        ,attach_location     <!-- 첨부경로 -->
     </sql>
 
 	<!--상품등록 -->
@@ -45,66 +45,64 @@
 
 	<!--상품 보기 -->
 	<select id="selectProductDetail" parameterType="Integer" resultType="ProductDTO">
-        SELECT
-        *
-        FROM
-        Product left join attach on Product.PRODUCT_NUMBER =Attach.PRODUCT_NUMBER 
-        WHERE product_DeleteDate IS NULL 
-        AND 
-        product.product_Number = #{productNumber};
+        SELECT *
+        FROM product
+        LEFT JOIN attach
+        ON product.product_number = attach.product_number 
+        WHERE product_delete_date IS NULL 
+        AND product.product_Number = #{productNumber};
 	</select>
 
 	<!--상품 수정 -->
 	<update id="updateProduct" parameterType="ProductDTO">
-		UPDATE Product
+		UPDATE product
 		SET
-		product_Category = #{productCategory}
-		, product_State = #{productState}
-		, product_Name = #{productName}
-		, product_Price = #{productPrice}
-		, product_Stock = #{productStock}
-		, product_Desc = #{productDesc}
-
+			product_category = #{productCategory}
+			, product_state = #{productState}
+			, product_name = #{productName}
+			, product_price = #{productPrice}
+			, product_stock = #{productStock}
+			, product_desc = #{productDesc}
 		WHERE
-		product_Number = #{productNumber}
+			product_number = #{productNumber}
 	</update>
 	
     <!--상품 삭제-->
     <update id="deleteProduct" parameterType="Integer">
-        UPDATE Product
+        UPDATE product
         SET
-            product_DeleteDate = NOW()
+			product_delete_date = NOW()
         WHERE
-            product_Number = #{productNumber}
+			product_number = #{productNumber}
     </update>
 
 	<!--상품 전체리스트 조회 -->
 	<select id="selectProductList" parameterType="ProductDTO" resultType="ProductDTO">
 		SELECT
-		<include refid="Product" />
+			<include refid="Product" />
 		FROM
-		Product
+			product
 		WHERE
-		product_DeleteDate IS NULL
-		ORDER BY
-		product_Number DESC,
-		product_InputDate DESC
+			product_delete_date IS NULL
+		ORDER BY product_number DESC, product_input_date DESC
 	</select>
 	
 	<!--상품 개수카운트-->
 	<select id="selectProductTotalCount" parameterType="ProductDTO" resultType="int">
 		SELECT
-		COUNT(*)
+			COUNT(*)
 		FROM
-		Product
+			product
 		WHERE
-		product_DeleteDate IS NULL
+			product_delete_date IS NULL
 	</select>
 	
 	<!--상품 판매리스트 조회(productlist.html)-->
     <select id="selectProductSellList" parameterType="ProductDTO" resultType="ProductDTO">
         SELECT *
-        FROM Product LEFT JOIN attach ON product.PRODUCT_NUMBER = attach.PRODUCT_NUMBER
-        WHERE product_DeleteDate IS NULL
+        FROM Product 
+        LEFT JOIN attach
+        ON product.product_number = attach.product_number
+        WHERE product_delete_date IS NULL
     </select>
 </mapper>

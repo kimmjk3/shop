@@ -4,17 +4,17 @@
 <mapper namespace="com.shop.mapper.BoardMapper">
 
     <sql id="Post">
-          post_Number       <!--게시글 번호-->
-        , board_Number      <!--게시판 번호-->
-        , post_Title        <!--게시글 제목-->
-        , post_Contents     <!--게시글 내용-->
-        , post_Category     <!--게시글 카테고리-->
-        , post_Score        <!--게시글 별점-->
-        , post_InputDate    <!--게시글 작성일-->
-        , post_Correct      <!--게시글 수정일-->
-        , post_DeleteDate   <!--게시글 삭제일-->
-        , post_Recommend    <!--게시글 추천수-->
-        , user_ID           <!--게시글 작성자-->
+          post_number       <!--게시글 번호-->
+        , board_number      <!--게시판 번호-->
+        , post_title        <!--게시글 제목-->
+        , post_contents     <!--게시글 내용-->
+        , post_category     <!--게시글 카테고리-->
+        , post_score        <!--게시글 별점-->
+        , post_input_date    <!--게시글 작성일-->
+        , post_correct      <!--게시글 수정일-->
+        , post_delete_date   <!--게시글 삭제일-->
+        , post_recommend    <!--게시글 추천수-->
+        , user_id           <!--게시글 작성자-->
     </sql>
     
     <!--게시글 작성-->
@@ -41,34 +41,34 @@
         SELECT
             <include refid="Post" />
         FROM
-            Post
+            post
         WHERE
-            post_DeleteDate IS NULL
+            post_delete_date IS NULL
         AND
-            post_Number = #{postNumber}
+            post_number = #{postNumber}
     </select>
 
     <!--게시글 수정-->
     <update id="updateBoard" parameterType="BoardDTO">
         UPDATE Post
         SET
-              post_Title = #{postTitle}
-            , post_Contents = #{postContents}
-            , post_Category = #{postCategory}
-            , post_Score = #{postScore}
-            , post_Correct = NOW()
+              post_title = #{postTitle}
+            , post_contents = #{postContents}
+            , post_category = #{postCategory}
+            , post_score = #{postScore}
+            , post_correct = NOW()
             
         WHERE
-            post_Number = #{postNumber}
+            post_number = #{postNumber}
     </update>
 
     <!--게시글 삭제-->
     <update id="deleteBoard" parameterType="Integer">
-        UPDATE Post
+        UPDATE post
         SET
-            post_DeleteDate = NOW()
+            post_delete_date = NOW()
         WHERE
-            post_Number = #{postNumber}
+            post_number = #{postNumber}
     </update>
 
     <!--게시글 전체조회-->
@@ -76,21 +76,21 @@
         SELECT
             <include refid="Post" />
         FROM
-            Post
+            post
         WHERE
-            post_DeleteDate IS NULL
+            post_delete_date IS NULL
         ORDER BY
-            post_Number DESC,
-            post_InputDate DESC
+            post_number DESC,
+            post_input_date DESC
     </select>
 
     <select id="selectBoardTotalCount" parameterType="BoardDTO" resultType="int">
         SELECT
             COUNT(*)
         FROM
-            Post
+            post
         WHERE
-            post_DeleteDate IS NULL
+            post_delete_date IS NULL
     </select>
 
 </mapper>

@@ -4,21 +4,21 @@
 <mapper namespace="com.shop.mapper.AttachMapper">
 
     <sql id="AttachColumns">
-	    attach_Number    <!-- 첨부 번호 -->
-	    ,product_Number <!-- 파일 번호 -->
+	    attach_number    <!-- 첨부 번호 -->
+	    ,product_number <!-- 파일 번호 -->
 	    
-	    ,attach_ThumbnailOriginalName <!-- 원본 파일명 -->
-	    ,attach_ThumbnailSaveName <!-- 저장 파일명 -->
-	    ,attach_ThumbnailSize <!-- 파일 크기 -->
-	    ,attach_ThumbnailLocation   <!--경로-->
+	    ,attach_thumbnail_original_name <!-- 원본 파일명 -->
+	    ,attach_thumbnail_save_name <!-- 저장 파일명 -->
+	    ,attach_thumbnail_size <!-- 파일 크기 -->
+	    ,attach_thumbnail_location   <!--경로-->
 	    
-        ,attach_ContentsOriginalName <!-- 원본 파일명 -->
-        ,attach_ContentsSaveName <!-- 저장 파일명 -->
-        ,attach_ContentsSize <!-- 파일 크기 -->
-        ,attach_ContentsLocation   <!--경로-->
+        ,attach_contents_original_name <!-- 원본 파일명 -->
+        ,attach_contents_save_name <!-- 저장 파일명 -->
+        ,attach_contents_size <!-- 파일 크기 -->
+        ,attach_contents_location   <!--경로-->
 	    
-	    ,attach_InsertDate <!-- 등록일 -->
-        ,attach_DeleteDate <!-- 삭제일 -->
+	    ,attach_insert_date <!-- 등록일 -->
+        ,attach_delete_date <!-- 삭제일 -->
     </sql> 
 
     <!-- 파일추가 -->
@@ -52,42 +52,41 @@
         SELECT
             <include refid="AttachColumns" />
         FROM
-            Attach
+            attach
         WHERE
-            attach_DeleteDate is null
+            attach_delete_date is null
         AND
-            product_Number = #{productNumber}
+            product_number = #{productNumber}
     </select>
 
     <!-- 파일삭제 -->
     <update id="deleteAttach" parameterType="Integer">
-        UPDATE Attach
+        UPDATE attach
         SET
-            attach_deleteDate = NOW()
+            attach_delete_date = NOW()
         WHERE
-            product_Number = #{productNumber}
+            product_number = #{productNumber}
     </update>
 
     <!--첨푸파일 리스트조회 -->
     <select id="selectAttachList" parameterType="AttachDTO" resultType="AttachDTO">
         SELECT
-        attach_Number, attach_Thumbnaillocation, attach_Contentslocation
+        	attach_number, attach_thumbnail_location, attach_contents_location
         FROM
-        Attach
+        	attach
         WHERE
-        product_Number = #{productNumber}
-        ORDER BY
-        attach_Number ASC
+        	product_number = #{productNumber}
+        ORDER BY attach_number ASC
     </select>
     
     <!--첨푸파일 개수 카운트 -->
     <select id="selectAttachTotalCount" parameterType="AttachDTO" resultType="int">
         SELECT
-        COUNT(*)
+        	COUNT(*)
         FROM
-        Attach
+        	attach
         WHERE
-        product_Number = #{productNumber}
+        	product_number = #{productNumber}
     </select>
     
     
@@ -96,9 +95,19 @@
     <!-- 게시글 첨부 -->
     <!-- 파일추가 -->
     <insert id="insertPostAttach" parameterType="list">
-        INSERT INTO Attach (
-            attach_Number,post_Number,attach_ThumbnailOriginalName,attach_ThumbnailSaveName,attach_ThumbnailSize,attach_ThumbnailLocation
-            ,attach_ContentsOriginalName,attach_ContentsSaveName,attach_ContentsSize,attach_ContentsLocation,attach_InsertDate,attach_DeleteDate
+        INSERT INTO attach (
+			attach_number
+			, post_Number
+			, attach_thumbnail_original_name
+			, attach_thumbnail_save_name
+			, attach_thumbnail_size
+			, attach_thumbnail_location
+            , attach_contents_original_name
+            , attach_contents_save_name
+            , attach_contents_size
+            , attach_contents_location
+            , attach_insert_date
+            , attach_delete_date
         ) VALUES
         <foreach collection="list" item="item" separator=",">
         (
@@ -121,45 +130,54 @@
     <!-- 파일보기 -->
     <select id="selectPostAttachDetail" parameterType="Integer" resultType="AttachDTO">
         SELECT
-            attach_Number,post_Number,attach_ThumbnailOriginalName,attach_ThumbnailSaveName,attach_ThumbnailSize,attach_ThumbnailLocation
-            ,attach_ContentsOriginalName,attach_ContentsSaveName,attach_ContentsSize,attach_ContentsLocation,attach_InsertDate,attach_DeleteDate
+            attach_number
+            , post_number
+            , attach_thumbnail_original_name
+            , attach_thumbnail_save_name
+            , attach_thumbnail_size
+            , attach_thumbnail_location
+            , attach_contents_original_name
+            , attach_contents_save_name
+            , attach_contents_size
+            , attach_contents_location
+            , attach_insert_date
+            , attach_delete_date
         FROM
-            Attach
+            attach
         WHERE
-            attach_DeleteDate is null
+            attach_delete_date is null
         AND
             post_Number = #{postNumber}
     </select>
 
     <!-- 파일삭제 -->
     <update id="deletePostAttach" parameterType="Integer">
-        UPDATE Attach
+        UPDATE attach
         SET
-            attach_deleteDate = NOW()
+            attach_delete_date = NOW()
         WHERE
-            post_Number = #{postNumber}
+            post_number = #{postNumber}
     </update>
 
     <!--첨푸파일 리스트조회 -->
     <select id="selectPostAttachList" parameterType="AttachDTO" resultType="AttachDTO">
         SELECT
-        attach_Number, attach_Thumbnaillocation, attach_Contentslocation
+        	attach_number, attach_thumbnail_location, attach_contents_location
         FROM
-        Attach
+        	attach
         WHERE
-        post_Number = #{postNumber}
-        ORDER BY
-        attach_Number ASC
+        	post_number = #{postNumber}
+        ORDER BY attach_number ASC
     </select>
     
     <!--첨푸파일 개수 카운트 -->
     <select id="selectPostAttachTotalCount" parameterType="AttachDTO" resultType="int">
         SELECT
-        COUNT(*)
+        	COUNT(*)
         FROM
-        Attach
+        	attach
         WHERE
-        post_Number = #{postNumber}
+        	post_number = #{postNumber}
     </select>
 
 </mapper>
