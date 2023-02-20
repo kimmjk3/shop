@@ -29,7 +29,6 @@ public class ProductController extends UiUtils {
     // 상품 판매리스트 진입
     @GetMapping(value = "/shop/productlist.do")
     public String openSellList(Model model) {
-        System.out.println("상품 리스트 페이지 진입(productlist.html)");
 
         List<ProductDTO> productSellList = productService.getProductSellList();
         model.addAttribute("productSellList", productSellList);
@@ -40,7 +39,6 @@ public class ProductController extends UiUtils {
     // 상품구매 페이지 진입
     @GetMapping(value = "/shop/productpurchase.do")
     public String openSell(Model model, Integer productNumber) {
-        System.out.println("상품구매 페이지진입");
 
         if (productNumber == null) {
             // TODO => 올바르지 않은 접근이라는 메시지를 전달하고, 상품관리 페이지로 리다이렉트
@@ -160,7 +158,6 @@ public class ProductController extends UiUtils {
     @PostMapping(value = "/shop/productdelete.do")
     public String deleteProduct(@RequestParam(value = "productNumber", required = false) Integer productNumber,
             Model model) {
-        System.out.println("/shop/productdelete.do 실행됨");
 
         if (productNumber == null) {
             return showMessageWithRedirect("올바르지 않은 접근입니다.", "/shop/productmanagement.do", Method.GET, null, model);

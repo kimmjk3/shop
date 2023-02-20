@@ -47,8 +47,7 @@ public class BoardServiceImpl implements BoardService {
         if (registerBoard(params) == false) {
             return false;
         }
-
-        System.out.println(params.getPostNumber());
+        
         List<AttachDTO> fileList = fileUtils.uploadFiles(files, params.getPostNumber());
         if (CollectionUtils.isEmpty(fileList) == false) {
             queryResult = attachMapper.insertPostAttach(fileList);

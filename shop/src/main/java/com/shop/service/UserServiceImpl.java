@@ -20,7 +20,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean registerUser(UserDTO params) {
         int queryResult = 0;
-        System.out.println(params);
 
         queryResult = userMapper.insertUser(params);
 
@@ -91,7 +90,6 @@ public class UserServiceImpl implements UserService {
         queryResult1 = userMapper.selectInterestItemDetail(userID, productNumber);
         if (queryResult1 == 1) {
             queryResult2 = userMapper.deleteInterestItem(userID, productNumber);
-            System.out.println("queryResult : " + queryResult2);
         }
 
         return (queryResult2 > 0) ? true : false;

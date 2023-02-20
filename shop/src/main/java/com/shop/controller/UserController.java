@@ -34,14 +34,12 @@ public class UserController extends UiUtils {
     // 메인페이지 진입
     @GetMapping(value = "/shop/index.do")
     public String openMain(Model model) {
-        System.out.println("index페이지 진입");
         return "shop/index";
     }
 
     // 회원가입 페이지 진입
     @GetMapping(value = "/shop/join.do") // 회원가입 주소
     public String openUserJoin(Model model, HttpSession session) {
-        System.out.println("회원가입 페이지 진입");
 
         // 로그인이 되어있을 경우 접근 불가
         String userID = (String) session.getAttribute("userID");
@@ -58,21 +56,17 @@ public class UserController extends UiUtils {
     @PostMapping(value = "/shop/joinAction.do")
     public String registerUser(UserDTO params, Model model) {
         try {
-            System.out.println("접속테스트");
             boolean isRegistered = userService.registerUser(params);
             if (isRegistered == false) {
                 // TODO=> 회원가입 등록 실패하였다는 메시지 전달
-                System.out.println("회원가입 실패");
                 return showMessageWithRedirect("회원가입 실패하였습니다.", "/shop/login.do", Method.GET, null, model);
             }
         } catch (DataAccessException e) {
             // TODO=> 데이터베이스 처리 과정에 문제가 발생하였다는 메시지를 전달
-            System.out.println("데이터베이스 처리 오류");
             e.printStackTrace();
             return showMessageWithRedirect("테이터베이스 처리 오류가 발생하였습니다.", "/shop/login.do", Method.GET, null, model);
         } catch (Exception e) {
             // TODO=> 시스템에 문제가 발생하였다는 메시지 전달
-            System.out.println("시스템에 문제가 발생");
             return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/shop/login.do", Method.GET, null, model);
         }
         return showMessageWithRedirect("회원가입 성공하였습니다.", "/shop/login.do", Method.GET, null, model);
@@ -81,7 +75,6 @@ public class UserController extends UiUtils {
     // 로그인 페이지 진입
     @GetMapping(value = "/shop/login.do") // 로그인 주소
     public String openUserLogin(Model model, HttpSession session) {
-        System.out.println("로그인페이지 진입");
 
         // 로그인이 되어있을 경우 접근 불가
         String userID = (String) session.getAttribute("userID");
@@ -97,12 +90,9 @@ public class UserController extends UiUtils {
     // 로그인 처리
     @PostMapping(value = "/shop/loginAction.do")
     public String loginPOST(HttpServletRequest request, UserDTO params, HttpSession session, Model model) {
-        // System.out.println("로그인 메서드 진입");
-        // System.out.println("전달된 데이터:" + params);
 
         UserDTO user = userService.loginUser(params);
         // String test =userLo.getUserPW();
-        // System.out.println("입력된 데이터:" + params);
 
         if (user == null) { // 일치하지 않은 아이디와 비밀번호 입력 할 경우
             session.setAttribute("userID", null);
@@ -137,8 +127,6 @@ public class UserController extends UiUtils {
         }
 
         try {
-            System.out.println("관심상품 등록");
-            System.out.println(userID + " " + productNumber);
             boolean isRegistered = userService.registerInterestItem(userID, productNumber);
             if (isRegistered == false) {
                 // TODO=> 등록 실패하였다는 메시지 전달
@@ -146,12 +134,10 @@ public class UserController extends UiUtils {
             }
         } catch (DataAccessException e) {
             // TODO=> 데이터베이스 처리 과정에 문제가 발생하였다는 메시지를 전달
-            System.out.println("데이터베이스 처리 오류");
             e.printStackTrace();
             return showMessageWithRedirect("데이터베이스 오류가 발생하였습니다.", "/shop/productlist.do", Method.GET, null, model);
         } catch (Exception e) {
             // TODO=> 시스템에 문제가 발생하였다는 메시지 전달
-            System.out.println("시스템에 문제가 발생");
             e.printStackTrace();
             return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/shop/productlist.do", Method.GET, null, model);
         }
@@ -177,7 +163,6 @@ public class UserController extends UiUtils {
     @GetMapping(value = "/shop/interestitemdelete.do")
     public String deleteBoard(@RequestParam(value = "productNumber", required = false) Integer productNumber,
             Model model, HttpSession session) {
-        System.out.println("/shop/boarddelete.do 실행됨");
 
         String userID = null;
         if (session.getAttribute("userID") != null) {
