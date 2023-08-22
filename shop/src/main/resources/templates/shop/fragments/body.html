@@ -41,9 +41,7 @@
 	</header>
 	<!-- End Header -->
 
-
 	<th:block layout:fragment="content"></th:block>
-
 
 	<!-- footer -->
 	<th:block layout:fragment="footer">
@@ -69,8 +67,7 @@
 	</th:block>
 
 	<th:block layout:fragment="script"></th:block>
-
-
+	
 	<!-- Vendor JS Files -->
 	<script th:src="@{/assets/vendor/purecounter/purecounter.js}"></script>
 	<script th:src="@{/assets/vendor/aos/aos.js}"></script>
@@ -83,11 +80,9 @@
 	
 	<!-- Template Main JS File -->
 	<script th:src="@{/assets/js/main.js}"></script>
-	
 	<script th:src="@{/scripts/jquery.min.js}"></script>
     <script th:src="@{/scripts/main.js}"></script>
     <script th:src="@{/scripts/common.js}"></script>
-    
     
     <script th:inline="javascript">
         //페이지 준비중 메세지
@@ -95,5 +90,4 @@
             alert('페이지 준비중입니다.');
         }
     </script>
-</th:block>
 </body>
