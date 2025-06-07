@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="shop/layout/basic">
+
+<th:block layout:fragment="title">
+	<title>상품구매</title>
+</th:block>
+<th:block layout:fragment="content">
+	<main id="main">
+		<section id="about" class="about">
+			<div><!-- <div class="container"> -->
+				<div class="section-title">
+					<h2>상품구매</h2>
+				</div>
+				
+				<div class="row">
+					<div style="width: 98%; margin: 0 auto;">
+						<div class="row">
+							<div th:object="${product}" style="display:flex; width:100%;">
+								<span style="width: 60%;display:inline-block;">
+                                    <div style="text-align:right;">
+                                        <img style="width:80%" class="card-img-top" th:src="*{attachThumbnailLocation}" alt="썸네일">
+                                    </div> 
+                                    <br />
+									<div style="text-align:right;">
+										<img style="width:70%" class="card-img-top" th:src="*{attachContentsLocation}" alt="내용">
+									</div>
+								</span>
+
+								<span style="width:38%;padding-right:10%; margin-top:30px; display:inline-block; position:fixed; right:0;">
+									<div class="bText" style="margin-bottom:10px;font-size:25px;"  th:text="*{productName}"></div>
+									<div class="bText" style="margin-top:10px;padding-bottom:30px;text-align: right;border-bottom:1px dashed #bbb;font-size:25px;" ><span th:text="*{productPrice}"></span><span>₩</span></div>
+									<div style="display: flex; margin-left: 10px; text-align: center; margin-top: 30px; margin-bottom: 30px;">
+										<div class="cText">키보드색상</div>
+										<select style="width: 50%; text-align: center;" name="keyboardColor">
+											<option value="">색상선택</option>
+											<option value="블랙">블랙</option>
+											<option value="화이트">화이트</option>
+										</select>
+									</div>
+									<div style="display: flex; margin-left: 10px; text-align: center; margin-top: 30px; margin-bottom: 30px;">
+										<div class="cText">폰트</div>
+										<select style="width: 50%; text-align: center;" name="keyboardColor">
+											<option value="">폰트선택</option>
+											<option value="한글">한글</option>
+											<option value="영어">영어</option>
+										</select>
+									</div>
+									<div style="display: flex; margin-left: 10px; text-align: center; margin-top: 30px; margin-bottom: 30px;">
+										<div class="cText">스위치</div>
+										<select style="width: 50%; text-align: center;" name="keyboardColor">
+											<option value="">스위치종류</option>
+											<option value="청축">청축</option>
+											<option value="갈축">갈축</option>
+											<option value="적축">적축</option>
+											<option value="저소음적축">저소음적축</option>
+										</select>
+									</div>
+									<div style="padding-top: 30px; border-top: 1px dashed #bbb;text-align:center;">
+										<div>
+											<a th:href="@{#}" class="btn btn-dark bText" style="width:100%;font-size:15px;" onclick="prepareMessage()">BUY NOW</a>
+										</div>
+										<div>
+											<a th:if="${session.userID != null}" th:href="@{/shop/interestitem.do(productNumber=*{productNumber}, userID=${session.userID})}" class="btn btn-warning bText" style="width:100%;font-size:15px;">ADD TO INTEREST ITEM</a>
+											<!-- <a th:if="${session.userID != null}" th:href="@{/shop/interestitem.do(productNumber=*{productNumber}, userID=*{session.userID})}"></a> -->
+										</div>
+									</div>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+</th:block>
+</html>

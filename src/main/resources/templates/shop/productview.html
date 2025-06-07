@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="shop/layout/basic">
+
+<th:block layout:fragment="title">
+	<title>게시물 보기</title>
+</th:block>
+
+<th:block layout:fragment="content">
+	<main id="main">
+		<section id="about" class="about">
+			<div class="container" data-aos="fade-up">
+				<div class="section-title">
+					<h2>상품</h2>
+				</div>
+				
+				<div class="row">
+					<div style="width: 70%; margin-left: auto; margin-right: auto;" th:object="${product}">
+						<form>
+							<table class="type04">
+								<tbody>
+                                    <tr>
+                                        <th class="bText" colspan="1">카테고리</th>
+                                        <td colspan="3" th:if="*{productCategory} == 1">키보드</td>
+                                        <td colspan="3" th:if="*{productCategory} == 2">마우스</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="bText" colspan="1">상품명</th>
+                                        <td colspan="3" th:text="*{productName}"></td>
+                                    </tr>
+									<tr>
+                                        <th class="bText" >등록인</th>
+                                        <td th:text="*{userID}"></td>
+                                        <th class="bText" >상태</th>
+                                        <td th:if="*{productState} == 1">준비중</td>
+                                        <td th:if="*{productState} == 2">판매중</td>
+									</tr>
+                                    <tr>
+                                        <th class="bText" >상품가격</th>
+                                        <td><span th:text="*{productPrice}"></span><span>₩</span></td>
+                                        <th class="bText" >재고</th>
+                                        <td th:text="*{productStock}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="bText" >등록일</th>
+                                        <td th:text="*{productInputDate}"></td>
+                                        <th class="bText" >조회수</th>
+                                        <td th:text="*{productHits}"></td>
+                                    </tr>
+                                    <tr style="height:100px;width:100%">
+                                        <td colspan="4">
+                                            <div th:text="*{productDesc}" style="padding-bottom:10px;word-break:break-all;"></div>
+                                        </td>
+                                    </tr>
+								</tbody>
+							</table>
+						</form>
+						
+						<form th:if="${attach} != null" th:object="${attach}">
+						  <table>
+                                <thead>
+                                    <tr>
+                                        <th class="bText" >썸네일 이미지</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <img style="width:100%;height:100%;"th:src="*{attachThumbnailLocation}" alt="썸네일" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <thead>
+                                    <tr>
+                                        <th class="bText" >내용 이미지</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <!-- <td colspan="1" th:text="${row.attachNumber}"></td> -->
+                                        <td>
+                                            <img style="width:100%;height:100%;"th:src="*{attachContentsLocation}" alt="내용" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+
+						<div style="width: 70%; margin-left: auto; margin-right: auto;">
+							<table class="table table-hover">
+
+							</table>
+						</div>
+						<div style="text-align: right;">
+                            <a th:href="@{/shop/productmanagement.do}" class="btn btn-secondary bText">뒤로가기</a>
+							<button type="button" class="btn btn-danger bText" th:if="${session.userID} == *{userID}" th:onclick="deleteProduct([[ ${product.productNumber} ]])">삭제하기</button>
+							<a class="btn btn-primary bText" th:if="${session.userID} == *{userID}" th:href="@{/shop/productregistration.do( productNumber=${product.productNumber} )}">수정하기</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+</th:block>
+
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+
+		console.log("${session.userLo}");
+
+		function deleteProduct(productNumber) {
+
+			if (confirm(productNumber + "번 상품을 삭제할까요?")) {
+				var uri = /*[[ @{/shop/productdelete.do} ]]*/null;
+				var html = "";
+
+				html += '<form name="dataForm" action="'+uri+'" method="post">';
+				html += '<input type="hidden" name="productNumber" value="'+productNumber+'" />';
+				html += '</form>';
+
+				$("body").append(html);
+				document.dataForm.submit();
+			}
+		}
+		/*[- end of function -]*/
+		/*]]>*/
+	</script>
+</th:block>
+
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="shop/layout/basic">
+
+<th:block layout:fragment="title">
+    <title>GG마켓</title>
+</th:block>
+
+<th:block layout:fragment="content">
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container d-flex flex-column align-items-center" data-aos="zoom-in" data-aos-delay="100">
+      <h1>MARS PROShooting Star</h1>
+      <h2>최고의 디자인에 담겨진 최고의 성능. 기존의 기계식 키보드와 다른 디자인에 경험을 선사합니다.</h2>
+      <a th:href="@{/shop/productlist.do}" class="btn-about">구매하기</a>
+    </div>
+  </section><!-- End Hero -->
+</th:block>
+
+</html>
